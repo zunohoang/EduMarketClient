@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Google Sans, Roboto, sans-serif;
+  background-color: rgb(255, 255, 255);
+}
