@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 :root {
-  font-family: Google Sans, Roboto, sans-serif;
+  font-family: Google Sans,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
   background-color: rgb(255, 255, 255);
 }
