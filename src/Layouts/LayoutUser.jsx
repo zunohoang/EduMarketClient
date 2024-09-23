@@ -8,7 +8,6 @@ export default function LayoutUser() {
         <div>
             <NavBar />
             <div>
-                <Cache />
                 <Outlet />
                 <Footer />
             </div>
