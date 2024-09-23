@@ -9,6 +9,8 @@ export default function AppRoutes() {
             <Routes>
                 <Route path="/" element={<LayoutUser />}>
                     <Route index element={<Home />} />
+                    <Route path="courses" element={<Home />} />
+                    <Route path="news" element={<Home />} />
                 </Route>
                 {/* <Route path="/admin" element={<LayoutAdmin />}>
                     <Route index element={<Home />} />
