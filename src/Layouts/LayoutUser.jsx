@@ -7,7 +7,7 @@ export default function LayoutUser() {
     return (
         <div>
             <NavBar />
-            <div>
+            <div className="">
                 <Outlet />
                 <Footer />
             </div>
