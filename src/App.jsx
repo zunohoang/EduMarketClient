@@ -5,7 +5,7 @@ function App() {
 
   return (
     <StrictMode>
-      <div className="h-screen bg-gradient-to-b from-blue-100">
+      <div className="bg-gradient-to-b from-blue-100 to-[#F7F8F9]">
         <AppRoutes />
       </div>
     </StrictMode>

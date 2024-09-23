@@ -6,7 +6,7 @@ import YT from '../../assets/youtube-circle.png'
 import MS from '../../assets/messenger-circle.png'
 
 export default function SideBar() {
-    
+
     return (
         <div className="[&_p]:text-[#155e94] [&_h1]:text-[#155e94]">
             <Link className="flex items-center justify-start  
@@ -33,7 +33,7 @@ export default function SideBar() {
                             rounded-lg px-4 py-2.5 
                             cursor-pointer 
                             " href="./">
-                <svg width="25" height="25" viewBox="0 0 26 27" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8"><path d="M22.067 8.333v8.534H6.973a3.045 3.045 0 00-3.04 3.04V8.333C3.933 4.067 5 3 9.267 3h7.466C21 3 22.067 4.067 22.067 8.333z" fill="#FDB4BA"></path><path d="M22.067 16.867V20.6a3.737 3.737 0 01-3.734 3.733H7.667A3.737 3.737 0 013.933 20.6v-.693a3.045 3.045 0 013.04-3.04h15.094zM17.267 9.133H8.733a.806.806 0 01-.8-.8c0-.437.363-.8.8-.8h8.534c.437 0 .8.363.8.8 0 .438-.363.8-.8.8zM14.067 12.867H8.733a.806.806 0 01-.8-.8c0-.438.363-.8.8-.8h5.334c.437 0 .8.362.8.8 0 .437-.363.8-.8.8z" fill="red"></path></svg>                
+                <svg width="25" height="25" viewBox="0 0 26 27" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8"><path d="M22.067 8.333v8.534H6.973a3.045 3.045 0 00-3.04 3.04V8.333C3.933 4.067 5 3 9.267 3h7.466C21 3 22.067 4.067 22.067 8.333z" fill="#FDB4BA"></path><path d="M22.067 16.867V20.6a3.737 3.737 0 01-3.734 3.733H7.667A3.737 3.737 0 013.933 20.6v-.693a3.045 3.045 0 013.04-3.04h15.094zM17.267 9.133H8.733a.806.806 0 01-.8-.8c0-.437.363-.8.8-.8h8.534c.437 0 .8.363.8.8 0 .438-.363.8-.8.8zM14.067 12.867H8.733a.806.806 0 01-.8-.8c0-.438.363-.8.8-.8h5.334c.437 0 .8.362.8.8 0 .437-.363.8-.8.8z" fill="red"></path></svg>
                 <p className="ml-4 font-medium h-full text-center">Thi online</p>
             </Link>
 
@@ -56,7 +56,7 @@ export default function SideBar() {
             <Line />
 
             <h1 className="flex items-center justify-start font-medium ml-2 px-4">Liên kết</h1>
-        
+
             <Link className="flex items-center justify-start  
                             hover:bg-[rgba(26,79,140,0.06)] 
                             rounded-lg px-4 py-2.5 
