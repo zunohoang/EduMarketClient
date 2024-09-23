@@ -8,7 +8,7 @@ import Teachers from '../../components/user/Teachers'
 
 export default function Home() {
     return (
-        <div className="mt-6 gap-12 flex w-full">
+        <div className="pt-[80px] gap-12 flex w-full bg-gradient-to-b from-blue-100 to-[#F7F8F9]">
             <div className='w-[30%]'>
                 <LeftBar />
             </div>
