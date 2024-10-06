@@ -9,10 +9,6 @@ export default function Course() {
                 <FilterSidebar />
                 <div className="course-content">
                     <CourseTabs />
-                    {/* <CourseList>
-                    <CourseCard title="Lập trình tư duy Hóa học 11" />
-                    <CourseCard title="Lập trình tư duy Khí lý tưởng" />
-                </CourseList> */}
                 </div>
             </div>
         </div>

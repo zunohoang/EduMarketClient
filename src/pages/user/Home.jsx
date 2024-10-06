@@ -5,6 +5,7 @@ import SearchCategories from '../../components/user/SearchCategories'
 import LeftBar from '../../components/user/LeftBar'
 import RightBar from '../../components/user/RightBar'
 import Teachers from '../../components/user/Teachers'
+import CourseList from '../../components/user/CourseList'
 
 export default function Home() {
     return (
@@ -16,6 +17,7 @@ export default function Home() {
                 <img src={Bg} alt="home" className="cursor-pointer object-cover w-full rounded-[15px] m-auto" />
                 <SearchCategories />
                 <Teachers />
+                <CourseList />
             </div>
             <div className='w-[30%]'>
                 <RightBar />

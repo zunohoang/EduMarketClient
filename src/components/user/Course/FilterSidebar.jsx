@@ -8,7 +8,7 @@ function Categories({ title }) {
 
 export default function FilterSidebar() {
     return (
-        <div className="w-[325px] mt-5">
+        <div className="max-w-[325px] w-[30%] mt-5">
             <p className="text-base font-medium mt-4 mb-3">Tìm kiếm</p>
             <div className="flex items-center rounded-md bg-[#EEF0F3] px-3">
                 <input type="text" placeholder="Nhập tên khóa học" className="font-normal text-sm px-2 w-full p-3 outline-none rounded-md text-[#1B1B1B] bg-[#EEF0F3]" />
