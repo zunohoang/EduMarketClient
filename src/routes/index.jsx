@@ -6,7 +6,7 @@ import Course from '../pages/user/Course';
 import CourseVideoPage from '../pages/user/CourseVideoPage';
 import VideoHomeCard from '../components/user/Course/Video/VideoHomeCard';
 import VideoCard from '../components/user/Course/Video/VideoCard';
-
+import News from '../pages/user/News'
 export default function AppRoutes() {
     return (
         <BrowserRouter>
@@ -20,7 +20,7 @@ export default function AppRoutes() {
                             <Route path=":videoId" element={<VideoCard />} />
                         </Route>
                     </Route>
-                    <Route path="news" element={<Home />} />
+                    <Route path="news" element={<News />} />
                 </Route>
                 {/* <Route path="/admin" element={<LayoutAdmin />}>
                     <Route index element={<Home />} />
