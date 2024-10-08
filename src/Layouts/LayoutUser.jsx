@@ -7,7 +7,7 @@ export default function LayoutUser() {
     return (
         <div>
             <NavBar />
-            <div className="">
+            <div className="bg-[#F3F4F5]">
                 <Outlet />
                 <Footer />
             </div>
