@@ -27,7 +27,7 @@ export default function NavBar() {
     const [open, setOpen] = useState(false);
 
     return (
-        <div className="w-full bg-white/60 h-[56px] fixed top-0 left-0 backdrop-blur-lg">
+        <div className="z-10 w-full bg-white/60 h-[56px] fixed top-0 left-0 backdrop-blur-lg">
             {
                 open && <SearchModal setOpen={setOpen} open={open} />
             }
