@@ -7,6 +7,9 @@ import CourseVideoPage from '../pages/user/CourseVideoPage';
 import VideoHomeCard from '../components/user/Course/Video/VideoHomeCard';
 import VideoCard from '../components/user/Course/Video/VideoCard';
 import News from '../pages/user/News'
+import Login from '../pages/auth/Login'
+import Register from '../pages/auth/Register'
+
 export default function AppRoutes() {
     return (
         <BrowserRouter>
@@ -21,12 +24,12 @@ export default function AppRoutes() {
                         </Route>
                     </Route>
                     <Route path="news" element={<News />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
                 </Route>
                 {/* <Route path="/admin" element={<LayoutAdmin />}>
                     <Route index element={<Home />} />
                 </Route> */}
-                {/* <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} /> */}
             </Routes>
         </BrowserRouter>
     )

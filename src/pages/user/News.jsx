@@ -19,28 +19,17 @@ export default function News() {
             </div>
 
             <div className="w-full h-full mt-10 ">
-                <h1 className="ml-3 mb-1 text-3xl font-bold">KHÓA HỌC MỚI</h1>
+                <h1 className="ml-3 mb-1 text-[17.5px] font-bold">KHÓA HỌC MỚI</h1>
 
                 <div className="w-full h-[1px] bg-slate-600 mb-5 mx-3"></div>
                 <div className="flex overflow-x-scroll">
                     <NewsList 
                         itemCount={8}
                         itemMargin="4px 16px 4px 4px"
-                        itemWidth="192px"
+                        itemWidth="144px"
                         itemHeight="121px"
                     />
-                    <NewsList 
-                        itemCount={8}
-                        itemMargin="4px 16px 4px 4px"
-                        itemWidth="192px"
-                        itemHeight="121px"
-                    />
-                    <NewsList 
-                        itemCount={8}
-                        itemMargin="4px 16px 4px 4px"
-                        itemWidth="192px"
-                        itemHeight="121px"
-                    />
+                    
                 </div>
             </div>
             
