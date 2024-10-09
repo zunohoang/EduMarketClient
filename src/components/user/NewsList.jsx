@@ -1,10 +1,13 @@
 import banner from "../../assets/banner.png"
 
 function NewsItem({ margin, width, height }) {
+
+    const handleLink = () => {
+    }
     return (
-        <div className="flex " >
+        <div className="flex " onClick={handleLink}>
             <li className="bg-slate-400 rounded-xl" style={{ margin, width, height }}>
-                <img  className="w-full h-full object-cover rounded-xl" src={banner} alt="" />
+                <img  className="w-full h-full object-cover rounded-xl shadow-2xl" src={banner} alt="" />
             </li>
             <div className="">
                 <h2 className="text-lg">Học Vật lí để không bị Lí vật</h2>

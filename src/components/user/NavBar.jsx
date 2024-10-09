@@ -67,10 +67,14 @@ export default function NavBar() {
                 </div>
                 <div className="flex items-center">
                     <div className="mr-4">
-                        <button className="text-[#355676] text-sm px-5 py-2">Đăng ký</button>
+                        <NavLink to={'/register'}>
+                            <button className="text-[#355676] text-sm px-5 py-2">Đăng ký</button>
+                        </NavLink>
                     </div>
                     <div>
-                        <button className="bg-[#2D5D90] text-sm text-white px-5 py-2 rounded-lg">Đăng nhập</button>
+                        <NavLink to={'/login'}>
+                            <button className="bg-[#2D5D90] text-sm text-white px-5 py-2 rounded-lg">Đăng nhập</button>
+                        </NavLink>
                     </div>
                 </div>
             </div>
