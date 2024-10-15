@@ -33,9 +33,9 @@ export default function NavBar() {
             }
             <div className="flex justify-between items-center h-full ml-5 mr-5">
                 <div className="flex items-center gap-4">
-                    <div className="bg-sky-600 p-2 rounded-[10px]">
+                    <NavLink to={"/"} className="bg-sky-600 p-2 rounded-[10px]">
                         <h1 className="text-lg font-bold text-white">EM</h1>
-                    </div>
+                    </NavLink>
                     <div className="flex item-center justify-center">
                         <button className="bg-[#1A4F8C0F] w-48 h-10 rounded-xl flex items-center" onClick={() => setOpen(true)}>
                             <div className="text-[#A3B6C6] mr-auto ml-3 text-sm">
