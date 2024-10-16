@@ -10,12 +10,13 @@ import News from '../pages/user/News'
 import Login from '../pages/auth/Login'
 import Register from '../pages/auth/Register'
 //Admin
-import Administrator from '../pages/admin/Administrator';
+import LayoutAdmin from '../Layouts/LayoutAdmin';
 import CoursesManagement from '../components/admin/CoursesManagement'
 import Dashboard from '../components/admin/Dashboard'
 import StudentsManagement from '../components/admin/StudentsManagement'
 import TeachersManagement from '../components/admin/TeachersManagement'
 import WebSettings from '../components/admin/WebSettings'
+import SideBar from '../components/admin/SideBar';
 
 export default function AppRoutes() {
     return (
@@ -34,13 +35,13 @@ export default function AppRoutes() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                 </Route>
-                <Route path="/admin" element={<Administrator />}>
-                    <Route index element={<Dashboard />} />
-                    <Route path="./dashboard" element={<Dashboard />}/>
-                    <Route path="./courses" element={<CoursesManagement />}/>
-                    <Route path="./students" element={<studentsManagement />}/>
-                    <Route path="./teachers" element={<teachersManagement />}/>
-                    <Route path="./settings" element={<WebSettings />}/>
+                <Route path="/admin" element={<LayoutAdmin />}>
+                    <Route index element={<SideBar />} />
+                    <Route path="dashboard" element={<Dashboard />}/>
+                    <Route path="courses" element={<CoursesManagement />}/>
+                    <Route path="students" element={<StudentsManagement />}/>
+                    <Route path="teachers" element={<TeachersManagement />}/>
+                    <Route path="settings" element={<WebSettings />}/>
 
                 </Route>
             </Routes>
