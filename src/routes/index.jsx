@@ -17,6 +17,8 @@ import StudentsManagement from '../components/admin/StudentsManagement'
 import TeachersManagement from '../components/admin/TeachersManagement'
 import WebSettings from '../components/admin/WebSettings'
 import SideBar from '../components/admin/SideBar';
+import NewsList from '../components/user/News/NewsList';
+import NewsDetail from '../components/user/News/NewsDetail';
 
 export default function AppRoutes() {
     return (
@@ -31,20 +33,23 @@ export default function AppRoutes() {
                             <Route path=":videoId" element={<VideoCard />} />
                         </Route>
                     </Route>
-                    <Route path="/news" element={<News />} />
+                    <Route path="news" element={<News />} >
+                        <Route index element={<NewsList />} />
+                        <Route path=":newsId" element={<NewsDetail />} />
+                    </Route>
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                 </Route>
                 <Route path="/admin" element={<LayoutAdmin />}>
                     <Route index element={<SideBar />} />
-                    <Route path="dashboard" element={<Dashboard />}/>
-                    <Route path="courses" element={<CoursesManagement />}/>
-                    <Route path="students" element={<StudentsManagement />}/>
-                    <Route path="teachers" element={<TeachersManagement />}/>
-                    <Route path="settings" element={<WebSettings />}/>
+                    <Route path="dashboard" element={<Dashboard />} />
+                    <Route path="courses" element={<CoursesManagement />} />
+                    <Route path="students" element={<StudentsManagement />} />
+                    <Route path="teachers" element={<TeachersManagement />} />
+                    <Route path="settings" element={<WebSettings />} />
 
                 </Route>
             </Routes>
-        </BrowserRouter>
+        </BrowserRouter >
     )
 }
