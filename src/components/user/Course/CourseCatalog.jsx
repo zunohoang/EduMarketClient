@@ -7,8 +7,10 @@ export default function Course() {
             <h3 className="text-[#355676] text-[17.5px] font-bold">DANH MỤC</h3>
             <div className="flex gap-6">
                 <FilterSidebar />
-                <div className="course-content">
+                <h1>dsds</h1>
+                <div className="flex justify-center">
                     <CourseTabs />
+                    <sdfs>sdfs</sdfs>
                 </div>
             </div>
         </div>
