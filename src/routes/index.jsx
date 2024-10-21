@@ -22,6 +22,9 @@ import TeachersManagement from '../components/admin/TeacherManagement/TeachersMa
 import TeacherList from '../components/admin/TeacherManagement/TeacherList';
 import AddTeacher from '../components/admin/TeacherManagement/AddTeacher';
 import WebSettings from '../components/admin/WebSettings'
+import SideBar from '../components/admin/SideBar';
+import NewsList from '../components/user/News/NewsList';
+import NewsDetail from '../components/user/News/NewsDetail';
 
 export default function AppRoutes() {
     return (
@@ -36,7 +39,10 @@ export default function AppRoutes() {
                             <Route path=":videoId" element={<VideoCard />} />
                         </Route>
                     </Route>
-                    <Route path="/news" element={<News />} />
+                    <Route path="news" element={<News />} >
+                        <Route index element={<NewsList />} />
+                        <Route path=":newsId" element={<NewsDetail />} />
+                    </Route>
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                 </Route>
@@ -59,9 +65,8 @@ export default function AppRoutes() {
                         <Route path='./add' element={<AddTeacher />} />
                     <Route />
                     <Route path="settings" element={<WebSettings />}/>
-
                 </Route>
             </Routes>
-        </BrowserRouter>
+        </BrowserRouter >
     )
 }
