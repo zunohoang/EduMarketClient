@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react'
 import Cache from '../../components/Cache'
 import { Outlet, useLocation } from 'react-router-dom';
 import SectionLessonCard from '../../components/user/Course/SectionLessonCard'
+import TeacherCourse from '../../components/user/Course/Video/TeacherCourse';
+import CommentVideo from '../../components/user/Course/Video/CommentVideo';
 
 function HomeIcon() {
     return (
@@ -26,20 +28,26 @@ function HomeIcon() {
 
 export default function CourseVideoPage() {
     return (
-        <div className='pt-[70px] pl-7 pr-7'>
+        <div className='pt-[80px] pl-7 pr-7'>
             <div className="flex items-center text-[#2D5D90] gap-3">
                 <HomeIcon />
-                <div className="text-lg">&gt;</div>
-                <span className="font-medium cursor-pointer">LẬP TRÌNH TƯ DUY TỪ TRƯỜNG VÀ HẠT NHÂN</span>
+                <div className="sm:text-lg text-md">&gt;</div>
+                <span className="font-medium cursor-pointer sm:text-md text-xs">LẬP TRÌNH TƯ DUY TỪ TRƯỜNG VÀ HẠT NHÂN</span>
             </div>
-            <div className="flex gap-6 mt-4">
-                <Outlet />
-                <div className='w-[60%] bg-[#FFFFFF] p-4 px-7'>
-                    <h1 className='font-semibold'>Danh sách bài học</h1>
-                    <div className='mt-6 flex flex-col gap-2'>
-                        <SectionLessonCard />
-                        <SectionLessonCard />
+            <div className="grid grid-cols-12 gap-6 mt-4">
+                <div className='lg:col-span-7 col-span-12'>
+                    <Outlet />
+                    <TeacherCourse />
+                </div>
+                <div className='lg:col-span-5 col-span-12'>
+                    <div className='p-4 px-7 rounded-md bg-[#FFFFFF]'>
+                        <h1 className='font-semibold'>Danh sách bài học</h1>
+                        <div className='mt-6 flex flex-col gap-2'>
+                            <SectionLessonCard />
+                            <SectionLessonCard />
+                        </div>
                     </div>
+                    <CommentVideo />
                 </div>
             </div>
         </div >
