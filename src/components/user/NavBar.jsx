@@ -27,7 +27,7 @@ export default function NavBar() {
     const [open, setOpen] = useState(false);
 
     return (
-        <div className="z-10 w-full bg-white/60 h-[56px] fixed top-0 left-0 backdrop-blur-lg">
+        <div className="z-10 w-full bg-white/60 h-[56px] fixed top-0 left-0 backdrop-blur-lg md:block hidden">
             {
                 open && <SearchModal setOpen={setOpen} open={open} />
             }
@@ -37,8 +37,8 @@ export default function NavBar() {
                         <h1 className="text-lg font-bold text-white">EM</h1>
                     </NavLink>
                     <div className="flex item-center justify-center">
-                        <button className="bg-[#1A4F8C0F] w-48 h-10 rounded-xl flex items-center" onClick={() => setOpen(true)}>
-                            <div className="text-[#A3B6C6] mr-auto ml-3 text-sm">
+                        <button className="bg-[#1A4F8C0F] lg:w-48 w-12 h-10 rounded-xl flex items-center" onClick={() => setOpen(true)}>
+                            <div className="text-[#A3B6C6] mr-auto ml-3 text-sm lg:block hidden">
                                 Tìm kiếm
                             </div>
                             <svg className="size-6 text-[#3D6998] ml-auto mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">

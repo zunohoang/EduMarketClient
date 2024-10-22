@@ -15,7 +15,7 @@ export default function Categories() {
                     </svg>
                 </div>
             </div>
-            <div className={`mt-6 gap-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 overflow-hidden transition-all duration-1500 ease-in-out ${!showMore ? `h-48` : `h-auto`}`}>
+            <div className={`mt-6 gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 overflow-hidden transition-all duration-1500 ease-in-out ${!showMore ? `h-48` : `h-auto`}`}>
                 <CategoryCard title="KHÓA HỌC LỚP 12" />
                 <CategoryCard title="KHÓA HỌC LỚP 11" />
                 <CategoryCard title="KHÓA HỌC LỚP 9" />
