@@ -15,8 +15,8 @@ function ClassCard({ title, isActive }) {
 
 function CourseItem({ name, img, teacher, id }) {
     return (
-        <div className="course__item min-w-[200px] text-[#395978]" key={id}>
-            <img className="rounded-xl w-[200px] h-[200px]" src={img} alt={name} />
+        <div className="course__item min-w-[150px] text-[#395978] " key={id}>
+            <img className="rounded-xl" src={img} alt={name} />
             <div className="uppercase mt-2 text-[15px] font-medium">
                 <h2>{name}</h2>
             </div>
@@ -69,17 +69,16 @@ function Pagination({ currentPage = 1, totalPages = 4 }) {
 
 export default function CourseTabs() {
     return (
-        <div className="mt-8 w-[100%]">
+        <div className="mt-3 w-fit p-5">
             <div className="flex">
-                <ClassCard title={"Tất cả"} isActive={false} />
+                <ClassCard title={"Tất cả"} isActive={true} />
                 <ClassCard title={"Lớp 12"} isActive={false} />
                 <ClassCard title={"Lớp 11"} isActive={false} />
                 <ClassCard title={"Lớp 10"} isActive={false} />
-                <ClassCard title={"Lớp 9"} isActive={false} />
             </div>
             <div className=" h-[1px] bg-[rgba(0,0,0,0.1)]"></div>
-            <div className="flex gap-6 my-6 justify-center">
-                <div className="flex gap-6 flex-wrap">
+            <div className="flex w-full  my-6 justify-start">
+                <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-4">
                     <CourseItem name={"Toán"} img={'/subject1_1.jpg'} teacher={"Nguyễn Văn A"} id={1} />
                     <CourseItem name={"Vật lý"} img={'/subject1.jpg'} teacher={"Nguyễn Văn B"} id={2} />
                     <CourseItem name={"Hóa học"} img={'/subject1_1.jpg'} teacher={"Nguyễn Văn C"} id={3} />

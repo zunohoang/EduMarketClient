@@ -31,20 +31,19 @@ export default function AppRoutes() {
                             <Route path=":videoId" element={<VideoCard />} />
                         </Route>
                     </Route>
-                    <Route path="/news" element={<News />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                 </Route>
                 <Route path="/admin" element={<LayoutAdmin />}>
                     <Route index element={<SideBar />} />
-                    <Route path="dashboard" element={<Dashboard />}/>
-                    <Route path="courses" element={<CoursesManagement />}/>
-                    <Route path="students" element={<StudentsManagement />}/>
-                    <Route path="teachers" element={<TeachersManagement />}/>
-                    <Route path="settings" element={<WebSettings />}/>
+                    <Route path="dashboard" element={<Dashboard />} />
+                    <Route path="courses" element={<CoursesManagement />} />
+                    <Route path="students" element={<StudentsManagement />} />
+                    <Route path="teachers" element={<TeachersManagement />} />
+                    <Route path="settings" element={<WebSettings />} />
 
                 </Route>
             </Routes>
-        </BrowserRouter>
+        </BrowserRouter >
     )
 }
