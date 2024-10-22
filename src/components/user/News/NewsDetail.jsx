@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 function HomeIcon() {
     return (
         <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -50,6 +52,23 @@ function TableRes({ cnt }) {
     );
 }
 
+function NewsCard({ title, time, id }) {
+    return (
+        <Link to={`/news/${id}`} className="flex gap-3 items-center p-2 m-2 rounded-md hover:shadow-md">
+            <img className="w-16 h-16 rounded-md" src="https://mapstudy.sgp1.digitaloceanspaces.com/blog/sn4mwau00f3a/sse7j1h006jt-1718867788325.jpg" alt="" />
+            <div className="text-md">
+                <p>{title}</p>
+                <div className="flex gap-2 text-sm items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
+                    </svg>
+                    <p>{time}</p>
+                </div>
+            </div>
+        </Link>
+    );
+}
+
 export default function NewsDetail() {
     return (
         <div className="w-full">
@@ -58,8 +77,8 @@ export default function NewsDetail() {
                 <div className="text-lg">&gt;</div>
                 <span className="font-medium cursor-pointer">Tin tức</span>
             </div>
-            <div className="m-6 flex gap-6 w-full">
-                <div className="bg-[#FFFFFF] w-[70%] rounded-lg p-4">
+            <div className="m-6 flex gap-6 w-full flex-wrap">
+                <div className="bg-[#FFFFFF] xl:w-[70%] w-full rounded-lg p-5">
                     <div className="flex gap-2 text-sm items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
@@ -82,189 +101,18 @@ export default function NewsDetail() {
                         <TableRes cnt={'103'} />
                     </div>
                 </div>
-                <div className="bg-[#FFFFFF] w-[30%] rounded-xl p-4">
+                <div className="bg-[#FFFFFF] xl:w-[28%] w-full rounded-xl p-4">
                     <h1 className="text-lg font-bold">Các tin tức khác</h1>
                     <div className="my-6">
-                        <div className="flex gap-3 items-center p-3">
-                            <img className="w-16 h-16 rounded-md" src="https://mapstudy.sgp1.digitaloceanspaces.com/blog/sn4mwau00f3a/sse7j1h006jt-1718867788325.jpg" alt="" />
-                            <div className="text-md">
-                                <p>Gợi ý đáp án đề thi môn Toán tốt nghiệp THPT 2024</p>
-                                <div className="flex gap-2 text-sm items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
-                                    </svg>
-                                    <p>14:41 - 27/6/2024</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="flex gap-3 items-center p-3">
-                            <img className="w-16 h-16 rounded-md" src="https://mapstudy.sgp1.digitaloceanspaces.com/blog/sn4mwau00f3a/sse7j1h006jt-1718867788325.jpg" alt="" />
-                            <div className="text-md">
-                                <p>Gợi ý đáp án đề thi môn Toán tốt nghiệp THPT 2024</p>
-                                <div className="flex gap-2 text-sm items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
-                                    </svg>
-                                    <p>14:41 - 27/6/2024</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="flex gap-3 items-center p-3">
-                            <img className="w-16 h-16 rounded-md" src="https://mapstudy.sgp1.digitaloceanspaces.com/blog/sn4mwau00f3a/sse7j1h006jt-1718867788325.jpg" alt="" />
-                            <div className="text-md">
-                                <p>Gợi ý đáp án đề thi môn Toán tốt nghiệp THPT 2024</p>
-                                <div className="flex gap-2 text-sm items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
-                                    </svg>
-                                    <p>14:41 - 27/6/2024</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="flex gap-3 items-center p-3">
-                            <img className="w-16 h-16 rounded-md" src="https://mapstudy.sgp1.digitaloceanspaces.com/blog/sn4mwau00f3a/sse7j1h006jt-1718867788325.jpg" alt="" />
-                            <div className="text-md">
-                                <p>Gợi ý đáp án đề thi môn Toán tốt nghiệp THPT 2024</p>
-                                <div className="flex gap-2 text-sm items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
-                                    </svg>
-                                    <p>14:41 - 27/6/2024</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="flex gap-3 items-center p-3">
-                            <img className="w-16 h-16 rounded-md" src="https://mapstudy.sgp1.digitaloceanspaces.com/blog/sn4mwau00f3a/sse7j1h006jt-1718867788325.jpg" alt="" />
-                            <div className="text-md">
-                                <p>Gợi ý đáp án đề thi môn Toán tốt nghiệp THPT 2024</p>
-                                <div className="flex gap-2 text-sm items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
-                                    </svg>
-                                    <p>14:41 - 27/6/2024</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="flex gap-3 items-center p-3">
-                            <img className="w-16 h-16 rounded-md" src="https://mapstudy.sgp1.digitaloceanspaces.com/blog/sn4mwau00f3a/sse7j1h006jt-1718867788325.jpg" alt="" />
-                            <div className="text-md">
-                                <p>Gợi ý đáp án đề thi môn Toán tốt nghiệp THPT 2024</p>
-                                <div className="flex gap-2 text-sm items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
-                                    </svg>
-                                    <p>14:41 - 27/6/2024</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="flex gap-3 items-center p-3">
-                            <img className="w-16 h-16 rounded-md" src="https://mapstudy.sgp1.digitaloceanspaces.com/blog/sn4mwau00f3a/sse7j1h006jt-1718867788325.jpg" alt="" />
-                            <div className="text-md">
-                                <p>Gợi ý đáp án đề thi môn Toán tốt nghiệp THPT 2024</p>
-                                <div className="flex gap-2 text-sm items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
-                                    </svg>
-                                    <p>14:41 - 27/6/2024</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="flex gap-3 items-center p-3">
-                            <img className="w-16 h-16 rounded-md" src="https://mapstudy.sgp1.digitaloceanspaces.com/blog/sn4mwau00f3a/sse7j1h006jt-1718867788325.jpg" alt="" />
-                            <div className="text-md">
-                                <p>Gợi ý đáp án đề thi môn Toán tốt nghiệp THPT 2024</p>
-                                <div className="flex gap-2 text-sm items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
-                                    </svg>
-                                    <p>14:41 - 27/6/2024</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="flex gap-3 items-center p-3">
-                            <img className="w-16 h-16 rounded-md" src="https://mapstudy.sgp1.digitaloceanspaces.com/blog/sn4mwau00f3a/sse7j1h006jt-1718867788325.jpg" alt="" />
-                            <div className="text-md">
-                                <p>Gợi ý đáp án đề thi môn Toán tốt nghiệp THPT 2024</p>
-                                <div className="flex gap-2 text-sm items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
-                                    </svg>
-                                    <p>14:41 - 27/6/2024</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="flex gap-3 items-center p-3">
-                            <img className="w-16 h-16 rounded-md" src="https://mapstudy.sgp1.digitaloceanspaces.com/blog/sn4mwau00f3a/sse7j1h006jt-1718867788325.jpg" alt="" />
-                            <div className="text-md">
-                                <p>Gợi ý đáp án đề thi môn Toán tốt nghiệp THPT 2024</p>
-                                <div className="flex gap-2 text-sm items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
-                                    </svg>
-                                    <p>14:41 - 27/6/2024</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="flex gap-3 items-center p-3">
-                            <img className="w-16 h-16 rounded-md" src="https://mapstudy.sgp1.digitaloceanspaces.com/blog/sn4mwau00f3a/sse7j1h006jt-1718867788325.jpg" alt="" />
-                            <div className="text-md">
-                                <p>Gợi ý đáp án đề thi môn Toán tốt nghiệp THPT 2024</p>
-                                <div className="flex gap-2 text-sm items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
-                                    </svg>
-                                    <p>14:41 - 27/6/2024</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="flex gap-3 items-center p-3">
-                            <img className="w-16 h-16 rounded-md" src="https://mapstudy.sgp1.digitaloceanspaces.com/blog/sn4mwau00f3a/sse7j1h006jt-1718867788325.jpg" alt="" />
-                            <div className="text-md">
-                                <p>Gợi ý đáp án đề thi môn Toán tốt nghiệp THPT 2024</p>
-                                <div className="flex gap-2 text-sm items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
-                                    </svg>
-                                    <p>14:41 - 27/6/2024</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="flex gap-3 items-center p-3">
-                            <img className="w-16 h-16 rounded-md" src="https://mapstudy.sgp1.digitaloceanspaces.com/blog/sn4mwau00f3a/sse7j1h006jt-1718867788325.jpg" alt="" />
-                            <div className="text-md">
-                                <p>Gợi ý đáp án đề thi môn Toán tốt nghiệp THPT 2024</p>
-                                <div className="flex gap-2 text-sm items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
-                                    </svg>
-                                    <p>14:41 - 27/6/2024</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex gap-3 items-center p-3">
-                            <img className="w-16 h-16 rounded-md" src="https://mapstudy.sgp1.digitaloceanspaces.com/blog/sn4mwau00f3a/sse7j1h006jt-1718867788325.jpg" alt="" />
-                            <div className="text-md">
-                                <p>Gợi ý đáp án đề thi môn Toán tốt nghiệp THPT 2024</p>
-                                <div className="flex gap-2 text-sm items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
-                                    </svg>
-                                    <p>14:41 - 27/6/2024</p>
-                                </div>
-                            </div>
-                        </div>
+                        <NewsCard title="Gợi ý đáp án đề thi môn Toán tốt nghiệp THPT 2024" time="14:41 - 27/6/2024" id={1} />
+                        <NewsCard title="Gợi ý đáp án đề thi môn Toán tốt nghiệp THPT 2024" time="14:41 - 27/6/2024" id={2} />
+                        <NewsCard title="Gợi ý đáp án đề thi môn Toán tốt nghiệp THPT 2024" time="14:41 - 27/6/2024" id={3} />
+                        <NewsCard title="Gợi ý đáp án đề thi môn Toán tốt nghiệp THPT 2024" time="14:41 - 27/6/2024" id={1} />
+                        <NewsCard title="Gợi ý đáp án đề thi môn Toán tốt nghiệp THPT 2024" time="14:41 - 27/6/2024" id={2} />
+                        <NewsCard title="Gợi ý đáp án đề thi môn Toán tốt nghiệp THPT 2024" time="14:41 - 27/6/2024" id={3} />
+                        <NewsCard title="Gợi ý đáp án đề thi môn Toán tốt nghiệp THPT 2024" time="14:41 - 27/6/2024" id={1} />
+                        <NewsCard title="Gợi ý đáp án đề thi môn Toán tốt nghiệp THPT 2024" time="14:41 - 27/6/2024" id={2} />
+                        <NewsCard title="Gợi ý đáp án đề thi môn Toán tốt nghiệp THPT 2024" time="14:41 - 27/6/2024" id={3} />
                     </div>
                 </div>
             </div>
