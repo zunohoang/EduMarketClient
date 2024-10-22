@@ -1,11 +1,11 @@
+import { Outlet } from "react-router-dom"
 import SideBar from "../components/admin/SideBar"
-import { Outlet } from "react-router-dom";
 
 export default function LayoutAdmin() {
     return (
-        <div>
+        <div className="w-screen h-screen flex flex-wrap">
             <SideBar />
-            <div className="bg-[#F3F4F5]">
+            <div className="bg-[#F3F4F5] w-3/4">
                 <Outlet />
             </div>
         </div>
