@@ -8,11 +8,13 @@ export default function Register() {
     const [password, setPassword] = useState("")
     const [rePassword, setRePassword] = useState("")
     const [email, setEmail] = useState("")
+    const [fullName, setFullName] = useState("")
 
     const [usernameTouched, setUsernameTouched] = useState(false)
     const [emailTouched, setEmailTouched] = useState(false)
     const [passwordTouched, setPasswordTouched] = useState(false)
     const [rePasswordTouched, setRePasswordTouched] = useState(false)
+    const [fullNameTouched, setFullNameTouched] = useState(false)
 
     const emailRegex = /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/
 
@@ -32,10 +34,22 @@ export default function Register() {
     const navigate = useNavigate()
     const handleDef = async (e) => {
         e.preventDefault();
-        navigate("/login")
+
+        const res = await fetch(`${process.env.API_URL}/api/v1/users`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ fullName, username, email, password })
+        });
+
+        if (res.ok) {
+            const response = await res.json();
+            navigate("/login")
+        } else {
+            alert("Đăng kí thất bại")
+        }
     }
-
-
 
     return (
         <div className="h-screen">
@@ -43,7 +57,20 @@ export default function Register() {
                 <div className="w-1/2 flex flex-col items-center justify-center">
                     <h1 className="text-3xl font-bold ">ĐĂNG KÍ</h1>
                     <form className="flex flex-col w-3/5 *:text-md [&_input]:p-2 [&_input]:pl-4">
-                        
+
+                        <label className="my-2" htmlFor="username">Họ và Tên</label>
+                        <input
+                            type="text"
+                            name="fullName"
+                            value={fullName}
+                            onChange={(e) => { setFullName(e.target.value); setFullNameTouched(true); }}
+                            onBlur={() => setFullNameTouched(true)}
+                            placeholder="VD:Nguyễn Văn A"
+                            className="bg-[#F3F4F6] text-[#6C727F] outline-none pl-3 text-[14.5px] w-full box-border rounded-lg my-2"
+                        />
+                        {fullNameTouched && isEmpty(fullName) && <InputMessage check={false} message="Họ và Tên không được để trống!" />}
+
+
                         <label className="my-2" htmlFor="username">Tên tài khoản</label>
                         <input
                             type="text"
@@ -56,7 +83,7 @@ export default function Register() {
                         />
                         {usernameTouched && isEmpty(username) && <InputMessage check={false} message="Tên tài khoản không được để trống!" />}
 
-                        
+
                         <label className="my-2" htmlFor="email">Email</label>
                         <input
                             type="text"
@@ -71,7 +98,7 @@ export default function Register() {
                         {emailTouched && !isEmpty(email) && !validateEmail() && <InputMessage check={validateEmail()} message="Email không hợp lệ!" />}
                         {emailTouched && !isEmpty(email) && validateEmail() && <InputMessage check={validateEmail()} message="Email hợp lệ!" />}
 
-                        
+
                         <label className="my-2" htmlFor="password">Mật khẩu</label>
                         <input
                             type="password"
@@ -84,7 +111,7 @@ export default function Register() {
                         />
                         {passwordTouched && isEmpty(password) && <InputMessage check={false} message="Mật khẩu không được để trống!" />}
 
-                        
+
                         <label className="my-2" htmlFor="rePassword">Nhập lại mật khẩu</label>
                         <input
                             type="password"
@@ -100,7 +127,7 @@ export default function Register() {
                         {rePasswordTouched && !isEmpty(rePassword) && validatePassword() && <InputMessage check={validatePassword()} message="Mật khẩu khớp!" />}
 
                         <button type="submit" onClick={handleDef} className="hover:bg-[#1a65b6]  bg-[#2D5D90] text-sm text-white px-5 py-2 rounded-lg">Đăng kí</button>
-                        </form>
+                    </form>
                 </div>
                 <div className="w-1/2 flex flex-col justify-center items-center">
                     <h1 className="text-3xl font-bold">Chào mừng bạn đến với EduMarket</h1>

@@ -11,11 +11,11 @@ function LessonCard({ title, videoId }) {
         <div onClick={(e) => {
             e.stopPropagation();
             updateURL();
-        }} className='bg-[#e7eff0] h-[38px] ml-2 rounded-xl flex items-center mt-1 mb-1 pl-2 pr-3'>
+        }} className='bg-[#e7eff0] sm:h-[38px] ml-2 rounded-xl flex items-center mt-1 mb-1 pl-2 pr-3 p-1 h-fit'>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6 text-[#395c8c] opacity-80 cursor-pointer">
                 <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm14.024-.983a1.125 1.125 0 0 1 0 1.966l-5.603 3.113A1.125 1.125 0 0 1 9 15.113V8.887c0-.857.921-1.4 1.671-.983l5.603 3.113Z" clipRule="evenodd" />
             </svg>
-            <h1 className='pl-2 text-[#395c8c] cursor-pointer'>{title}</h1>
+            <h1 className='pl-2 text-[#395c8c] cursor-pointer h-fit'>{title}</h1>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 text-[#395c8c] ml-auto cursor-pointer">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
             </svg>
