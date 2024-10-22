@@ -77,7 +77,7 @@ export default function NewsDetail() {
                 <div className="text-lg">&gt;</div>
                 <span className="font-medium cursor-pointer">Tin tức</span>
             </div>
-            <div className="m-6 flex gap-6 w-full flex-wrap">
+            <div className="mt-6 flex gap-6 w-full flex-wrap">
                 <div className="bg-[#FFFFFF] xl:w-[70%] w-full rounded-lg p-5">
                     <div className="flex gap-2 text-sm items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">

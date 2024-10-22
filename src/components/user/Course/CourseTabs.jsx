@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import img1 from "../../../assets/subject1.jpg";
 
 function ClassCard({ title, isActive }) {
@@ -15,7 +16,7 @@ function ClassCard({ title, isActive }) {
 
 function CourseItem({ name, img, teacher, id }) {
     return (
-        <div className="course__item min-w-[150px] text-[#395978] " key={id}>
+        <Link to={`/courses/${id}`} className="course__item min-w-[150px] text-[#395978] hover:scale-105 duration-1000" key={id}>
             <img className="rounded-xl" src={img} alt={name} />
             <div className="uppercase mt-2 text-[15px] font-medium">
                 <h2>{name}</h2>
@@ -26,7 +27,7 @@ function CourseItem({ name, img, teacher, id }) {
                 </svg>
                 <p>{teacher}</p>
             </div>
-        </div>
+        </Link>
     );
 }
 

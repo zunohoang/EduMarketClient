@@ -6,7 +6,7 @@ export default function Footer() {
     return (
         <div className="bg-[#2D5D90] mt-4 text-white p-7">
             <div className='hidden lg:block mb-10'>
-                <div className="flex justify-around">
+                <div className="flex justify-around ">
                     <div>
                         <p className="text-lg font-semibold mb-2">LIÊN HỆ</p>
                         <div>

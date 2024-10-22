@@ -88,14 +88,14 @@ export default function VideoCard() {
                     ) : ("")
                 }
             </div>
-            <div className="flex w-full absolute bottom-0 p-1 pl-3 justify-center gap-4 mt-4">
-                <button onClick={onPlay} className="px-2 py-2 bg-none text-white rounded-full hover:bg-[#52A7E5]">
+            <div className="flex w-full absolute bottom-0 p-1 pl-3 justify-center gap-4 mt-4 sm:scale-100 scale-90">
+                <button onClick={onPlay} className="sm:px-2 sm:py-2 bg-none text-white rounded-full w-fit sm:hover:bg-[#52A7E5]">
                     {
                         !isPlaying == 1 ? (
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="sm:size-6 size-5">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" />
                             </svg>) : (
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="sm:size-6 size-5">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 8.25h2.25v7.5H6.75V8.25ZM15 8.25h2.25v7.5H15v-7.5Z" />
                             </svg>
                         )
@@ -112,9 +112,9 @@ export default function VideoCard() {
                             videoRef.current.seekTo(e.target.value);
                             setVideoCurrentTime(e.target.value);
                         }}
-                        class="w-[60%] h-[6px] bg-[#2D5D90] rounded-full"
+                        class="sm:w-[60%] w-[100px] sm:h-[6px] h-[5px]  bg-[#2D5D90] rounded-full"
                     />
-                    <div className="text-white text-sm w-22">{convertTime(videoCurrentTime)} / {convertTime(videoTime)}</div>
+                    <div className="text-white sm:text-sm text-xs sm:w-22 w-96 ">{convertTime(videoCurrentTime)} / {convertTime(videoTime)}</div>
                     {/* Volume */}
                     <div className="flex items-center">
                         <button onClick={() => {
@@ -139,7 +139,7 @@ export default function VideoCard() {
                                 )
                             }
                         </button>
-                        <div className="w-[80px] bg-none flex items-center">
+                        <div className="w-[40px] sm:w-[84px] bg-none flex items-center">
                             <input
                                 type="range"
                                 min="0"
