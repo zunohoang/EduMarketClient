@@ -133,7 +133,9 @@ export default function AddTeacher() {
                     {rePasswordTouched && !isEmpty(rePassword) && validatePassword() && <InputMessage check={true} message="Mật khẩu khớp!" />}
 
                     {/* Submit Button */}
-                    <button type="submit" className="hover:bg-[#1a65b6]  bg-[#2D5D90] text-sm text-white px-5 py-2 rounded-lg">+ Tạo tài khoản</button>
+                    <div className="flex justify-end my-2">
+                        <button type="submit" className=" w-fit hover:bg-[#1a65b6]  bg-[#2D5D90] text-sm text-white px-5 py-2 rounded-lg">+ Tạo tài khoản</button>
+                    </div>
                 </form>
             </div>
             {/* Confirm Box */}

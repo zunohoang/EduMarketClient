@@ -35,7 +35,7 @@ export default function StudentItem({ id, username, subject, ownCourse }) {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
                     </svg>
                 </div>
-                <div ref={menuRef} className={`${menuDisplay} absolute top-3/4 right-10 z-10 w-full rounded-lg shadow-2xl bg-white
+                <div ref={menuRef} className={`${menuDisplay} absolute top-3/4 right-10 z-10 p-2 rounded-lg shadow-2xl bg-white
                                                *:flex *:p-2 *:gap-3 *:rounded-lg *:cursor-pointer`}>
                     <div className="hover:bg-gray-300 text-blue-600">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
