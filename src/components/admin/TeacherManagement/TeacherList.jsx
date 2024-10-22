@@ -5,7 +5,7 @@ export default function TeacherList() {
         <div className="flex justify-center items-centers w-full h-screen bg-[#f4f7fe]">
             <div className="my-auto w-[90%] bg-white px-2 py-4 rounded-xl ">
                 <div className="flex justify-between my-3 mx-4">
-                    <h1 className="text-2xl font-bold text-[#2b3674]">Dach sách khóa học</h1>
+                    <h1 className="text-2xl font-bold text-[#2b3674]">Dach sách giảng viên</h1>
                     <div className="flex w-fit bg-white rounded-xl relative
                                     has-[:focus]:outline online-none  outline-2 outline-[#2d5d90]
                                     border-solid border-2 border-[#f4f7fe]">
