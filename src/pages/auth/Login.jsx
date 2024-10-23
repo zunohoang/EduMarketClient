@@ -29,8 +29,7 @@ export default function Login() {
     return (
         <div className="h-screen">
             <div className="pt-[70px] flex h-full *:text-[#355676] bg-white">
-
-                <div className="w-1/2 relative flex flex-col items-center justify-center">
+                <div className="md:w-1/2 w-full relative flex flex-col items-center justify-center">
                     <h1 className="text-3xl font-bold absolute top-1/4">ĐĂNG NHẬP</h1>
                     <form className="flex flex-col w-3/5
                                          *:my-2 *:text-md [&_input]:p-2 [&_input]:pl-4">
@@ -47,13 +46,10 @@ export default function Login() {
                         </p>
                     </div>
                 </div>
-                <div className="w-1/2 flex flex-col justify-center items-center">
+                <div className="md:flex md:flex-col justify-center items-center hidden">
                     <h1 className="text-3xl font-bold">Chào mừng bạn đến với EduMarket</h1>
                     <img className="mt-4" src={loginPic} alt="" />
-
                 </div>
-
-
             </div>
         </div>
 

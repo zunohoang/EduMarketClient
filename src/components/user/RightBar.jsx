@@ -1,15 +1,22 @@
 import adImg from '../../assets/advertisement.png';
 import { Link } from 'react-router-dom';
 import infor from '../../assets/infor.png';
+import EnterKey from './EnterKey';
+import { useState } from 'react';
 
 export default function RightBar() {
+    const [openEnterKey, setOpenEnterKey] = useState(false);
+
     return (
         <div className="mr-5">
+            <EnterKey setOpen={setOpenEnterKey} open={openEnterKey} />
             <div>
                 <img className="rounded-3xl" src={adImg} alt="" />
             </div>
             <div className="mt-5">
-                <button className="flex items-center justify-center w-full bg-[#2D5D90] text-sm text-white px-5 py-2 rounded-lg">
+                <button
+                    onClick={() => setOpenEnterKey(!openEnterKey)}
+                    className="flex items-center justify-center w-full bg-[#2D5D90] text-sm text-white px-5 py-2 rounded-lg">
                     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M19.79 14.9299C17.73 16.9799 14.78 17.6099 12.19 16.7999L7.48002 21.4999C7.14002 21.8499 6.47002 22.0599 5.99002 21.9899L3.81002 21.6899C3.09002 21.5899 2.42002 20.9099 2.31002 20.1899L2.01002 18.0099C1.94002 17.5299 2.17002 16.8599 2.50002 16.5199L7.20002 11.8199C6.40002 9.21995 7.02002 6.26995 9.08002 4.21995C12.03 1.26995 16.82 1.26995 19.78 4.21995C22.74 7.16995 22.74 11.9799 19.79 14.9299Z"

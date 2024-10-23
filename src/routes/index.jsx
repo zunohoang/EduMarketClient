@@ -18,6 +18,10 @@ import StudentList from '../components/admin/StudentManagement/StudentList';
 import TeacherList from '../components/admin/TeacherManagement/TeacherList';
 import AddTeacher from '../components/admin/TeacherManagement/AddTeacher';
 import WebSettings from '../components/admin/WebSettings'
+import SideBar from '../components/admin/SideBar';
+import NewsList from '../components/user/News/NewsList';
+import NewsDetail from '../components/user/News/NewsDetail';
+import Profile from '../pages/user/Profile';
 
 export default function AppRoutes() {
     return (
@@ -32,7 +36,11 @@ export default function AppRoutes() {
                             <Route path=":videoId" element={<VideoCard />} />
                         </Route>
                     </Route>
-                    <Route path="/news" element={<News />} />
+                    <Route path="news" element={<News />} >
+                        <Route index element={<NewsList />} />
+                        <Route path=":newsId" element={<NewsDetail />} />
+                    </Route>
+                    <Route path="profile" element={<Profile />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                 </Route>
