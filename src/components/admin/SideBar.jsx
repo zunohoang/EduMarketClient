@@ -3,13 +3,13 @@ import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 
 export default function SideBar() {
-    const [coursesDisplay, setCoursesDisplay] = useState('hidden');
-    const [studentsDisplay, setStudentsDisplay] = useState('hidden');
-    const [teachersDisplay, setTeachersDisplay] = useState('hidden');
-    const [settingsDisplay, setSettingsDisplay] = useState('hidden');
+    const [coursesDisplay, setCoursesDisplay] = useState(false);
+    const [studentsDisplay, setStudentsDisplay] = useState(false);
+    const [teachersDisplay, setTeachersDisplay] = useState(false);
+    const [settingsDisplay, setSettingsDisplay] = useState(false);
 
-    const toggleDisplay = (section, setSectionDisplay) => {
-        setSectionDisplay(section === 'hidden' ? '' : 'hidden');
+    const toggleDisplay = (currentDisplay, setDisplay) => {
+        setDisplay(!currentDisplay);
     };
 
     return (
@@ -20,47 +20,46 @@ export default function SideBar() {
 
                 <NavLink to={'./dashboard'}>
                     <div className='text-xl p-3 hover:text-[#2D5D90] hover:bg-white'>
-                        <h1>Dashboard</h1>
+                        <h1>Bảng điều khiển</h1>
                     </div>
                 </NavLink>
 
-                <NavLink to={'./courses'}>
+                <NavLink>
                     <div className='p-3 hover:text-[#2D5D90] hover:bg-white' onClick={() => toggleDisplay(coursesDisplay, setCoursesDisplay)}>
-                        <h1 className='text-xl'>Courses Management</h1>
+                        <h1 className='text-xl'>Quản lí khóa học</h1>
                     </div>
-                    <ul className={`${coursesDisplay} pl-10 text-md flex flex-col`}>
-                        <Link to={'./courses/list'} className='hover:text-[#2D5D90] hover:bg-white'>Courses List</Link>
-                        <Link to={'./courses/add'} className='hover:text-[#2D5D90] hover:bg-white'>Add Courses</Link>
+                    <ul className={`pl-10 text-md flex flex-col transition-all duration-500 ease-in-out overflow-hidden ${coursesDisplay ? 'max-h-40' : 'max-h-0'}`}>
+                        <Link to={'./courses/list'} className='hover:text-[#2D5D90] hover:bg-white'>Danh sách khóa học</Link>
+                        <Link to={'./courses/add'} className='hover:text-[#2D5D90] hover:bg-white'>Tạo khóa học mới</Link>
                     </ul>
                 </NavLink>
 
-                <NavLink to={'./students'}>
+                <NavLink>
                     <div className='p-3 hover:text-[#2D5D90] hover:bg-white' onClick={() => toggleDisplay(studentsDisplay, setStudentsDisplay)}>
-                        <h1 className='text-xl'>Students Management</h1>
+                        <h1 className='text-xl'>Quản lí người dùng</h1>
                     </div>
-                    <ul className={`${studentsDisplay} pl-10 text-md`}>
-                        <li className='hover:text-[#2D5D90] hover:bg-white'>Students List</li>
-                        <li className='hover:text-[#2D5D90] hover:bg-white'>Add Students</li>
+                    <ul className={`pl-10 text-md flex flex-col transition-all duration-500 ease-in-out overflow-hidden ${studentsDisplay ? 'max-h-20' : 'max-h-0'}`}>
+                        <Link to={'./students/list'} className='hover:text-[#2D5D90] hover:bg-white'>Danh sách người dùng</Link>
                     </ul>
                 </NavLink>
 
-                <NavLink to={'./teachers'}>
+                <NavLink>
                     <div className='p-3 hover:text-[#2D5D90] hover:bg-white' onClick={() => toggleDisplay(teachersDisplay, setTeachersDisplay)}>
-                        <h1 className='text-xl'>Teachers Management</h1>
+                        <h1 className='text-xl'>Quản lí giảng viên</h1>
                     </div>
-                    <ul className={`${teachersDisplay} pl-10 text-md`}>
-                        <li className='hover:text-[#2D5D90] hover:bg-white'>Teachers List</li>
-                        <li className='hover:text-[#2D5D90] hover:bg-white'>Add Teacher</li>
+                    <ul className={`pl-10 text-md flex flex-col transition-all duration-500 ease-in-out overflow-hidden ${teachersDisplay ? 'max-h-40' : 'max-h-0'}`}>
+                        <Link to={'./teachers/list'} className='hover:text-[#2D5D90] hover:bg-white'>Danh sách giảng viên</Link>
+                        <Link to={'./teachers/add'} className='hover:text-[#2D5D90] hover:bg-white'>Cấp quyền giảng viên</Link>
                     </ul>
                 </NavLink>
 
-                <NavLink to={'./settings'}>
+                <NavLink>
                     <div className='p-3 hover:text-[#2D5D90] hover:bg-white' onClick={() => toggleDisplay(settingsDisplay, setSettingsDisplay)}>
-                        <h1 className='text-xl'>Web Settings</h1>
+                        <h1 className='text-xl'>Cài đặt</h1>
                     </div>
-                    <ul className={`${settingsDisplay} pl-10 text-md`}>
-                        <li className='hover:text-[#2D5D90] hover:bg-white'>General Settings</li>
-                        <li className='hover:text-[#2D5D90] hover:bg-white'>Security Settings</li>
+                    <ul className={`pl-10 text-md flex flex-col transition-all duration-500 ease-in-out overflow-hidden ${settingsDisplay ? 'max-h-20' : 'max-h-0'}`}>
+                        <li className='hover:text-[#2D5D90] hover:bg-white'>Chung</li>
+                        <li className='hover:text-[#2D5D90] hover:bg-white'>Bảo mật</li>
                     </ul>
                 </NavLink>
             </div>
