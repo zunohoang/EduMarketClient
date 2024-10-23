@@ -8,7 +8,7 @@ import TopBarMobile from "../components/user/TopBarMobile";
 export default function LayoutUser() {
     return (
         <div>
-            <div className="md:hidden w-full bg-white/40 fixed backdrop-blur-md">
+            <div className="z-10 md:hidden w-full fixed backdrop-blur-md">
                 <TopBarMobile />
             </div>
             <NavBar />
