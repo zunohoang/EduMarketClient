@@ -1,4 +1,5 @@
 import Teacher1 from '../../assets/teacher1.png'
+import { Link } from 'react-router-dom'
 
 function TeacherCard({ fullName, img }) {
     return (
@@ -18,7 +19,7 @@ export default function Teachers() {
         <div className="bg-[#FFFFFF] rounded-xl p-5 pb-0 mt-8 w-full">
             <div className="flex">
                 <h3 className="text-[#355676] text-[15.75px] font-bold">Giáo viên EduMarket</h3>
-                <i className="ml-auto text-[#2D5D90]">Xem tất cả</i>
+                <Link to={`/teachers`} className="ml-auto text-[#2D5D90] hover:text-sky-700" >Xem tất cả</Link>
             </div>
             <div className="flex pt-4 pb-6 gap-6 hover:overflow-x-auto overflow-x-hidden h-[220px]">
                 <TeacherCard fullName={"Hoàng"} img={Teacher1} />
