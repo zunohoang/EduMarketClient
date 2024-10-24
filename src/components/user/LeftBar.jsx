@@ -4,20 +4,60 @@ import Line from './Line'
 import FB from '../../assets/facebook-circle.png'
 import YT from '../../assets/youtube-circle.png'
 import MS from '../../assets/messenger-circle.png'
+import Cookies from 'js-cookie';
 
 export default function SideBar() {
+    const [isAuth, setIsAuth] = React.useState(false);
+    const [username, setUsername] = React.useState('');
+    const [fullName, setFullName] = React.useState('');
+    const [role, setRole] = React.useState('');
+
+    React.useEffect(() => {
+        if (Cookies.get('accesstoken')) {
+            setIsAuth(true);
+            setUsername(Cookies.get('username'));
+            setFullName(Cookies.get('fullName'));
+            setRole(Cookies.get('role'));
+        } else {
+            setIsAuth(false);
+        }
+    }, []);
+
 
     return (
         <div className="[&_p]:text-[#155e94] [&_h1]:text-[#155e94]">
-            <Link className="flex items-center justify-start  
+            {
+                isAuth ? (
+                    <Link to={'/profile'} className="flex items-center justify-start  
+                            hover:bg-[rgba(26,79,140,0.06)] 
+                            rounded-lg px-4 py-2.5 
+                            cursor-pointer ">
+                        <div
+                            className="size-10 bg-gradient-to-br hover:shadow-black from-sky-600 to-sky-900 hover:to-sky-700 duration-700 text-white text-sm p-2 hover:shadow-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            </svg>
+                        </div>
+                        <div className="ml-4">
+                            <h1 className="font-medium h-full">{fullName}</h1>
+                            <p>{username}</p>
+                        </div>
+
+                    </Link>
+                ) : (
+                    <Link className="flex items-center justify-start  
                             hover:bg-[rgba(26,79,140,0.06)] 
                             rounded-lg px-4 py-2.5 
                             cursor-pointer 
                             "
-                to="/login">
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none"><path fill="#4491CE" d="M16.8 2.667h-2.6c-3.2 0-5.2 2-5.2 5.2v4.05h4.44l-2.07-2.07a.742.742 0 0 1-.22-.53c0-.19.07-.38.22-.53.29-.29.77-.29 1.06 0l3.35 3.35c.29.29.29.77 0 1.06l-3.35 3.35c-.29.29-.77.29-1.06 0a.754.754 0 0 1 0-1.06l2.07-2.07H9v4.05c0 3.2 2 5.2 5.2 5.2h2.59c3.2 0 5.2-2 5.2-5.2v-9.6c.01-3.2-1.99-5.2-5.19-5.2ZM2.75 11.917c-.41 0-.75.34-.75.75s.34.75.75.75H9v-1.5H2.75Z"></path></svg>
-                <p className="ml-4 font-medium h-full text-center">Đăng nhập</p>
-            </Link>
+                        to="/login">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none"><path fill="#4491CE" d="M16.8 2.667h-2.6c-3.2 0-5.2 2-5.2 5.2v4.05h4.44l-2.07-2.07a.742.742 0 0 1-.22-.53c0-.19.07-.38.22-.53.29-.29.77-.29 1.06 0l3.35 3.35c.29.29.29.77 0 1.06l-3.35 3.35c-.29.29-.77.29-1.06 0a.754.754 0 0 1 0-1.06l2.07-2.07H9v4.05c0 3.2 2 5.2 5.2 5.2h2.59c3.2 0 5.2-2 5.2-5.2v-9.6c.01-3.2-1.99-5.2-5.19-5.2ZM2.75 11.917c-.41 0-.75.34-.75.75s.34.75.75.75H9v-1.5H2.75Z"></path></svg>
+                        <p className="ml-4 font-medium h-full text-center">Đăng nhập</p>
+                    </Link>
+                )
+            }
+
 
             <Line />
 

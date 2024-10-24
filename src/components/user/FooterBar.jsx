@@ -1,7 +1,19 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import Cookie from 'js-cookie';
+import Cookies from 'js-cookie';
 
 export default function FooterBar() {
+    const [isAuth, setIsAuth] = React.useState(false);
+
+    React.useEffect(() => {
+        if (Cookies.get('accesstoken')) {
+            setIsAuth(true);
+        } else {
+            setIsAuth(false);
+        }
+    }, []);
+
     return (
         <nav className="p-3">
             <ul className="flex justify-around items-center max-w-3xl mx-auto">
@@ -35,12 +47,12 @@ export default function FooterBar() {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to={'/login'} className={({ isActive }) => `${isActive ? 'text-orange-900' : 'text-sky-950'} flex flex-col items-center hover:text-sky-600`}>
+                    <NavLink to={isAuth ? '/profile' : '/login'} className={({ isActive }) => `${isActive ? 'text-orange-900' : 'text-sky-950'} flex flex-col items-center hover:text-sky-600`}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
-                        <span className="text-xs mt-1">Đăng nhập</span>
+                        <span className="text-xs mt-1">{isAuth ? "Cá nhân" : "Đăng nhập"}</span>
                     </NavLink>
                 </li>
             </ul>

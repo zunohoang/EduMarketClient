@@ -2,11 +2,13 @@ import { Link, useNavigate } from "react-router-dom"
 import NavBar from "../../components/user/NavBar"
 import loginPic from "../../assets/loginpicture.gif"
 import { useState } from "react"
+import { jwtDecode } from 'jwt-decode';
 
 export default function Login() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
+
     const handleDef = async (e) => {
         e.preventDefault();
 
@@ -20,8 +22,16 @@ export default function Login() {
 
         if (res.ok) {
             const response = await res.json();
-            localStorage.setItem("accessstoken", response.data.accesstoken);
-            navigate("/")
+            const token = response.data.accesstoken;
+            const decoded = jwtDecode(token);
+            // luu token vao cookie hạn 7 ngày
+            document.cookie = `accesstoken=${token}; max-age=604800; path=/`;
+            document.cookie = `role=${decoded.role}; max-age=604800; path=/`;
+            document.cookie = `username=${decoded.username}; max-age=604800; path=/`;
+            document.cookie = `fullName=${decoded.fullName}; max-age=604800; path=/`;
+            document.cookie = `email=${decoded.email}; max-age=604800; path=/`;
+            document.cookie = `id=${decoded.id}; max-age=604800; path=/`;
+            window.location.href = '/';
         } else {
             alert("Sai tên tài khoản hoặc mật khẩu")
         }
