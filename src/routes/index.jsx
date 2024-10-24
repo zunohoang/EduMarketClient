@@ -11,14 +11,10 @@ import Login from '../pages/auth/Login'
 import Register from '../pages/auth/Register'
 //Admin
 import LayoutAdmin from '../Layouts/LayoutAdmin';
-import CoursesManagement from '../components/admin/CourseManagement/CoursesManagement'
 import CourseList from '../components/admin/CourseManagement/CourseList';
 import AddCourse from '../components/admin/CourseManagement/AddCourse';
 import Dashboard from '../components/admin/Dashboard'
-import StudentsManagement from '../components/admin/StudentManagement/StudentsManagement'
 import StudentList from '../components/admin/StudentManagement/StudentList';
-import AddStudent from '../components/admin/StudentManagement/AddStudent';
-import TeachersManagement from '../components/admin/TeacherManagement/TeachersManagement'
 import TeacherList from '../components/admin/TeacherManagement/TeacherList';
 import AddTeacher from '../components/admin/TeacherManagement/AddTeacher';
 import WebSettings from '../components/admin/WebSettings'
@@ -30,6 +26,7 @@ import Teacher from '../pages/user/Teacher';
 import TeacherList2 from '../components/user/Teacher/TeacherList';
 import TeacherDetail from '../components/user/Teacher/TeacherDetail';
 import CourseCategories from '../pages/user/CourseCategories';
+import Schedule from '../pages/user/Schedule';
 
 export default function AppRoutes() {
     return (
@@ -53,31 +50,26 @@ export default function AppRoutes() {
                         <Route index element={<TeacherList2 />} />
                         <Route path=":teacherId" element={<TeacherDetail />} />
                     </Route>
+                    <Route path="future" element={<Schedule />} />
                     <Route path="profile" element={<Profile />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                 </Route>
                 <Route path="/admin" element={<LayoutAdmin />}>
                     <Route index element={<Dashboard />} />
-                    <Route path="dashboard" element={<Dashboard />} />
-                    <Route path="courses" element={<CoursesManagement />} />
-                    <Route index element={<CourseList />} />
-                    <Route path='./list' element={<CourseList />} />
-                    <Route path='./add' element={<AddCourse />} />
-                    <Route />
-                    <Route path="students" element={<StudentsManagement />} />
-                    <Route index element={<StudentList />} />
-                    <Route path='./list' element={<StudentList />} />
-                    <Route path='./add' element={<AddStudent />} />
-                    <Route />
-                    <Route path="teachers" element={<TeachersManagement />} />
-                    <Route index element={<TeacherList />} />
-                    <Route path='./list' element={<TeacherList />} />
-                    <Route path='./add' element={<AddTeacher />} />
-                    <Route />
-                    <Route path="settings" element={<WebSettings />} />
+                    <Route path='dashboard' element={<Dashboard />} />
+
+                    <Route path='courses/list' element={<CourseList />} />
+                    <Route path='courses/add' element={<AddCourse />} />
+
+                    <Route path='students/list' element={<StudentList />} />
+
+                    <Route path='teachers/list' element={<TeacherList />} />
+                    <Route path='teachers/add' element={<AddTeacher />} />
+
+                    <Route path='settings' element={<WebSettings />} />
                 </Route>
             </Routes>
-        </BrowserRouter >
+        </BrowserRouter>
     )
 }
