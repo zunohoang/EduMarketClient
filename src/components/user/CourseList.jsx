@@ -42,7 +42,7 @@ const teachers = [
 
 function CourseItem({ name, img, teacher, id }) {
     return (
-        <div className="course__item min-w-[150px] text-[#395978]" key={id}>
+        <Link className="course__item min-w-[150px] text-[#395978]" key={id} to={`/courses/${id}`}>
             <img className="rounded-xl w-[150px] h-[150px]" src={img} alt={name} />
             <div className="uppercase mt-2 text-[15px] font-medium">
                 <h2>{name}</h2>
@@ -53,7 +53,7 @@ function CourseItem({ name, img, teacher, id }) {
                 </svg>
                 <p>{teacher}</p>
             </div>
-        </div>
+        </Link>
     );
 }
 

@@ -4,7 +4,7 @@ import iconYT from '../../../assets/youtube-circle.png'
 
 export default function TeacherDetail() {
     return (
-        <div className="grid grid-cols-12 gap-10 mx-10 my-2">
+        <div className="grid grid-cols-12 mx-10 my-2">
             <div className="lg:col-span-5 col-span-12 bg-white rounded-md p-5">
                 <div className="flex gap-5">
                     <img src="/teacher1.png" alt="teacher" className="rounded-md w-36 h-36" />
@@ -25,7 +25,7 @@ export default function TeacherDetail() {
                     </div>
                 </div>
             </div>
-            <div className="lg:col-span-7 col-span-12">
+            <div className="lg:col-span-7 col-span-12 lg:ml-10 lg:mt-0 mt-10">
                 <div className="flex">
                     <div>
                         <ClassCard title={"Khóa học"} isActive={true} />

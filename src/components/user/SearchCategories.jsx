@@ -1,7 +1,10 @@
 
 function Categories({ title }) {
     return (
-        <div className="text-[#2E5E97] bg-[#F3F5F6] text-[13.125px] px-4 pt-2 pb-1.5  rounded-lg shadow-sm">
+        <div
+
+            className="text-[#2E5E97] bg-[#F3F5F6] text-[13.125px] px-4 pt-2 pb-1.5  rounded-lg shadow-sm"
+        >
             {title}
         </div>
     )

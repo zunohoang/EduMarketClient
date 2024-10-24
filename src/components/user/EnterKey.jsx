@@ -3,7 +3,7 @@ import { useState } from "react";
 export default function EnterKey({ setOpen, open }) {
     return (
         <div
-            className={`fixed w-full h-screen top-0 left-0 flex items-center justify-center bg-opacity-50 transition-all bg-black ${open ? '' : 'hidden'} duration-500 ease-in-out`}
+            className={`fixed z-10 w-full h-screen top-0 left-0 flex items-center justify-center bg-opacity-50 transition-all bg-black ${open ? '' : 'hidden'} duration-500 ease-in-out`}
             onClick={() => { open && setOpen(false) }}
         >
             <div className={`w-[80%] bg-[#FFFFFF] rounded-lg p-5 max-w-lg`} onClick={(e) => e.stopPropagation()}>

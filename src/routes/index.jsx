@@ -29,6 +29,7 @@ import Profile from '../pages/user/Profile';
 import Teacher from '../pages/user/Teacher';
 import TeacherList2 from '../components/user/Teacher/TeacherList';
 import TeacherDetail from '../components/user/Teacher/TeacherDetail';
+import CourseCategories from '../pages/user/CourseCategories';
 
 export default function AppRoutes() {
     return (
@@ -42,6 +43,7 @@ export default function AppRoutes() {
                             <Route index element={<VideoHomeCard />} />
                             <Route path=":videoId" element={<VideoCard />} />
                         </Route>
+                        <Route path="categories/:category" element={<CourseCategories />} />
                     </Route>
                     <Route path="news" element={<News />} >
                         <Route index element={<NewsList />} />

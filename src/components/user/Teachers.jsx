@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom'
 
 function TeacherCard({ fullName, img }) {
     return (
-        <div className="w-[120px] h-[174px] min-w-[120px] rounded-xl flex justify-center items-end p-2" style={{
+        <Link to={`/teachers/3`} className="w-[120px] h-[174px] min-w-[120px] rounded-xl flex justify-center items-end p-2" style={{
             backgroundImage: `url(${img})`,
             backgroundPosition: 'center',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat'
         }}>
             <b className='text-white text-[12px] font-bold w-[80%] text-center'>Thầy {fullName}</b>
-        </div>
+        </Link>
     )
 }
 
