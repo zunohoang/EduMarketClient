@@ -25,6 +25,7 @@ import Profile from '../pages/user/Profile';
 import Teacher from '../pages/user/Teacher';
 import TeacherList2 from '../components/user/Teacher/TeacherList';
 import TeacherDetail from '../components/user/Teacher/TeacherDetail';
+import Schedule from '../pages/user/Schedule';
 
 export default function AppRoutes() {
     return (
@@ -47,23 +48,24 @@ export default function AppRoutes() {
                         <Route index element={<TeacherList2 />} />
                         <Route path=":teacherId" element={<TeacherDetail />} />
                     </Route>
+                    <Route path="future" element={<Schedule />} />
                     <Route path="profile" element={<Profile />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                 </Route>
                 <Route path="/admin" element={<LayoutAdmin />}>
-                    <Route index element={<Dashboard />}/>
-                    <Route path='dashboard' element={<Dashboard />}/>
+                    <Route index element={<Dashboard />} />
+                    <Route path='dashboard' element={<Dashboard />} />
 
-                    <Route path='courses/list' element={<CourseList />}/>
-                    <Route path='courses/add' element={<AddCourse/>}/>
+                    <Route path='courses/list' element={<CourseList />} />
+                    <Route path='courses/add' element={<AddCourse />} />
 
-                    <Route path='students/list' element={<StudentList />}/>
+                    <Route path='students/list' element={<StudentList />} />
 
-                    <Route path='teachers/list' element={<TeacherList />}/>
-                    <Route path='teachers/add' element={<AddTeacher />}/>
+                    <Route path='teachers/list' element={<TeacherList />} />
+                    <Route path='teachers/add' element={<AddTeacher />} />
 
-                    <Route path='settings' element={<WebSettings />}/>
+                    <Route path='settings' element={<WebSettings />} />
                 </Route>
             </Routes>
         </BrowserRouter>
