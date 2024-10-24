@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { Link } from 'react-router-dom';
 
 function getRandomColor() {
     const colors = [
@@ -23,14 +24,15 @@ export default function CategoryCard({ title }) {
 
 
     return (
-        <div>
+        <Link to={`/courses/categories/xuat-phat-som-11`}>
             <div
+
                 className="h-40 rounded-lg flex justify-center items-center text-lg text-white text-opacity-70 font-bold"
                 style={{ background: `linear-gradient(to bottom right, ${color1}, ${color2}50)` }} // Sử dụng gradient
             >
                 {title}
             </div>
             <h3 className="text-[#355676] font-semibold text-sm mt-2 ml-1">{title}</h3>
-        </div>
+        </Link>
     );
 }
