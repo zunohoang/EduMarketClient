@@ -22,6 +22,9 @@ import SideBar from '../components/admin/SideBar';
 import NewsList from '../components/user/News/NewsList';
 import NewsDetail from '../components/user/News/NewsDetail';
 import Profile from '../pages/user/Profile';
+import Teacher from '../pages/user/Teacher';
+import TeacherList2 from '../components/user/Teacher/TeacherList';
+import TeacherDetail from '../components/user/Teacher/TeacherDetail';
 
 export default function AppRoutes() {
     return (
@@ -39,6 +42,10 @@ export default function AppRoutes() {
                     <Route path="news" element={<News />} >
                         <Route index element={<NewsList />} />
                         <Route path=":newsId" element={<NewsDetail />} />
+                    </Route>
+                    <Route path="teachers" element={<Teacher />}>
+                        <Route index element={<TeacherList2 />} />
+                        <Route path=":teacherId" element={<TeacherDetail />} />
                     </Route>
                     <Route path="profile" element={<Profile />} />
                     <Route path="/login" element={<Login />} />
