@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom'; // Sử dụng NavLink thay vì Link
+import { Link, NavLink } from 'react-router-dom'; // Sử dụng NavLink thay vì Link
 import Line from './Line';
 import EnterKey from './EnterKey';
+import Cookies from 'js-cookie';
+import { useRef, useEffect } from 'react';
 
 function SearchModal({ setOpen, open }) {
     const [content, setContent] = useState("");
@@ -27,6 +29,43 @@ function SearchModal({ setOpen, open }) {
 export default function NavBar() {
     const [open, setOpen] = useState(false);
     const [openEnterKey, setOpenEnterKey] = useState(false);
+    const [isAuth, setIsAuth] = React.useState(false);
+
+    React.useEffect(() => {
+        if (Cookies.get('accesstoken')) {
+            setIsAuth(true);
+        } else {
+            setIsAuth(false);
+        }
+    }, []);
+
+    const [isOpen, setIsOpen] = useState(false)
+    const dropdownRef = useRef(null)
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsOpen(false)
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [])
+
+    const toggleDropdown = () => setIsOpen(!isOpen)
+
+    const handleLogout = () => {
+        Cookies.remove('accesstoken')
+        Cookies.remove('role')
+        Cookies.remove('username')
+        Cookies.remove('fullName')
+        Cookies.remove('email')
+        Cookies.remove('id')
+        window.location.href = '/login'
+    }
 
     return (
         <div className="z-10 w-full bg-white/60 h-[56px] fixed top-0 left-0 backdrop-blur-lg md:block hidden">
@@ -72,18 +111,60 @@ export default function NavBar() {
                     </NavLink>
                 </div>
                 <div className="flex items-center">
-                    <div className="mr-4">
-                        <NavLink to={'/register'}>
-                            <button className="text-[#355676] text-sm px-5 py-2">Đăng ký</button>
-                        </NavLink>
-                    </div>
-                    <div>
-                        <NavLink to={'/login'}>
-                            <button className="bg-[#2D5D90] text-sm text-white px-5 py-2 rounded-lg">Đăng nhập</button>
-                        </NavLink>
-                    </div>
-                    <div className='mx-3 h-[30px] w-[2px] bg-slate-500 lg:hidden'></div>
-                    <div className='lg:hidden'>
+                    {
+                        isAuth ? (
+                            <>
+                                <div className="relative" ref={dropdownRef}>
+                                    <button
+                                        onClick={toggleDropdown}
+                                        aria-haspopup="true"
+                                        aria-expanded={isOpen}
+                                        className="bg-gradient-to-br hover:shadow-black from-sky-600 to-sky-900 hover:to-sky-700 duration-700 text-white text-sm p-2 hover:shadow-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                        </svg>
+                                        <span className="sr-only">User menu</span>
+                                    </button>
+
+                                    {isOpen && (
+                                        <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
+                                            <Link
+                                                to={'/profile'}
+                                                onClick={() => setIsOpen(false)}
+                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-sky-100 focus:outline-none focus:bg-sky-100"
+                                                role="menuitem"
+                                            >
+                                                Thông tin tài khoản
+                                            </Link>
+                                            <div
+                                                onClick={handleLogout}
+                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-sky-100 focus:outline-none focus:bg-sky-100"
+                                                role="menuitem"
+                                            >
+                                                Đăng xuất
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <div className="mr-4">
+                                    <NavLink to={'/register'}>
+                                        <button className="text-[#355676] text-sm px-5 py-2">Đăng ký</button>
+                                    </NavLink>
+                                </div>
+                                <div>
+                                    <NavLink to={'/login'}>
+                                        <button className="bg-[#2D5D90] text-sm text-white px-5 py-2 rounded-lg">Đăng nhập</button>
+                                    </NavLink>
+                                </div>
+                            </>
+                        )
+                    }
+                    <div className='mx-3 h-[35px] w-[2px] bg-slate-500'></div>
+                    <div className=''>
                         <button
                             onClick={() => setOpenEnterKey(!openEnterKey)}
                             className="flex items-center justify-center w-full bg-[#2D5D90] text-sm text-white px-5 py-2 rounded-lg">
