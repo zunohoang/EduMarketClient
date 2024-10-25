@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-export default function CourseItem({id,title,subject,grade,teacher,date,attended,price,isChecked,onChange}) {
+export default function StudentItem({id,username,grade,attended}) {
     const [menuDisplay, setMenuDisplay] = useState('hidden');
     const menuRef = useRef(null);
 
@@ -23,17 +23,11 @@ export default function CourseItem({id,title,subject,grade,teacher,date,attended
     }, []);
     return (
         <tr id={id}>
-            <td>
-                <input type="checkbox" checked={isChecked} onChange={onChange} />
-            </td>
+            <td><input type="checkbox" /></td>
             <td>{id}</td>
-            <td>{title}</td>
-            <td>{subject}</td>
+            <td>{username}</td>
             <td>{grade}</td>
-            <td>{teacher}</td>
-            <td>{date}</td>
             <td>{attended}</td>
-            <td>{`${price} VNĐ`}</td>
             <td className="flex justify-center items-center relative">
                 <div className="cursor-pointer w-fit" onClick={toggleDisplay}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">

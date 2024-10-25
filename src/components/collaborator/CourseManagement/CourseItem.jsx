@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-export default function CourseItem({id,title,subject,grade,teacher,date,attended,price,isChecked,onChange}) {
+export default function CourseItem({id,title,subject,grade,teacher,date,attended,price,isChecked,onChange,code,image}) {
     const [menuDisplay, setMenuDisplay] = useState('hidden');
     const menuRef = useRef(null);
 
@@ -60,3 +60,4 @@ export default function CourseItem({id,title,subject,grade,teacher,date,attended
         </tr>
     )
 }
+

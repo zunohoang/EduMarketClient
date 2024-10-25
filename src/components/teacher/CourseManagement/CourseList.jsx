@@ -6,17 +6,7 @@ export default function CourseList() {
     const [selectAll, setSelectAll] = useState(false);
     const [selectedItems, setSelectedItems] = useState([]);
     const [confirm,setConfirm] = useState('hidden')
-    
     const [activePage,setActivePage] = useState(1);
-    const totalPages = 4; 
-
-    const handleNextPage = () => {
-        if (activePage < totalPages) setActivePage(activePage + 1);
-    };
-
-    const handlePreviousPage = () => {
-        if (activePage > 1) setActivePage(activePage - 1);
-    };
     
     const courses = [
         {
@@ -222,14 +212,17 @@ export default function CourseList() {
                     </table>
                 </div>
 
-                <div className="flex justify-end items-center mt-5 mr-7">
-                    <div className="cursor-pointer" onClick={handlePreviousPage}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-                        </svg>
-
+                <div className="flex justify-between mt-5 mr-7">
+                    <div className="">
+                        <button onClick={(e) => {handleDef(e)}} type="submit" className="hover:bg-green-600  border-2 border-solid border-gray-300  bg-green-800 text-sm text-white px-5 py-2 rounded-lg">Lấy code khóa học</button>    
                     </div>
-                    <div className="flex mx-2 ">
+                    <div className="flex justify-end items-center">
+                        <div className="cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                            </svg>
+                        </div>
+                        <div className="flex mx-2 ">
                         {[1, 2, 3, 4].map((pageNumber) => (
                             <div
                                 key={pageNumber}
@@ -242,11 +235,11 @@ export default function CourseList() {
                             </div>
                         ))}
                     </div>
-                    <div className="cursor-pointer" onClick={handleNextPage}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                        </svg>
-
+                        <div className="cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                            </svg>
+                        </div>
                     </div>
                 </div>
             </div>

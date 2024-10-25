@@ -1,25 +1,13 @@
+import StudentItem from "./StudentItem";
 import { useState } from "react";
-import TeacherItem from "./TeacherItem";
-
-export default function TeacherList() {
+export default function StudentList() {
     const [activePage,setActivePage] = useState(1);
-    const [displayInfor,setDisplayInfor] = useState('hidden')
-    const totalPages = 4; 
 
-    const handleNextPage = () => {
-        if (activePage < totalPages) setActivePage(activePage + 1);
-    };
-
-    const handlePreviousPage = () => {
-        if (activePage > 1) setActivePage(activePage - 1);
-    };
-    
-    
     return (
         <div className="flex justify-center items-centers w-full h-screen bg-[#f4f7fe]">
             <div className="my-auto w-[90%] bg-white px-2 py-4 rounded-xl ">
                 <div className="flex justify-between my-3 mx-4">
-                    <h1 className="text-2xl font-bold text-[#2b3674]">Dach sách giảng viên</h1>
+                    <h1 className="text-2xl font-bold text-[#2b3674]">Dach sách khóa học</h1>
                     <div className="flex w-fit bg-white rounded-xl relative
                                     has-[:focus]:outline online-none  outline-2 outline-[#2d5d90]
                                     border-solid border-2 border-[#f4f7fe]">
@@ -41,9 +29,9 @@ export default function TeacherList() {
                         <tr className="w-full"> 
                             <th><input type="checkbox" /></th>
                             <th><span>ID</span></th>
-                            <th><span>GIẢNG VIÊN</span></th>
-                            <th><span>MÔN</span></th>
-                            <th><span>KHÓA HỌC ĐÃ TẠO</span></th>
+                            <th><span>TÊN NGƯỜI DÙNG</span></th>
+                            <th><span>LỚP</span></th>
+                            <th><span>KHÓA HỌC THAM GIA</span></th>
                             <th>
                                 <div className="cursor-pointer text-black flex justify-center items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -53,83 +41,74 @@ export default function TeacherList() {
                             </th>
                         </tr>
 
-                        <TeacherItem 
+                        <StudentItem 
                             id={3}
-                            username="Nguyễn Văn Hoàng"
-                            subject="Vật lí"
-                            ownCourse={14}
-                            display={() => setDisplayInfor('')}
+                            username="Khúc Phương Nam"
+                            grade="Đại học"
+                            attended={12}
 
                         />
-                        <TeacherItem 
+                        <StudentItem 
                             id={3}
-                            username="Nguyễn Văn Hoàng"
-                            subject="Vật lí"
-                            ownCourse={14}
-                            display={() => setDisplayInfor('')}
+                            username="Khúc Phương Nam"
+                            grade="Đại học"
+                            attended={12}
 
                         />
-                        <TeacherItem 
+                        <StudentItem 
                             id={3}
-                            username="Nguyễn Văn Hoàng"
-                            subject="Vật lí"
-                            ownCourse={14}
-                            display={() => setDisplayInfor('')}
+                            username="Khúc Phương Nam"
+                            grade="Đại học"
+                            attended={12}
 
                         />
-                        <TeacherItem 
+                        <StudentItem 
                             id={3}
-                            username="Nguyễn Văn Hoàng"
-                            subject="Vật lí"
-                            ownCourse={14}
-                            display={() => setDisplayInfor('')}
+                            username="Khúc Phương Nam"
+                            grade="Đại học"
+                            attended={12}
 
                         />
-                        <TeacherItem 
+                        <StudentItem 
                             id={3}
-                            username="Nguyễn Văn Hoàng"
-                            subject="Vật lí"
-                            ownCourse={14}
-                            display={() => setDisplayInfor('')}
+                            username="Khúc Phương Nam"
+                            grade="Đại học"
+                            attended={12}
 
                         />
-                        <TeacherItem 
+                        <StudentItem 
                             id={3}
-                            username="Nguyễn Văn Hoàng"
-                            subject="Vật lí"
-                            ownCourse={14}
-                            display={() => setDisplayInfor('')}
+                            username="Khúc Phương Nam"
+                            grade="Đại học"
+                            attended={12}
 
                         />
-                        <TeacherItem 
+                        <StudentItem 
                             id={3}
-                            username="Nguyễn Văn Hoàng"
-                            subject="Vật lí"
-                            ownCourse={14}
-                            display={() => setDisplayInfor('')}
+                            username="Khúc Phương Nam"
+                            grade="Đại học"
+                            attended={12}
 
                         />
-                        <TeacherItem 
+                        <StudentItem 
                             id={3}
-                            username="Nguyễn Văn Hoàng"
-                            subject="Vật lí"
-                            ownCourse={14}
-                            display={() => setDisplayInfor('')}
+                            username="Khúc Phương Nam"
+                            grade="Đại học"
+                            attended={12}
 
                         />
-                        <TeacherItem 
+                        <StudentItem 
                             id={3}
-                            username="Nguyễn Văn Hoàng"
-                            subject="Vật lí"
-                            ownCourse={14}
-                            display={() => setDisplayInfor('')}
+                            username="Khúc Phương Nam"
+                            grade="Đại học"
+                            attended={12}
 
-                        />      
+                        />
                     </table>
                 </div>
 
                 <div className="flex justify-end items-center mt-5 mr-7">
-                    <div className="cursor-pointer" onClick={handlePreviousPage}>
+                    <div className="cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                         </svg>
@@ -148,23 +127,12 @@ export default function TeacherList() {
                             </div>
                         ))}
                     </div>
-                    <div className="cursor-pointer" onClick={handleNextPage}>
+                    <div className="cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                         </svg>
 
                     </div>
-                </div>
-            </div>
-            {/* Confirm Box */}
-            <div className={`${displayInfor} absolute w-full h-screen flex justify-center items-center bg-black bg-opacity-15`}>
-                <div className="relative bg-white p-8 rounded-xl w-3/4">
-                    <div onClick={() => { setDisplayInfor('hidden') }} className="absolute top-2 right-2 cursor-pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-                        </svg>
-                    </div>
-                    
                 </div>
             </div>
         </div>
