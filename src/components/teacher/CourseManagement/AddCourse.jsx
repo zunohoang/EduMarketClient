@@ -134,8 +134,6 @@ export default function AddCourse() {
                         
                     </div>
 
-                    
-
                      <div className="flex justify-end items-end ">
                         <button type="submit" className="hover:bg-[#1a65b6] w-1/4 text-center bg-[#2D5D90] text-sm text-white px-5 py-2 rounded-lg"> + Tạo khóa học</button>
                     </div>   

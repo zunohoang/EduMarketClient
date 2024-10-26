@@ -1,6 +1,6 @@
 import { useState } from "react";
 import TeacherItem from "./TeacherItem";
-
+import user from "../../../assets/user.png"
 export default function TeacherList() {
     const [activePage,setActivePage] = useState(1);
     const [displayInfor,setDisplayInfor] = useState('hidden')
@@ -16,7 +16,7 @@ export default function TeacherList() {
     
     
     return (
-        <div className="flex justify-center items-centers w-full h-screen bg-[#f4f7fe]">
+        <div className="relative flex justify-center items-centers w-full h-screen bg-[#f4f7fe]">
             <div className="my-auto w-[90%] bg-white px-2 py-4 rounded-xl ">
                 <div className="flex justify-between my-3 mx-4">
                     <h1 className="text-2xl font-bold text-[#2b3674]">Dach sách giảng viên</h1>
@@ -158,13 +158,37 @@ export default function TeacherList() {
             </div>
             {/* Confirm Box */}
             <div className={`${displayInfor} absolute w-full h-screen flex justify-center items-center bg-black bg-opacity-15`}>
-                <div className="relative bg-white p-8 rounded-xl w-3/4">
+                <div className="relative bg-white p-8 rounded-xl w-2/3">
                     <div onClick={() => { setDisplayInfor('hidden') }} className="absolute top-2 right-2 cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                         </svg>
                     </div>
-                    
+                    <div className="flex gap-10">
+                        <div className="rounded-full w-fit h-full overflow-hidden my-auto">
+                            <img className="object-cover" src={user} alt="" />
+                        </div>
+                        <div className="flex flex-col gap-4">
+                            <div className="text-xl font-bold">
+                                <span> GIẢNG VIÊN</span>
+                            </div>
+                            <div className="text-xl">Họ và tên: 
+                                <span> Nguyễn Văn A</span>
+                            </div>
+                            <div className="text-xl">Ngày sinh: 
+                                <span> 1/1/2005</span>
+                            </div>
+                            <div className="text-xl">Chuyên ngành: 
+                                <span> Vật lí</span>
+                            </div>
+                            <div className="text-xl">SĐT: 
+                                <span> 0383838888</span>
+                            </div>
+                            <div className="text-xl">Email: 
+                                <span> nguyenvana@gmail.com</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
