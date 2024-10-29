@@ -155,10 +155,10 @@ export default function Profile() {
             </div>
             <div className='p-3 w-full' >
                 <div className='flex gap-4'>
-                    <img src="/teacher1.png" className='rounded-full w-20 h-20' alt="" />
+                    <img src="/teacher1.png" className='rounded-full w-40 h-40' alt="" />
                     <div className='w-full'>
-                        <h1 className='font-bold text-sky-800'>{userData.name}</h1>
-                        <p className='text-sm font-medium text-sky-950'>Giáo viên</p>
+                        <h1 className='font-bold text-2xl text-sky-800'>{userData.name}</h1>
+                        <p className='text-lg font-medium text-sky-950'>Giáo viên</p>
                     </div>
                     <div className='flex flex-col gap-1'>
                         <button onClick={handleLogout} className="flex justify-between items-center px-4 h-10 md:w-40 lg:w-40 py-2 bg-orange-50 border-red-100 text-gray-800 rounded-md border-2 hover:bg-orange-200">
@@ -253,18 +253,20 @@ export default function Profile() {
                                         </div>
                                     </form>
                                 ) : (
-                                    <>
-                                        <img src="/teacher1.png" className='w-52 h-52 rounded-md' alt="" />
-                                        <p className="text-lg font-medium text-sky-950">Họ và tên: {userData.name}</p>
-                                        <p className="text-md font-medium text-sky-950">Email: {userData.email}</p>
-                                        <p className="text-md font-medium text-sky-950">Mô tả: {userData.description}</p>
+                                    <div className='flex gap-4'>
+                                    <img src="/teacher1.png" className='w-52 rounded-md object-cover' alt="" />
+                                    <div className="flex flex-col gap-3">
+                                        <p className="text-2xl font-medium text-sky-950">Họ và tên: {userData.name}</p>
+                                        <p className="text-lg font-medium text-sky-950">Email: {userData.email}</p>
+                                        <p className="text-lg font-medium text-sky-950">Mô tả: {userData.description}</p>
                                         <button
                                             onClick={() => setIsEditing(true)}
                                             className="ml-auto w-[150px] mt-4 px-4 py-2 bg-sky-700 text-white rounded-md hover:bg-blue-600"
                                         >
                                             Chỉnh sửa
                                         </button>
-                                    </>
+                                    </div>
+                                    </div>
                                 )}
                             </div>
                         )}
