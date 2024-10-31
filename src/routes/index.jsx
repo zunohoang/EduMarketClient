@@ -9,16 +9,7 @@ import VideoCard from '../components/user/Course/Video/VideoCard';
 import News from '../pages/user/News'
 import Login from '../pages/auth/Login'
 import Register from '../pages/auth/Register'
-//Admin
-import LayoutAdmin from '../Layouts/LayoutAdmin';
-import CourseList from '../components/admin/CourseManagement/CourseList';
-import AddCourse from '../components/admin/CourseManagement/AddCourse';
-import Dashboard from '../components/admin/Dashboard'
-import StudentList from '../components/admin/StudentManagement/StudentList';
-import TeacherList from '../components/admin/TeacherManagement/TeacherList';
-import AddTeacher from '../components/admin/TeacherManagement/AddTeacher';
-import WebSettings from '../components/admin/WebSettings'
-import SideBar from '../components/admin/SideBar';
+
 import NewsList from '../components/user/News/NewsList';
 import NewsDetail from '../components/user/News/NewsDetail';
 import Profile from '../pages/user/Profile';
@@ -27,6 +18,16 @@ import TeacherList2 from '../components/user/Teacher/TeacherList';
 import TeacherDetail from '../components/user/Teacher/TeacherDetail';
 import CourseCategories from '../pages/user/CourseCategories';
 import Schedule from '../pages/user/Schedule';
+
+//Admin
+import LayoutAdmin from '../Layouts/LayoutAdmin';
+import CourseListAdmin from '../pages/admin/Courses';
+import AddCourseAdmin from '../pages/admin/AddCourses';
+import EditCourse from '../pages/admin/EditCourse';
+import CourseStudents from '../pages/admin/CourseStudents';
+import TeacherListAdmin from '../pages/admin/TeacherListAdmin'
+import AddTeacher from '../pages/admin/AddTeacher'
+import StudentsListAdmin from '../pages/admin/StudentsListAdmin';
 
 export default function AppRoutes() {
     return (
@@ -56,18 +57,19 @@ export default function AppRoutes() {
                     <Route path="/register" element={<Register />} />
                 </Route>
                 <Route path="/admin" element={<LayoutAdmin />}>
-                    <Route index element={<Dashboard />} />
-                    <Route path='dashboard' element={<Dashboard />} />
+                    <Route index element={<Home />} />
 
-                    <Route path='courses/list' element={<CourseList />} />
-                    <Route path='courses/add' element={<AddCourse />} />
+                    <Route path="courses" element={<CourseListAdmin />} />
+                    <Route path="courses/:courseId/edit" element={<EditCourse />} />
+                    <Route path="add-course" element={<AddCourseAdmin />} />
+                    <Route path="courses/:courseId/students" element={<CourseStudents />} />
 
-                    <Route path='students/list' element={<StudentList />} />
+                    <Route path="teachers" element={<TeacherListAdmin />} />
+                    <Route path="add-teacher" element={<AddTeacher />} />
+                    <Route path="teachers/:teacherId/courses" element={<CourseListAdmin />} />
 
-                    <Route path='teachers/list' element={<TeacherList />} />
-                    <Route path='teachers/add' element={<AddTeacher />} />
+                    <Route path="students" element={<StudentsListAdmin />} />
 
-                    <Route path='settings' element={<WebSettings />} />
                 </Route>
             </Routes>
         </BrowserRouter>
