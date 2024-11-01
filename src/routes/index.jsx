@@ -28,7 +28,7 @@ import CourseStudents from '../pages/admin/CourseStudents';
 import TeacherListAdmin from '../pages/admin/TeacherListAdmin'
 import AddTeacher from '../pages/admin/AddTeacher'
 import StudentsListAdmin from '../pages/admin/StudentsListAdmin';
-
+import DashboardAdmin from '../pages/admin/DashboardAdmin';
 export default function AppRoutes() {
     return (
         <BrowserRouter>
@@ -57,8 +57,10 @@ export default function AppRoutes() {
                     <Route path="/register" element={<Register />} />
                 </Route>
                 <Route path="/admin" element={<LayoutAdmin />}>
-                    <Route index element={<Home />} />
+                    <Route index element={<DashboardAdmin />} />
 
+                    <Route path='dashboard' element={<DashboardAdmin />} />
+                    
                     <Route path="courses" element={<CourseListAdmin />} />
                     <Route path="courses/:courseId/edit" element={<EditCourse />} />
                     <Route path="add-course" element={<AddCourseAdmin />} />

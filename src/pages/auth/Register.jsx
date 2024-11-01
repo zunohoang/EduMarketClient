@@ -54,7 +54,7 @@ export default function Register() {
     return (
         <div className="h-screen">
             <div className="pt-[70px] flex h-full *:text-[#355676] bg-white">
-                <div className="w-1/2 flex flex-col items-center justify-center">
+                <div className="lg:w-1/2 flex w-full flex-col items-center justify-center">
                     <h1 className="text-3xl font-bold ">ĐĂNG KÍ</h1>
                     <form className="flex flex-col w-3/5 *:text-md [&_input]:p-2 [&_input]:pl-4">
 
@@ -129,9 +129,9 @@ export default function Register() {
                         <button type="submit" onClick={handleDef} className="hover:bg-[#1a65b6]  bg-[#2D5D90] text-sm text-white px-5 py-2 rounded-lg">Đăng kí</button>
                     </form>
                 </div>
-                <div className="w-1/2 flex flex-col justify-center items-center">
+                <div className="hidden lg:flex lg:w-1/2 flex-col justify-center items-center">
                     <h1 className="text-3xl font-bold">Chào mừng bạn đến với EduMarket</h1>
-                    <img className="mt-4" src={loginPic} alt="" />
+                    <img className="mt-6" src={loginPic} alt="" />
                 </div>
             </div>
         </div>

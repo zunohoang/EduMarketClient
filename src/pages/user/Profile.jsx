@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
+
+
 
 function HomeIcon() {
     return (
@@ -73,7 +75,7 @@ function ChangePassword() {
     return (
         <div className="mt-5">
             <h2 className="text-xl font-bold text-sky-800 mb-4">Đổi mật khẩu</h2>
-            <form className="space-y-4">
+            <form className="space-y-4 [&_input]:p-2">
                 <div>
                     <label htmlFor="currentPassword" className="block text-sm font-medium text-gray-700">Mật khẩu hiện tại</label>
                     <input type="password" id="currentPassword" name="currentPassword" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
@@ -94,11 +96,15 @@ function ChangePassword() {
 
 export default function Profile() {
     const [isEditing, setIsEditing] = useState(false);
+    
     const [userData, setUserData] = useState({
         name: "Nguyễn Văn Hoàng",
         email: "hoang@gmail.com",
-        description: "Nguyễn Văn Hoàng là một giáo viên tận tâm với hơn 10 năm kinh nghiệm trong lĩnh vực giáo dục. Anh đã giảng dạy tại nhiều trường học danh tiếng và có nhiều đóng góp quan trọng trong việc phát triển chương trình giảng dạy. Anh luôn nỗ lực để mang đến cho học sinh những bài học thú vị và bổ ích."
+        description: "Nguyễn Văn Hoàng là một giáo viên tận tâm với hơn 10 năm kinh nghiệm trong lĩnh vực giáo dục. Anh đã giảng dạy tại nhiều trường học danh tiếng và có nhiều đóng góp quan trọng trong việc phát triển chương trình giảng dạy. Anh luôn nỗ lực để mang đến cho học sinh những bài học thú vị và bổ ích.",
+        phone:"0984328181",
+        address:"Ba Đình, Hà Nội"
     });
+
     const [activeTab, setActiveTab] = useState('personal');
 
     const handleInputChange = (e) => {
@@ -133,7 +139,7 @@ export default function Profile() {
     const [email, setEmail] = useState('')
     const [role, setRole] = useState('')
     const [isAuth, setIsAuth] = useState(false)
-
+    const [address,setAddress] = useState('')
     React.useEffect(() => {
         if (Cookies.get('accesstoken')) {
             setIsAuth(true);
@@ -141,6 +147,7 @@ export default function Profile() {
             setFullName(Cookies.get('fullName'));
             setEmail(Cookies.get('email'));
             setRole(Cookies.get('role'));
+            setAddress(Cookies.get('address'));
         } else {
             setIsAuth(false);
         }
@@ -159,6 +166,8 @@ export default function Profile() {
                     <div className='w-full'>
                         <h1 className='font-bold text-2xl text-sky-800'>{userData.name}</h1>
                         <p className='text-lg font-medium text-sky-950'>Giáo viên</p>
+                        <p className='text-sm font-medium text-gray-600'>@hoangvannguyen</p>
+
                     </div>
                     <div className='flex flex-col gap-1'>
                         <button onClick={handleLogout} className="flex justify-between items-center px-4 h-10 md:w-40 lg:w-40 py-2 bg-orange-50 border-red-100 text-gray-800 rounded-md border-2 hover:bg-orange-200">
@@ -226,6 +235,28 @@ export default function Profile() {
                                             />
                                         </div>
                                         <div>
+                                            <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Số điện thoại</label>
+                                            <input
+                                                id="phone"
+                                                name="phone"
+                                                rows={4}
+                                                value={userData.phone}
+                                                onChange={handleInputChange}
+                                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label htmlFor="address" className="block text-sm font-medium text-gray-700">Mô tả</label>
+                                            <input
+                                                id="address"
+                                                name="address"
+                                                rows={4}
+                                                value={userData.address}
+                                                onChange={handleInputChange}
+                                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                            />
+                                        </div>
+                                        <div>
                                             <label htmlFor="description" className="block text-sm font-medium text-gray-700">Mô tả</label>
                                             <textarea
                                                 id="description"
@@ -258,6 +289,8 @@ export default function Profile() {
                                     <div className="flex flex-col gap-3">
                                         <p className="text-2xl font-medium text-sky-950">Họ và tên: {userData.name}</p>
                                         <p className="text-lg font-medium text-sky-950">Email: {userData.email}</p>
+                                        <p className="text-lg font-medium text-sky-950">Phone: {userData.phone}</p>
+                                        <p className="text-lg font-medium text-sky-950">Quê quán: {userData.address}</p>
                                         <p className="text-lg font-medium text-sky-950">Mô tả: {userData.description}</p>
                                         <button
                                             onClick={() => setIsEditing(true)}
