@@ -12,25 +12,24 @@ export default function Login() {
     const handleDef = async (e) => {
         e.preventDefault();
 
-        const res = await fetch(`${process.env.VITE_API}/api/v1/users/login`, {
+        const res = await fetch(`${process.env.VITE_API}/api/v1/auth/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({ username, password })
         });
-
-        if (res.ok) {
-            const response = await res.json();
+        const response = await res.json();
+        if (response.status) {
             const token = response.data.accesstoken;
-            const decoded = jwtDecode(token);
+            const user = response.data.user;
             // luu token vao cookie hạn 7 ngày
             document.cookie = `accesstoken=${token}; max-age=604800; path=/`;
-            document.cookie = `role=${decoded.role}; max-age=604800; path=/`;
-            document.cookie = `username=${decoded.username}; max-age=604800; path=/`;
-            document.cookie = `fullName=${decoded.fullName}; max-age=604800; path=/`;
-            document.cookie = `email=${decoded.email}; max-age=604800; path=/`;
-            document.cookie = `id=${decoded.id}; max-age=604800; path=/`;
+            document.cookie = `role=${user.role}; max-age=604800; path=/`;
+            document.cookie = `username=${user.username}; max-age=604800; path=/`;
+            document.cookie = `fullName=${user.fullName}; max-age=604800; path=/`;
+            document.cookie = `email=${user.email}; max-age=604800; path=/`;
+            document.cookie = `id=${user._id}; max-age=604800; path=/`;
             window.location.href = '/';
         } else {
             alert("Sai tên tài khoản hoặc mật khẩu")

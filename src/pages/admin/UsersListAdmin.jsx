@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
 import { PencilIcon, TrashIcon, ChevronLeftIcon, ChevronRightIcon, SearchIcon, ChevronLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import OptionEditor from '../../components/admin/students/OptionEditor';
+import OptionEditor from '../../components/admin/users/OptionEditor';
 
-export default function Students() {
+export default function Users() {
     const [students, setStudents] = useState([]);
 
     React.useEffect(() => {
         async function callApi() {
             console.log('fetching students');
             try {
-                const response = await fetch(`${process.env.VITE_API}/api/v1/users?role=STUDENT`, {
+                const response = await fetch(`${process.env.VITE_API}/api/v1/users`, {
                     method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
                 });
                 const data = await response.json();
                 console.log(data)
@@ -29,7 +26,7 @@ export default function Students() {
     return (
         <div className="p-6 bg-gray-100">
             <div className='flex items-center mb-6'>
-                <h1 className="font-medium text-2xl text-gray-800">Học viên</h1>
+                <h1 className="font-medium text-2xl text-gray-800">Người dùng</h1>
             </div>
             <TableStudent students={students} setStudents={setStudents} />
         </div>
@@ -54,7 +51,7 @@ function TableStudent({ students, setStudents }) {
     const totalPages = Math.ceil(filteredStudents.length / itemsPerPage);
 
     async function deleteStudent(studentId) {
-        confirm('Bạn có chắc chắn muốn xóa học viên này khỏi hệ thống?');
+        confirm('Bạn có chắc chắn muốn xóa người này này khỏi hệ thống?');
         try {
             const response = await fetch(`${process.env.VITE_API}/api/v1/users/${studentId}`, {
                 method: 'DELETE',
@@ -67,9 +64,9 @@ function TableStudent({ students, setStudents }) {
             if (data.status) {
                 const newStudents = students.filter(student => student._id !== studentId);
                 setStudents(newStudents);
-                alert('Xóa học viên thành công');
+                alert('Xóa người dùng thành công');
             } else {
-                alert('Xóa học viên thất bại');
+                alert('Xóa người dùng thất bại');
             }
         } catch (error) {
             console.error('Error:', error);
@@ -80,11 +77,11 @@ function TableStudent({ students, setStudents }) {
         <div className="bg-white shadow-lg rounded-lg overflow-hidden">
             <div className="p-6">
                 <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-xl font-semibold text-gray-800">Danh sách học viên</h2>
+                    <h2 className="text-xl font-semibold text-gray-800">Danh sách người dùng</h2>
                     <div className="relative w-64">
                         <input
                             type="text"
-                            placeholder="Tìm kiếm học viên..."
+                            placeholder="Tìm kiếm người dùng..."
                             className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
@@ -99,9 +96,11 @@ function TableStudent({ students, setStudents }) {
                                 <tr>
                                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">STT</th>
                                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Tên</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Tài khoản</th>
                                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Email</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Số điện thoại</th>
                                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Năm sinh</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Khóa học</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Quyền</th>
                                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Thao tác</th>
                                 </tr>
                             </thead>
@@ -116,13 +115,32 @@ function TableStudent({ students, setStudents }) {
                                             <div className="text-sm text-gray-400">{student._id}</div>
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap">
+                                            <div className="text-sm text-gray-600">{student.username}</div>
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap">
                                             <div className="text-sm text-gray-600">{student.email}</div>
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <div className="text-sm text-gray-600">{student.phone}</div>
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             <div className="text-sm text-gray-600">{student.born}</div>
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap">
-                                            <div className="text-sm text-gray-600">{student.coursesJoined.length}</div>
+                                            <div className="text-sm text-gray-600">
+                                                {student.role == "STUDENT" && (<span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                    {student.role}
+                                                </span>)}
+                                                {student.role == "ADMIN" && (<span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                                    {student.role}
+                                                </span>)}
+                                                {student.role == "TEACHER" && (<span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                                    {student.role}
+                                                </span>)}
+                                                {student.role == "COLLABORATOR" && (<span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                                    {student.role}
+                                                </span>)}
+                                            </div>
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                             <OptionEditor student={student} setStudents={setStudents} />

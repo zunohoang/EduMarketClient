@@ -12,7 +12,7 @@ export default function Students() {
         async function callApi() {
             console.log('fetching students');
             try {
-                const response = await fetch(`${process.env.API}/api/v1/courses/${courseId}/students`, {
+                const response = await fetch(`${process.env.VITE_API}/api/v1/courses/${courseId}/students`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ function TableStudent({ students, setStudents, courseId }) {
     async function deleteUserOfCourse(studentId) {
         confirm('Bạn có chắc chắn muốn xóa học viên này khỏi khóa học?');
         try {
-            const response = await fetch(`${process.env.API}/api/v1/courses/${courseId}/students/${studentId}`, {
+            const response = await fetch(`${process.env.VITE_API}/api/v1/courses/${courseId}/students/${studentId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
