@@ -28,6 +28,7 @@ import CourseStudents from '../pages/admin/CourseStudents';
 import TeacherListAdmin from '../pages/admin/TeacherListAdmin'
 import AddTeacher from '../pages/admin/AddTeacher'
 import StudentsListAdmin from '../pages/admin/StudentsListAdmin';
+import UsersListAdmin from '../pages/admin/UsersListAdmin';
 
 export default function AppRoutes() {
     return (
@@ -70,6 +71,10 @@ export default function AppRoutes() {
 
                     <Route path="students" element={<StudentsListAdmin />} />
 
+                    <Route path="users" element={<UsersListAdmin />} />
+
+                    <Route path="news" element={<Schedule />} />
+                    <Route path="add-news" element={<Schedule />} />
                 </Route>
             </Routes>
         </BrowserRouter>
