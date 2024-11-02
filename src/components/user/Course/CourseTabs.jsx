@@ -1,9 +1,11 @@
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import img1 from "../../../assets/subject1.jpg";
 
-function ClassCard({ title, isActive }) {
+function ClassCard({ title, isActive, onClick }) {
     return (
-        <div className="flex items-center justify-center p-6 h-12 cursor-pointer"
+        <div
+            onClick={onClick}
+            className="flex items-center justify-center p-6 h-12 cursor-pointer"
             style={{
                 color: isActive ? "#2D5D90" : "#9CA3AF",
                 borderBottom: isActive ? "2px solid #2D5D90" : "none"
@@ -11,7 +13,7 @@ function ClassCard({ title, isActive }) {
         >
             <p className="text-lg font-semibold">{title}</p>
         </div>
-    )
+    );
 }
 
 function CourseItem({ name, img, teacher, id }) {
@@ -31,21 +33,21 @@ function CourseItem({ name, img, teacher, id }) {
     );
 }
 
-function Pagination({ currentPage = 1, totalPages = 4 }) {
+function Pagination({ currentPage, totalPages, onPageChange }) {
     return (
         <div className="flex items-center justify-center space-x-2">
             <button
+                onClick={() => onPageChange(currentPage - 1)}
                 className="p-2 rounded-md border border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={currentPage === 1}
                 aria-label="Previous page"
             >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
+                {/* SVG icon for Previous */}
             </button>
             {[...Array(totalPages)].map((_, i) => (
                 <button
                     key={i}
+                    onClick={() => onPageChange(i + 1)}
                     className={`w-10 h-10 rounded-md ${currentPage === i + 1
                         ? 'bg-blue-500 text-white'
                         : 'border border-gray-300 hover:bg-gray-100'
@@ -56,41 +58,71 @@ function Pagination({ currentPage = 1, totalPages = 4 }) {
                 </button>
             ))}
             <button
+                onClick={() => onPageChange(currentPage + 1)}
                 className="p-2 rounded-md border border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={currentPage === totalPages}
                 aria-label="Next page"
             >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                </svg>
+                {/* SVG icon for Next */}
             </button>
         </div>
-    )
+    );
 }
 
 export default function CourseTabs() {
+    const [activeClass, setActiveClass] = useState("Tất cả");
+    const [currentPage, setCurrentPage] = useState(1);
+    const totalPages = 5;
+
+    const classes = ["Tất cả", "Lớp 12", "Lớp 11", "Lớp 10"];
+
+    const courses = [
+        { name: "Toán 12", img: "/subject1_1.jpg", teacher: "Nguyễn Văn A", id: 1, class: "Lớp 12" },
+        { name: "Văn 12", img: "/subject1_1.jpg", teacher: "Trần Thị B", id: 2, class: "Lớp 12" },
+        { name: "Anh 11", img: "/subject1.jpg", teacher: "Lê Văn C", id: 3, class: "Lớp 11" },
+        { name: "Lý 11", img: "/subject1_1.jpg", teacher: "Phạm Thị D", id: 4, class: "Lớp 11" },
+        { name: "Hóa 10", img: "/subject1.jpg", teacher: "Nguyễn Văn E", id: 5, class: "Lớp 10" },
+        { name: "Sinh 10", img: "/subject1.jpg", teacher: "Trần Thị F", id: 6, class: "Lớp 10" },
+        { name: "Sử 12", img: "/subject1.jpg", teacher: "Lê Văn G", id: 7, class: "Lớp 12" },
+        { name: "Địa 11", img: "/subject1_1.jpg", teacher: "Phạm Thị H", id: 8, class: "Lớp 11" },
+        { name: "GDCD 10", img: "/subject1_1.jpg", teacher: "Nguyễn Văn I", id: 9, class: "Lớp 10" },
+        { name: "Tin 12", img: "/subject1_1.jpg", teacher: "Trần Thị J", id: 10, class: "Lớp 12" },
+    ];
+
+    const filteredCourses = courses.filter(course =>
+        activeClass === "Tất cả" || course.class === activeClass
+    );
+
+    const coursesToShow = filteredCourses.slice((currentPage - 1) * 8, currentPage * 8);
+
     return (
         <div className="mt-3 w-fit p-5">
             <div className="flex">
-                <ClassCard title={"Tất cả"} isActive={true} />
-                <ClassCard title={"Lớp 12"} isActive={false} />
-                <ClassCard title={"Lớp 11"} isActive={false} />
-                <ClassCard title={"Lớp 10"} isActive={false} />
+                {classes.map((classTitle) => (
+                    <ClassCard
+                        key={classTitle}
+                        title={classTitle}
+                        isActive={classTitle === activeClass}
+                        onClick={() => {
+                            setActiveClass(classTitle);
+                            setCurrentPage(1);
+                        }}
+                    />
+                ))}
             </div>
-            <div className=" h-[1px] bg-[rgba(0,0,0,0.1)]"></div>
-            <div className="flex w-full  my-6 justify-start">
+            <div className="h-[1px] bg-[rgba(0,0,0,0.1)]"></div>
+            <div className="flex w-full my-6 justify-start">
                 <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-4">
-                    <CourseItem name={"Toán"} img={'/subject1_1.jpg'} teacher={"Nguyễn Văn A"} id={1} />
-                    <CourseItem name={"Vật lý"} img={'/subject1.jpg'} teacher={"Nguyễn Văn B"} id={2} />
-                    <CourseItem name={"Hóa học"} img={'/subject1_1.jpg'} teacher={"Nguyễn Văn C"} id={3} />
-                    <CourseItem name={"Sinh học"} img={'/subject1.jpg'} teacher={"Nguyễn Văn D"} id={4} />
-                    <CourseItem name={"Lịch sử"} img={'/subject1_1.jpg'} teacher={"Nguyễn Văn E"} id={5} />
-                    <CourseItem name={"Địa lý"} img={'/subject1_1.jpg'} teacher={"Nguyễn Văn F"} id={6} />
-                    <CourseItem name={"Tiếng Anh"} img={'/subject1_1.jpg'} teacher={"Nguyễn Văn G"} id={7} />
-                    <CourseItem name={"Ngữ văn"} img={'/subject1_1.jpg'} teacher={"Nguyễn Văn H"} id={8} />
+                    {coursesToShow.map(course => (
+                        <CourseItem key={course.id} {...course} />
+                    ))}
                 </div>
             </div>
-            <Pagination currentPage={1} totalPages={5} />
+            <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={(page) => setCurrentPage(page)}
+            />
         </div>
-    )
+    );
 }
