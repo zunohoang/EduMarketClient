@@ -24,7 +24,7 @@ export default function CourseManager() {
 
     useEffect(() => {
         async function callApiGetInstructors() {
-            const res = await fetch(`${process.env.API}/api/v1/users/instructor`, {
+            const res = await fetch(`${process.env.VITE_API}/api/v1/users/instructor`, {
                 method: "GET"
             });
 
@@ -117,7 +117,7 @@ export default function CourseManager() {
         formData.append('file', file);
         formData.append('course', JSON.stringify(course));
 
-        const res = await fetch(`${process.env.API}/api/v1/courses`, {
+        const res = await fetch(`${process.env.VITE_API}/api/v1/courses`, {
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`

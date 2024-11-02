@@ -41,7 +41,7 @@ function CourseOptions({ student, setStudents }) {
     const deleteCourse = async (courseId) => {
         if (confirm('Bạn có chắc chắn muốn hủy quyền truy cập khóa học này cho học viên này?')) {
             try {
-                const response = await fetch(`${process.env.API}/api/v1/courses/${courseId}/students/${student._id}`, {
+                const response = await fetch(`${process.env.VITE_API}/api/v1/courses/${courseId}/students/${student._id}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
@@ -119,7 +119,7 @@ function CourseOptions({ student, setStudents }) {
                                                     </td>
                                                     <td className="px-6 py-4 whitespace-nowrap">
                                                         <div className='w-10 h-10'>
-                                                            <img src={`${process.env.API}/${course.image}`} alt={course.name} className="w-full h-full object-cover" />
+                                                            <img src={`${process.env.VITE_API}/${course.image}`} alt={course.name} className="w-full h-full object-cover" />
                                                         </div>
                                                     </td>
                                                     <td className="px-6 py-4 whitespace-nowrap">
