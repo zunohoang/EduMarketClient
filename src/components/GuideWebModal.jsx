@@ -33,6 +33,7 @@ export default function UserGuideModal() {
                         <li>Em cảm ơn ạ</li>
                     </ul>
                     <p className="text-gray-600 mb-4 text-sm">*Để xem lại thông báo này thầy chỉ cần việc load lại trang home ạ.</p>
+                    <p className="text-gray-600 mb-4 text-sm">Em một lần nữa cảm ơn thầy ạ.</p>
                     <button
                         onClick={closeModal}
                         className="w-full bg-sky-700 text-white py-2 px-4 rounded hover:bg-sky-500 transition duration-200"
