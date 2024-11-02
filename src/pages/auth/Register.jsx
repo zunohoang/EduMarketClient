@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom"
 import loginPic from "../../assets/loginpicture.gif"
 import { useState } from "react"
+
 import InputMessage from "../../components/user/InputMessage"
 
 export default function Register() {
@@ -40,11 +41,12 @@ export default function Register() {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ fullName, username, email, password })
+            body: JSON.stringify({ name: fullName, username, email, password })
         });
 
         if (res.ok) {
             const response = await res.json();
+            alert("Đăng kí thành công")
             navigate("/login")
         } else {
             alert("Đăng kí thất bại")
