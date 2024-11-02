@@ -2,7 +2,7 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function CourseManager() {
+export default function AddUsers() {
     const navigate = useNavigate();
 
     const [teacher, setTeacher] = useState({
@@ -14,6 +14,7 @@ export default function CourseManager() {
         username: '',
         password: '',
         repassword: '',
+        role: '',
         address: '',
         description: ''
     });
@@ -45,32 +46,30 @@ export default function CourseManager() {
             return;
         }
 
-        const formData = new FormData();
-        formData.append('file', fileInputRef.current.files[0]);
-        formData.append('teacher', JSON.stringify(teacher));
-        console.log(teacher);
-
-        const res = await fetch(`${process.env.VITE_API}/api/v1/users/teacher`, {
+        const res = await fetch(`${process.env.VITE_API}/api/v1/users`, {
             method: 'POST',
-            body: formData,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(teacher),
         });
 
         const data = await res.json();
         console.log(data);
         if (data.status) {
-            alert('Thêm giáo viên thành công');
+            alert('Thêm người dùng thành công');
             navigate('/admin/teachers');
         } else {
-            alert('Thêm giáo viên thất bại');
+            alert('Thêm người dùng thất bại');
         }
     }
 
     return (
         <div className="course-manager bg-gray-100 min-h-screen p-6">
-            <h1 className="font-medium text-2xl mb-6 text-gray-800">Giáo viên</h1>
+            <h1 className="font-medium text-2xl mb-6 text-gray-800">Người dùng</h1>
             <div className="mx-auto bg-white rounded-lg shadow-lg p-6">
                 <div className="flex items-center mb-6">
-                    <h1 className="text-xl font-semibold text-gray-800">Thêm giáo viên</h1>
+                    <h1 className="text-xl font-semibold text-gray-800">Tạo người dùng</h1>
                 </div>
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div className='flex gap-5'>
@@ -102,27 +101,20 @@ export default function CourseManager() {
                         </div>
                     </div>
                     <div>
-                        <label htmlFor="image" className="block text-sm font-medium text-gray-700">Avatar</label>
-                        <input
-                            type="file"
-                            id="image"
-                            name="imgae"
-                            ref={fileInputRef}
-                            onChange={(e) => {
-                                const file = e.target.files[0];
-                                if (file) {
-                                    const reader = new FileReader();
-                                    reader.onloadend = () => {
-                                        setPreviewImage(reader.result);
-                                    };
-                                    reader.readAsDataURL(file);
-                                }
-                            }}
-                            className="mt-2 p-2 block w-full rounded-md shadow-sm outline-none focus:border-sky-800 focus:ring focus:ring-sky-700  focus:ring-opacity-50"
+                        <label htmlFor="role" className="block text-sm font-medium text-gray-700">Quyền</label>
+                        <select
+                            id="role"
+                            name="role"
+                            value={teacher.role}
+                            onChange={handleChange}
+                            className="mt-2 p-2 block w-full rounded-md shadow-sm shadow-gray-300 outline-none focus:border-sky-800 focus:ring focus:ring-sky-700  focus:ring-opacity-50"
                             required
-                        />
-                        {previewImage && (
-                            <img src={previewImage} alt="preview" className="mt-2 w-20 h-20 object-cover rounded-full" />)}
+                        >
+                            <option value="ADMIN">Admin</option>
+                            <option value="TEACHER">Giáo viên</option>
+                            <option value="COLLABORATOR">Cộng tác viên</option>
+                            <option value="STUDENT">Học viên</option>
+                        </select>
                     </div>
                     <div className='flex gap-5'>
                         <div className='w-full'>
@@ -146,24 +138,11 @@ export default function CourseManager() {
                                 name="email"
                                 value={teacher.email}
                                 onChange={handleChange}
-                                placeholder='VD: giaovien@gmail.com'
+                                placeholder='VD: nguoidung@gmail.com'
                                 className="mt-2 p-2 block w-full rounded-md shadow-gray-300 border-gray-300 shadow-sm outline-none focus:border-sky-800 focus:ring focus:ring-sky-700  focus:ring-opacity-50"
                                 required
                             />
                         </div>
-                    </div>
-                    <div>
-                        <label htmlFor="username" className="block text-sm font-medium text-gray-700">Tài khoản</label>
-                        <input
-                            type="text"
-                            id="username"
-                            name="username"
-                            value={teacher.username}
-                            onChange={handleChange}
-                            placeholder='VD: giaovien'
-                            className="mt-2 p-2 block w-full rounded-md shadow-gray-300 border-gray-300 shadow-sm outline-none focus:border-sky-800 focus:ring focus:ring-sky-700  focus:ring-opacity-50"
-                            required
-                        />
                     </div>
                     <div>
                         <label htmlFor="address" className="block text-sm font-medium text-gray-700">Địa chỉ</label>
@@ -174,6 +153,31 @@ export default function CourseManager() {
                             value={teacher.address}
                             onChange={handleChange}
                             placeholder='VD: 123, HaNoi'
+                            className="mt-2 p-2 block w-full rounded-md shadow-gray-300 border-gray-300 shadow-sm outline-none focus:border-sky-800 focus:ring focus:ring-sky-700  focus:ring-opacity-50"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="description" className="block text-sm font-medium text-gray-700">Mô tả</label>
+                        <textarea
+                            id="description"
+                            name="description"
+                            value={teacher.description}
+                            onChange={handleChange}
+                            placeholder='Mô tả...'
+                            className="mt-2 p-2 h-32 block w-full rounded-md shadow-sm shadow-gray-300 outline-none focus:border-sky-800 focus:ring focus:ring-sky-700  focus:ring-opacity-50"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="username" className="block text-sm font-medium text-gray-700">Tài khoản</label>
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            value={teacher.username}
+                            onChange={handleChange}
+                            placeholder='VD: nguoidung'
                             className="mt-2 p-2 block w-full rounded-md shadow-gray-300 border-gray-300 shadow-sm outline-none focus:border-sky-800 focus:ring focus:ring-sky-700  focus:ring-opacity-50"
                             required
                         />
@@ -203,18 +207,6 @@ export default function CourseManager() {
                                 required
                             />
                         </div>
-                    </div>
-                    <div>
-                        <label htmlFor="description" className="block text-sm font-medium text-gray-700">Mô tả</label>
-                        <textarea
-                            id="description"
-                            name="description"
-                            value={teacher.description}
-                            onChange={handleChange}
-                            placeholder='Mô tả...'
-                            className="mt-2 p-2 h-32 block w-full rounded-md shadow-sm shadow-gray-300 outline-none focus:border-sky-800 focus:ring focus:ring-sky-700  focus:ring-opacity-50"
-                            required
-                        />
                     </div>
                     <button onClick={handleCreateTeacher} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition duration-300">
                         Thêm giáo viên

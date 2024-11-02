@@ -81,7 +81,8 @@ export default function SideBar() {
             icon: 'M12 0C8.686 0 6 2.686 6 6v6H2c-1.104 0-2 .896-2 2v1c0 1.104.896 2 2 2h4v2c0 1.104.896 2 2 2s2-.896 2-2v-2h4c1.104 0 2-.896 2-2v-1c0-1.104-.896-2-2-2h-4V6c0-3.314-2.686-6-6-6zm0 2c2.209 0 4 1.791 4 4v6h-8V6c0-2.209 1.791-4 4-4z', // Biểu tượng Học sinh
             section: 'CHÍNH',
             subItems: [
-                { title: 'Danh sách người dùng', url: '/admin/users' }
+                { title: 'Danh sách người dùng', url: '/admin/users' },
+                { title: 'Thêm người dùng', url: '/admin/add-user' }
             ]
         },
         {
@@ -98,8 +99,8 @@ export default function SideBar() {
             icon: 'M12 0C8.686 0 6 2.686 6 6v6H2c-1.104 0-2 .896-2 2v1c0 1.104.896 2 2 2h4v2c0 1.104.896 2 2 2s2-.896 2-2v-2h4c1.104 0 2-.896 2-2v-1c0-1.104-.896-2-2-2h-4V6c0-3.314-2.686-6-6-6zm0 2c2.209 0 4 1.791 4 4v6h-8V6c0-2.209 1.791-4 4-4z', // Biểu tượng Giao dịch
             section: 'CHÍNH',
             subItems: [
-                { title: 'Danh sách lịch học', url: '/admin/schedules' },
-                { title: 'Thêm lịch học', url: '/admin/add-schedules' }
+                { title: 'Mã truy cập (Giao dịch)', url: '/admin/access-keys' },
+                { title: 'Tạo mã', url: '/admin/add-key' }
             ]
         },
         {

@@ -29,6 +29,10 @@ import TeacherListAdmin from '../pages/admin/TeacherListAdmin'
 import AddTeacher from '../pages/admin/AddTeacher'
 import StudentsListAdmin from '../pages/admin/StudentsListAdmin';
 import UsersListAdmin from '../pages/admin/UsersListAdmin';
+import AddUsers from '../pages/admin/AddUsers';
+import AccessKeys from '../pages/admin/AccessKeys';
+import Dashboard from '../pages/admin/DashboardAdmin';
+import AddAccessKey from '../pages/admin/AddAccessKey';
 
 export default function AppRoutes() {
     return (
@@ -58,7 +62,7 @@ export default function AppRoutes() {
                     <Route path="/register" element={<Register />} />
                 </Route>
                 <Route path="/admin" element={<LayoutAdmin />}>
-                    <Route index element={<Home />} />
+                    <Route index element={<Dashboard />} />
 
                     <Route path="courses" element={<CourseListAdmin />} />
                     <Route path="courses/:courseId/edit" element={<EditCourse />} />
@@ -72,9 +76,15 @@ export default function AppRoutes() {
                     <Route path="students" element={<StudentsListAdmin />} />
 
                     <Route path="users" element={<UsersListAdmin />} />
+                    <Route path='add-user' element={<AddUsers />} />
 
                     <Route path="news" element={<Schedule />} />
                     <Route path="add-news" element={<Schedule />} />
+
+                    <Route path="access-keys" element={<AccessKeys />} />
+                    <Route path="add-key" element={<AddAccessKey />} />
+
+                    <Route path="*" element={<h1>Not Found</h1>} />
                 </Route>
             </Routes>
         </BrowserRouter>

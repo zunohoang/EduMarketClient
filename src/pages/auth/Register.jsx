@@ -35,7 +35,7 @@ export default function Register() {
     const handleDef = async (e) => {
         e.preventDefault();
 
-        const res = await fetch(`${process.env.API_URL}/api/v1/users`, {
+        const res = await fetch(`${process.env.VITE_API}/api/v1/users`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

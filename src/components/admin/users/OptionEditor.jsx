@@ -13,7 +13,7 @@ function CourseOptions({ student, setStudents }) {
 
     const handleChangeRole = async (ROLE) => {
         console.log(ROLE)
-        const res = await fetch(`${process.env.API}/api/v1/users/${student._id}/change-role`, {
+        const res = await fetch(`${process.env.VITE_API}/api/v1/users/${student._id}/change-role`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json"

@@ -11,7 +11,7 @@ export default function Courses() {
 
     React.useEffect(() => {
         async function callApi() {
-            const response = await fetch(`${process.env.API}/api/v1/courses${teacherId ? `?teacherId=${teacherId}` : ''}`);
+            const response = await fetch(`${process.env.VITE_API}/api/v1/courses${teacherId ? `?teacherId=${teacherId}` : ''}`);
             const data = await response.json();
             console.log(data);
             setCourses(data.data.courses);
@@ -50,7 +50,7 @@ function TableCourse({ courses, setCourses }) {
 
     const deleteCourse = async (id) => {
         if (window.confirm('Bạn có chắc chắn muốn xóa khóa học này không?')) {
-            const response = await fetch(`${process.env.API}/api/v1/courses/${id}`, {
+            const response = await fetch(`${process.env.VITE_API}/api/v1/courses/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -120,7 +120,7 @@ function TableCourse({ courses, setCourses }) {
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         <div className='w-10 h-10'>
-                                            <img src={`${process.env.API}/${course.image}`} alt={course.name} className="w-full h-full object-cover" />
+                                            <img src={`${process.env.VITE_API}/${course.image}`} alt={course.name} className="w-full h-full object-cover" />
                                         </div>
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">

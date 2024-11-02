@@ -23,7 +23,7 @@ function CourseOptions({ course }) {
 
     const handlePublic = async () => {
         if (!course.status) {
-            const res = await fetch(`${process.env.API}/api/v1/courses/${course._id}/public`, {
+            const res = await fetch(`${process.env.VITE_API}/api/v1/courses/${course._id}/public`, {
                 method: "PUT"
             });
             const data = await res.json();
@@ -39,7 +39,7 @@ function CourseOptions({ course }) {
     };
 
     const handleUnpublic = async () => {
-        const res = await fetch(`${process.env.API}/api/v1/courses/${course._id}/unpublic`, {
+        const res = await fetch(`${process.env.VITE_API}/api/v1/courses/${course._id}/unpublic`, {
             method: "PUT"
         });
         const data = await res.json();

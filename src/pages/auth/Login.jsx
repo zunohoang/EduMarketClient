@@ -12,7 +12,7 @@ export default function Login() {
     const handleDef = async (e) => {
         e.preventDefault();
 
-        const res = await fetch(`${process.env.API}/api/v1/auth/login`, {
+        const res = await fetch(`${process.env.VITE_API}/api/v1/auth/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

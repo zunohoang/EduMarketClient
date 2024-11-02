@@ -31,11 +31,11 @@ export default function CourseManager() {
 
     React.useEffect(() => {
         async function callApi() {
-            const response = await fetch(`${process.env.API}/api/v1/courses/${courseId}`);
+            const response = await fetch(`${process.env.VITE_API}/api/v1/courses/${courseId}`);
             const data = await response.json();
             console.log(data);
             setCourse(data.data.course);
-            setPreviewImage(`${process.env.API}/${data.data.course.image}`);
+            setPreviewImage(`${process.env.VITE_API}/${data.data.course.image}`);
         }
         callApi();
     }, []);
@@ -45,14 +45,24 @@ export default function CourseManager() {
     const [previewImage, setPreviewImage] = useState(null);
     const fileInputRef = useRef(null);
 
-    const instructors = [
-        'Nguyễn Văn A',
-        'Trần Thị B',
-        'Lê Văn C',
-        'Phạm Thị D',
-        'Hoàng Văn E',
-        'Lý Thị F'
-    ];
+    const [instructors, setInstructors] = useState([]);
+
+    React.useEffect(() => {
+        async function callApiGetInstructors() {
+            const res = await fetch(`${process.env.VITE_API}/api/v1/users/instructor`, {
+                method: "GET"
+            });
+
+            const data = await res.json();
+            if (data.status == true) {
+                setInstructors(data.data.instructors);
+            } else {
+                alert("Lỗi máy chủ chúng tôi sẽ chuyển hướng sang đội ngũ hỗ trợ");
+                window.location.href = 'https://github.com/zunohoang';
+            }
+        }
+        callApiGetInstructors();
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -130,7 +140,7 @@ export default function CourseManager() {
         data.append('file', fileInputRef.current.files[0]);
         data.append('course', JSON.stringify(course));
 
-        const res = await fetch(`${process.env.API}/api/v1/courses/${courseId}`, {
+        const res = await fetch(`${process.env.VITE_API}/api/v1/courses/${courseId}`, {
             method: 'PUT',
             body: data
         });
@@ -176,7 +186,10 @@ export default function CourseManager() {
                                 className="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                 onClick={() => setIsInstructorDropdownOpen(!isInstructorDropdownOpen)}
                             >
-                                <span className="block truncate">{course.instructor}</span>
+                                <span className="block truncate">
+                                    {course.instructor.role ? "[" : "Chọn"}{course.instructor.role}{course.instructor.role ? "]" : ""} {course.instructor.fullName} - {course.instructor.email}
+
+                                </span>
                                 <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                                     <ChevronDown className="h-5 w-5 text-gray-400" aria-hidden="true" />
                                 </span>
@@ -189,7 +202,7 @@ export default function CourseManager() {
                                             className="cursor-default select-none relative py-2 pl-3 pr-9 hover:bg-blue-600 hover:text-white"
                                             onClick={() => handleInstructorSelect(instructor)}
                                         >
-                                            {instructor}
+                                            [{instructor.role}] {instructor.fullName} - {instructor.email}
                                         </div>
                                     ))}
                                 </div>

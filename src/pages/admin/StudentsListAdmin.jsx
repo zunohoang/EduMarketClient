@@ -10,7 +10,7 @@ export default function Students() {
         async function callApi() {
             console.log('fetching students');
             try {
-                const response = await fetch(`${process.env.API}/api/v1/users?role=STUDENT`, {
+                const response = await fetch(`${process.env.VITE_API}/api/v1/users?role=STUDENT`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ function TableStudent({ students, setStudents }) {
     async function deleteStudent(studentId) {
         confirm('Bạn có chắc chắn muốn xóa học viên này khỏi hệ thống?');
         try {
-            const response = await fetch(`${process.env.API}/api/v1/users/${studentId}`, {
+            const response = await fetch(`${process.env.VITE_API}/api/v1/users/${studentId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
