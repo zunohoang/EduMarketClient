@@ -63,8 +63,8 @@ export default function AppRoutes() {
                     <Route path="/register" element={<Register />} />
                 </Route>
                 <Route path="/admin" element={<LayoutAdmin />}>
-                    <Route index element={<DashboardAdmin />} /
-                    
+                    <Route index element={<DashboardAdmin />} />
+
                     <Route path="courses" element={<CourseListAdmin />} />
                     <Route path="courses/:courseId/edit" element={<EditCourse />} />
                     <Route path="add-course" element={<AddCourseAdmin />} />
