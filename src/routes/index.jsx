@@ -28,6 +28,7 @@ import CourseStudents from '../pages/admin/CourseStudents';
 import TeacherListAdmin from '../pages/admin/TeacherListAdmin'
 import AddTeacher from '../pages/admin/AddTeacher'
 import StudentsListAdmin from '../pages/admin/StudentsListAdmin';
+import DashboardAdmin from '../pages/admin/DashboardAdmin';
 import UsersListAdmin from '../pages/admin/UsersListAdmin';
 import AddUsers from '../pages/admin/AddUsers';
 import AccessKeys from '../pages/admin/AccessKeys';
@@ -62,8 +63,8 @@ export default function AppRoutes() {
                     <Route path="/register" element={<Register />} />
                 </Route>
                 <Route path="/admin" element={<LayoutAdmin />}>
-                    <Route index element={<Dashboard />} />
-
+                    <Route index element={<DashboardAdmin />} /
+                    
                     <Route path="courses" element={<CourseListAdmin />} />
                     <Route path="courses/:courseId/edit" element={<EditCourse />} />
                     <Route path="add-course" element={<AddCourseAdmin />} />

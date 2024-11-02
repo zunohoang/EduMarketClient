@@ -20,7 +20,7 @@ function ItemOption({ item, activeItem, setActiveItem, toggleSection, openSectio
                 <SvgIcon d={item.icon} />
                 <span className="ml-3">{item.name}</span>
             </div>
-
+            
             {openSections[item.name] && item.subItems && (
                 <ul className="ml-8 flex flex-col gap-1">
                     {item.subItems.map((subItem) => (
@@ -41,7 +41,7 @@ function ItemOption({ item, activeItem, setActiveItem, toggleSection, openSectio
 }
 
 export default function SideBar() {
-    const [activeItem, setActiveItem] = useState('Home');
+    const [activeItem, setActiveItem] = useState('Dashboard');
     const [openSections, setOpenSections] = useState({}); // Trạng thái hiển thị các sub-options
 
     const menuItems = [
@@ -139,6 +139,7 @@ export default function SideBar() {
                             {menuItems
                                 .filter((item) => item.section === section)
                                 .map((item) => (
+                                    
                                     <ItemOption
                                         key={item.name}
                                         item={item}
