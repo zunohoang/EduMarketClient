@@ -43,6 +43,25 @@ function TableTeacher({ teachers, setTeachers }) {
 
     const totalPages = Math.ceil(filteredTeachers.length / itemsPerPage)
 
+    const deleteTeacher = async (id) => {
+        const isConfirmed = confirm("Bạn có chắc chắn muốn xóa giáo viên này không?");
+        if (!isConfirmed) return;
+
+        const res = await fetch(`${process.env.VITE_API}/api/v1/users/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        if (res.ok) {
+            const newTeachers = teachers.filter(teacher => teacher._id !== id);
+            setTeachers(newTeachers);
+            alert("Xóa thành công");
+        } else {
+            alert("Xóa thất bại");
+        }
+    }
+
     return (
         <div className="bg-white shadow-lg rounded-lg overflow-hidden">
             <div className="p-6">
