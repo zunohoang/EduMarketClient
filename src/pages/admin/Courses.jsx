@@ -128,8 +128,17 @@ function TableCourse({ courses, setCourses }) {
                                         <div className="text-sm text-gray-400">{course._id}</div>
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">
-                                        <div className="text-sm text-gray-600">{course.instructor.fullName}</div>
-                                        <div className="text-sm text-gray-400">{course.instructor.email}</div>
+                                        {
+                                            course.instructor ? (
+                                                <div>
+                                                    <div className="text-sm text-gray-600">{course.instructor.fullName}</div>
+                                                    <div className="text-sm text-gray-400">{course.instructor.email}</div>
+                                                </div>
+                                            ) : (
+                                                <div className="text-sm text-gray-600">Chưa cập nhật</div>
+                                            )
+                                        }
+
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         <div className="text-sm text-gray-600">{Array.isArray(course.student) ? course.student.length : '0'}</div>

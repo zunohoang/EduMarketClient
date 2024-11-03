@@ -50,8 +50,13 @@ function TableAccessKey({ accessKeys, setAccessKeys }) {
         if (response.ok) {
             const data = await response.json()
             if (data.status) {
-                setAccessKeys(prev => prev.filter(Accesskey => AccessKey._id !== id))
+                setAccessKeys(accessKeys.filter(accessKey => accessKey._id !== id))
+                alert('Xóa thành công')
+            } else {
+                alert('Xóa thất bại')
             }
+        } else {
+            alert('Xóa thất bại')
         }
     }
 
@@ -119,7 +124,7 @@ function TableAccessKey({ accessKeys, setAccessKeys }) {
                                         <div className="text-sm text-gray-600">{new Date(accessKey.createdAt).toLocaleString()}</div>
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">
-                                        <div className="text-sm text-gray-600">{accessKey.price} VND</div>
+                                        <div className="text-sm text-gray-600">{accessKey.fee}</div>
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 

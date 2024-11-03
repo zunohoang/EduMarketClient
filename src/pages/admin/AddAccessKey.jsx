@@ -1,17 +1,22 @@
 
+import { stringify } from 'postcss';
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 export default function AddAccessKey() {
     const navigate = useNavigate();
 
     const [accessKey, setAccessKey] = useState({
         title: '',
-        role: '',
+        platform: '',
+        infix: '',
         bill: '',
         expired: '86400000',
-        courses: []
-    });
+        fee: 0,
+        courses: [],
+        createdBy: Cookies.get('id'),
+    })
 
     const [courses, setCourses] = useState([]);
 
@@ -39,8 +44,37 @@ export default function AddAccessKey() {
         e.preventDefault();
     };
 
-    const handleCreateKey = () => {
-        console.log(accessKey);
+    const handleCreateKey = async () => {
+        accessKey.fee = formatCurrency(
+            accessKey.courses.reduce((sum, courseId) => {
+                const course = courses.find(c => c._id === courseId);
+                const fee = course ? Number(course.fee) : 0;
+                return sum + (isNaN(fee) ? 0 : fee);
+            }, 0)
+        );
+
+        const formData = new FormData();
+        formData.append('file', fileInputRef.current.files[0]);
+        formData.append('accessKey', JSON.stringify(accessKey));
+
+        const response = await fetch(`${process.env.VITE_API}/api/v1/access-keys`, {
+            method: 'POST',
+            body: formData
+        });
+
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+            if (data.status) {
+                alert('Mã của bạn là: ' + data.data.key);
+                console.log(data.data);
+            } else {
+                alert('Tạo mã truy cập thất bại');
+            }
+        } else {
+            alert('Tạo mã truy cập thất bại');
+        }
     }
 
 
@@ -56,6 +90,38 @@ export default function AddAccessKey() {
                         <label htmlFor="title" className="block text-sm font-medium text-gray-700">Tiêu đề</label>
                         <input type="text" name="title" id="title" onChange={handleChange} value={accessKey.title} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
                     </div>
+                    <div>
+                        <label htmlFor="platform" className="block text-sm font-medium text-gray-700">
+                            Key
+                        </label>
+                        <div className="flex">
+                            <select
+                                name="platform"
+                                id="platform"
+                                onChange={handleChange}
+                                value={accessKey.platform}
+                                className="w-1/12 mt-1 block px-3 py-2 border border-gray-300 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                            >
+                                <option value="">Chọn nền tảng</option>
+                                <option value="FB">FB</option>
+                                <option value="TIKTOK">TIKTOK</option>
+                                <option value="ZALO">ZALO</option>
+                                <option value="WEB">WEB</option>
+                            </select>
+                            <input type="text" name="infix" id="infix" placeholder='Nhập mã (a-z A-Z 0-9)'
+                                maxLength="5"
+                                onChange={handleChange} value={accessKey.infix} className="mt-1 block w-1/12 px-3 py-2 border border-gray-300 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
+                            <div className=" mt-1 block px-3 py-2 border border-gray-300 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                XXXXXXXXXXXXXX
+                            </div>
+                        </div>
+                        <div className="text-sm text-gray-500 mt-2">
+                            <p>Lưu ý: Mã truy cập dạng: tên nền tảng + trung tố tự nhập + hậu tố máy chủ sẽ tự gen</p>
+                            <p>*Mỗi mã chỉ dùng 1 lần</p>
+                            <p></p>
+                        </div>
+                    </div>
+
                     <div>
                         <label htmlFor="expired" className="block text-sm font-medium text-gray-700">Thời hạn</label>
                         <select name="expired" id="expired" onChange={handleChange} value={accessKey.expired} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">

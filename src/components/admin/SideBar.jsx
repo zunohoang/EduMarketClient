@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SvgIcon = ({ d }) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -8,6 +9,7 @@ const SvgIcon = ({ d }) => (
 );
 
 function ItemOption({ item, activeItem, setActiveItem, toggleSection, openSections }) {
+    const navigate = useNavigate();
     return (
         <div>
             <div
@@ -15,12 +17,15 @@ function ItemOption({ item, activeItem, setActiveItem, toggleSection, openSectio
                     }`}
                 onClick={() => {
                     toggleSection(item.name);
+                    if (item.name == "Bảng điều khiển") {
+                        navigate('/admin');
+                    }
                 }}
             >
                 <SvgIcon d={item.icon} />
                 <span className="ml-3">{item.name}</span>
             </div>
-            
+
             {openSections[item.name] && item.subItems && (
                 <ul className="ml-8 flex flex-col gap-1">
                     {item.subItems.map((subItem) => (
@@ -52,7 +57,7 @@ export default function SideBar() {
         },
         {
             name: 'Khóa học',
-            icon: 'M12 0C8.686 0 6 2.686 6 6v6H2c-1.104 0-2 .896-2 2v1c0 1.104.896 2 2 2h4v2c0 1.104.896 2 2 2s2-.896 2-2v-2h4c1.104 0 2-.896 2-2v-1c0-1.104-.896-2-2-2h-4V6c0-3.314-2.686-6-6-6zm0 2c2.209 0 4 1.791 4 4v6h-8V6c0-2.209 1.791-4 4-4z', // Biểu tượng Khóa học
+            icon: 'm7.875 14.25 1.214 1.942a2.25 2.25 0 0 0 1.908 1.058h2.006c.776 0 1.497-.4 1.908-1.058l1.214-1.942M2.41 9h4.636a2.25 2.25 0 0 1 1.872 1.002l.164.246a2.25 2.25 0 0 0 1.872 1.002h2.092a2.25 2.25 0 0 0 1.872-1.002l.164-.246A2.25 2.25 0 0 1 16.954 9h4.636M2.41 9a2.25 2.25 0 0 0-.16.832V12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 12V9.832c0-.287-.055-.57-.16-.832M2.41 9a2.25 2.25 0 0 1 .382-.632l3.285-3.832a2.25 2.25 0 0 1 1.708-.786h8.43c.657 0 1.281.287 1.709.786l3.284 3.832c.163.19.291.404.382.632M4.5 20.25h15A2.25 2.25 0 0 0 21.75 18v-2.625c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125V18a2.25 2.25 0 0 0 2.25 2.25Z',
             section: 'CHÍNH',
             subItems: [
                 { title: 'Danh sách khóa học', url: '/admin/courses' },
@@ -61,7 +66,7 @@ export default function SideBar() {
         },
         {
             name: 'Giáo viên',
-            icon: 'M12 0C8.686 0 6 2.686 6 6v6H2c-1.104 0-2 .896-2 2v1c0 1.104.896 2 2 2h4v2c0 1.104.896 2 2 2s2-.896 2-2v-2h4c1.104 0 2-.896 2-2v-1c0-1.104-.896-2-2-2h-4V6c0-3.314-2.686-6-6-6zm0 2c2.209 0 4 1.791 4 4v6h-8V6c0-2.209 1.791-4 4-4z', // Biểu tượng Giáo viên
+            icon: 'M12 2c2.21 0 4 1.79 4 4s-1.79 4-4 4-4-1.79-4-4 1.79-4 4-4zM6 20c0-3 3-5 6-5s6 2 6 5H6z',
             section: 'CHÍNH', subItems: [
                 { title: 'Danh sách giáo viên', url: '/admin/teachers' },
                 { title: 'Thêm giáo viên', url: '/admin/add-teacher' }
@@ -69,7 +74,7 @@ export default function SideBar() {
         },
         {
             name: 'Học sinh',
-            icon: 'M12 0C8.686 0 6 2.686 6 6v6H2c-1.104 0-2 .896-2 2v1c0 1.104.896 2 2 2h4v2c0 1.104.896 2 2 2s2-.896 2-2v-2h4c1.104 0 2-.896 2-2v-1c0-1.104-.896-2-2-2h-4V6c0-3.314-2.686-6-6-6zm0 2c2.209 0 4 1.791 4 4v6h-8V6c0-2.209 1.791-4 4-4z', // Biểu tượng Học sinh
+            icon: 'M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z', // Biểu tượng Học sinh
             section: 'CHÍNH',
             subItems: [
                 { title: 'Danh sách học viên', url: '/admin/students' }
@@ -78,20 +83,11 @@ export default function SideBar() {
         ,
         {
             name: 'Người dùng',
-            icon: 'M12 0C8.686 0 6 2.686 6 6v6H2c-1.104 0-2 .896-2 2v1c0 1.104.896 2 2 2h4v2c0 1.104.896 2 2 2s2-.896 2-2v-2h4c1.104 0 2-.896 2-2v-1c0-1.104-.896-2-2-2h-4V6c0-3.314-2.686-6-6-6zm0 2c2.209 0 4 1.791 4 4v6h-8V6c0-2.209 1.791-4 4-4z', // Biểu tượng Học sinh
+            icon: 'M4.5 17H4a1 1 0 0 1-1-1 3 3 0 0 1 3-3h1m0-3.05A2.5 2.5 0 1 1 9 5.5M19.5 17h.5a1 1 0 0 0 1-1 3 3 0 0 0-3-3h-1m0-3.05a2.5 2.5 0 1 0-2-4.45m.5 13.5h-7a1 1 0 0 1-1-1 3 3 0 0 1 3-3h3a3 3 0 0 1 3 3 1 1 0 0 1-1 1Zm-1-9.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z',
             section: 'CHÍNH',
             subItems: [
                 { title: 'Danh sách người dùng', url: '/admin/users' },
                 { title: 'Thêm người dùng', url: '/admin/add-user' }
-            ]
-        },
-        {
-            name: 'Tin tức',
-            icon: 'M20 6v14H4V6z', // Biểu tượng Tin tức
-            section: 'CHÍNH',
-            subItems: [
-                { title: 'Danh sách tin tức', url: '/admin/news' },
-                { title: 'Thêm tin tức', url: '/admin/add-news' }
             ]
         },
         {
@@ -101,6 +97,15 @@ export default function SideBar() {
             subItems: [
                 { title: 'Mã truy cập (Giao dịch)', url: '/admin/access-keys' },
                 { title: 'Tạo mã', url: '/admin/add-key' }
+            ]
+        },
+        {
+            name: 'Tin tức',
+            icon: 'M20 6v14H4V6z', // Biểu tượng Tin tức
+            section: 'CHÍNH',
+            subItems: [
+                { title: 'Danh sách tin tức', url: '/admin/news' },
+                { title: 'Thêm tin tức', url: '/admin/add-news' }
             ]
         },
         {
@@ -139,7 +144,6 @@ export default function SideBar() {
                             {menuItems
                                 .filter((item) => item.section === section)
                                 .map((item) => (
-                                    
                                     <ItemOption
                                         key={item.name}
                                         item={item}
