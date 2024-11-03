@@ -24,6 +24,17 @@ function ItemOption({ item, activeItem, setActiveItem, toggleSection, openSectio
             {openSections[item.name] && item.subItems && (
                 <ul className="ml-8 flex flex-col gap-1">
                     {item.subItems.map((subItem) => (
+                        (item == 'Bảng điều khiển') ?(
+                        <NavLink key={item.name}
+                            className={({ isActive }) => `${isActive ? 'text-white' : ''} rounded-md p-3 block text-gray-400 hover:text-white`}
+                            to={`admin/dashboard`}
+                            onClick={() => {
+                                setActiveItem(item.name);
+                            }}
+                        >
+                            <div>{item.name}</div>
+                        </NavLink>
+                        ):(
                         <NavLink key={subItem.title}
                             className={({ isActive }) => `${isActive ? 'text-white' : ''} rounded-md p-3 block text-gray-400 hover:text-white py-1`}
                             to={`${subItem.url}`}
@@ -33,6 +44,7 @@ function ItemOption({ item, activeItem, setActiveItem, toggleSection, openSectio
                         >
                             <div>{subItem.title}</div>
                         </NavLink>
+                        )
                     ))}
                 </ul>
             )}
