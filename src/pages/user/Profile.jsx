@@ -161,32 +161,35 @@ export default function Profile() {
                 <span className="font-medium cursor-pointer">Thông tin cá nhân</span>
             </div>
             <div className='p-3 w-full' >
-                <div className='flex gap-4'>
-                    <img src="/teacher1.png" className='rounded-full w-40 h-40' alt="" />
-                    <div className='w-full'>
-                        <h1 className='font-bold text-2xl text-sky-800'>{userData.name}</h1>
-                        <p className='text-lg font-medium text-sky-950'>Giáo viên</p>
-                        <p className='text-sm font-medium text-gray-600'>@hoangvannguyen</p>
+                <div className='flex flex-col md:flex-row md:justify-between'>
+                    <div className="flex gap-4">
+                        <img src="/teacher1.png" className='rounded-full w-40 h-40' alt="" />
+                        <div className='w-full'>
+                            <h1 className='font-bold text-2xl text-sky-800'>{userData.name}</h1>
+                            <p className='text-lg font-medium text-sky-950'>Giáo viên</p>
+                            <p className='text-sm font-medium text-gray-600'>@hoangvannguyen</p>
 
+                        </div>
                     </div>
-                    <div className='flex flex-col gap-1'>
-                        <button onClick={handleLogout} className="flex justify-between items-center px-4 h-10 md:w-40 lg:w-40 py-2 bg-orange-50 border-red-100 text-gray-800 rounded-md border-2 hover:bg-orange-200">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="red" className="size-6">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
-                            </svg>
-                            <p className='hidden md:block'>Đăng xuất</p>
-                        </button>
+                    <div className='flex flex-col gap-3 mt-4'>
                         {
                             role === 'ADMIN' && (
                                 <Link to={'/admin'} className="flex justify-between items-center px-4 h-10 md:w-40 lg:w-40 py-2 bg-[#395C8C] text-white rounded-md border-2 hover:bg-sky-700">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="size-6">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
                                     </svg>
-                                    <p className='hidden md:block'>ADMIN</p>
+                                    <p className=''>ADMIN</p>
                                 </Link>
                             )
 
                         }
+                        <button onClick={handleLogout} className="flex justify-between items-center px-4 h-10 md:w-40 lg:w-40  py-2 bg-orange-50 border-red-100 text-gray-800 rounded-md border-2 hover:bg-orange-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="red" className="size-6">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
+                            </svg>
+                            <p className=''>Đăng xuất</p>
+                        </button>
+                        
                     </div>
                 </div>
                 <div className='mt-5'>
@@ -284,8 +287,8 @@ export default function Profile() {
                                         </div>
                                     </form>
                                 ) : (
-                                    <div className='flex gap-4'>
-                                    <img src="/teacher1.png" className='w-52 rounded-md object-cover' alt="" />
+                                    <div className='flex flex-col lg:flex-row gap-4'>
+                                    <img src="/teacher1.png" className='lg:w-52 rounded-md object-cover' alt="" />
                                     <div className="flex flex-col gap-3">
                                         <p className="text-2xl font-medium text-sky-950">Họ và tên: {userData.name}</p>
                                         <p className="text-lg font-medium text-sky-950">Email: {userData.email}</p>
