@@ -14,6 +14,7 @@ export default function CourseManager() {
         fee: '100000',
         image: '/subject1.jpg',
         contributors: ['Trần Thị B', 'Lê Văn C'],
+        category: [],
         sections: [
             {
                 title: 'Chương I. Giới thiệu',
@@ -45,7 +46,15 @@ export default function CourseManager() {
     const [previewImage, setPreviewImage] = useState(null);
     const fileInputRef = useRef(null);
 
+    const [currentCategory, setCurrentCategory] = useState("Toán")
+
     const [instructors, setInstructors] = useState([]);
+
+    const categories = ["Toán", "Văn", "Tiếng anh", "Lý", "Hóa", "Sinh", "Sử", "Địa",
+        "2k5", "2k6", "2k7", "2k8", "2k9",
+        "Lớp 12", "Lớp 11", "Lớp 10", "Lớp 9"
+    ];
+
 
     React.useEffect(() => {
         async function callApiGetInstructors() {
@@ -207,6 +216,55 @@ export default function CourseManager() {
                                     ))}
                                 </div>
                             )}
+                        </div>
+                    </div>
+                    <div>
+                        <label htmlFor="category" className="block text-sm font-medium text-gray-700">Thẻ</label>
+                        <div className='flex gap-3'>
+                            <select
+                                onChange={(e) => {
+                                    setCurrentCategory(e.target.value);
+                                }}
+                                id="category"
+                                name="category"
+                                className='bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm'
+                            >
+                                {
+                                    categories.map((category, index) => (
+                                        <option key={index} value={category}>{category}</option>
+                                    ))
+                                }
+                            </select>
+                            <button
+                                onClick={() => {
+                                    if (course.category.indexOf(currentCategory) === -1) {
+                                        setCourse(prev => ({
+                                            ...prev,
+                                            category: [...prev.category, currentCategory]
+                                        }));
+                                    }
+                                }}
+                                className='flex gap-2 p-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300'
+                            >
+                                Thêm
+                            </button>
+                        </div>
+                        <div className='w-full flex flex-wrap gap-1 py-4'>
+                            {
+                                course.category.map((category, index) => (
+                                    <div key={index} className='flex gap-4 p-1 px-3 rounded-md bg-sky-700 text-white'>
+                                        <p className=''>{category}</p>
+                                        <div className='flex items-center text-xs'>
+                                            <button onClick={() => {
+                                                setCourse(prev => ({
+                                                    ...prev,
+                                                    category: prev.category.filter((_, i) => i !== index)
+                                                }));
+                                            }}>X</button>
+                                        </div>
+                                    </div>
+                                ))
+                            }
                         </div>
                     </div>
                     <div>
