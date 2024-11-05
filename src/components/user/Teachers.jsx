@@ -1,4 +1,4 @@
-import Teacher1 from '../../assets/teacher1.png'
+import Teacher1 from '../../assets/teacher1.webp'
 import { Link } from 'react-router-dom'
 
 function TeacherCard({ fullName, img }) {

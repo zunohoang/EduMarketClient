@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState, useRef } from 'react';
-import tea1 from "../../assets/subject1.jpg";
+import tea1 from "../../assets/subject1.webp";
 
 const teachers = [
     {

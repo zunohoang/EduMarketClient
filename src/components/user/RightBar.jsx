@@ -1,6 +1,6 @@
-import adImg from '../../assets/advertisement.png';
+import adImg from '../../assets/advertisement.webp';
 import { Link } from 'react-router-dom';
-import infor from '../../assets/infor.png';
+import infor from '../../assets/infor.webp';
 import EnterKey from './EnterKey';
 import { useState } from 'react';
 
