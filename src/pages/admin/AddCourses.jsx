@@ -12,6 +12,7 @@ export default function CourseManager() {
         status: false,
         fee: '',
         image: '',
+        category: [],
         sections: []
     });
 
@@ -19,8 +20,14 @@ export default function CourseManager() {
     const [isInstructorDropdownOpen, setIsInstructorDropdownOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState(course.image);
     const fileInputRef = useRef(null);
+    const [currentCategory, setCurrentCategory] = useState("");
 
     const [instructors, setInstructors] = useState([]);
+
+    const categories = ["Toán", "Văn", "Tiếng anh", "Lý", "Hóa", "Sinh", "Sử", "Địa",
+        "2k5", "2k6", "2k7", "2k8", "2k9",
+        "Lớp 12", "Lớp 11", "Lớp 10", "Lớp 9"
+    ];
 
     useEffect(() => {
         async function callApiGetInstructors() {
@@ -140,7 +147,7 @@ export default function CourseManager() {
                 <div className="flex items-center mb-6">
                     <h1 className="text-xl font-semibold text-gray-800">Thêm khóa học</h1>
                 </div>
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="space-y-6">
                     <div>
                         <label htmlFor="name" className="block text-sm font-medium text-gray-700">Tên khóa học</label>
                         <input
@@ -182,6 +189,56 @@ export default function CourseManager() {
                                 </div>
                             )}
                         </div>
+                    </div>
+                    <div>
+                        <label htmlFor="category" className="block text-sm font-medium text-gray-700">Thẻ</label>
+                        <div className='flex gap-3'>
+                            <select
+                                onChange={(e) => {
+                                    setCurrentCategory(e.target.value);
+                                }}
+                                id="category"
+                                name="category"
+                                className='bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm'
+                            >
+                                {
+                                    categories.map((category, index) => (
+                                        <option key={index} value={category}>{category}</option>
+                                    ))
+                                }
+                            </select>
+                            <button
+                                onClick={() => {
+                                    if (course.category.indexOf(currentCategory) === -1) {
+                                        setCourse(prev => ({
+                                            ...prev,
+                                            category: [...prev.category, currentCategory]
+                                        }));
+                                    }
+                                }}
+                                className='flex gap-2 p-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300'
+                            >
+                                Thêm
+                            </button>
+                        </div>
+                        <div className='w-full flex flex-wrap gap-1 py-4'>
+                            {
+                                course.category.map((category, index) => (
+                                    <div key={index} className='flex gap-4 p-1 px-3 rounded-md bg-sky-700 text-white'>
+                                        <p className=''>{category}</p>
+                                        <div className='flex items-center text-xs'>
+                                            <button onClick={() => {
+                                                setCourse(prev => ({
+                                                    ...prev,
+                                                    category: prev.category.filter((_, i) => i !== index)
+                                                }));
+                                            }}>X</button>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </div>
+
                     </div>
                     <div>
                         <label htmlFor="description" className="block text-sm font-medium text-gray-700">Mô tả</label>
@@ -312,7 +369,7 @@ export default function CourseManager() {
                     <button onClick={handleCreateCourse} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition duration-300">
                         Lưu khóa học
                     </button>
-                </form>
+                </div>
             </div>
         </div>
     );
