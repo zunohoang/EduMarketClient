@@ -21,7 +21,6 @@ export default function UserGuideModal() {
 
                     </p>
                     <ul className="list-disc pl-5 mb-6 space-y-2">
-                        <li>Hiện tại bọn em chỉ mới đấu API cho phần admin và cũng gần hoàn thiện toàn bộ website (90%), dự kiến sẽ xong hoàn thiện 100% vào 24h 04-11-2024. Em xin phép ạ</li>
                         <li>GITHUB của dự án: <a className='text-blue-700' href='https://github.com/zunohoang/EduMarketClient'>Mã nguồn</a></li>
                         <li>Thầy có thể đăng nhập vào với tài khoản admin là:
                             <ul className="list-disc pl-5 text-sky-700">

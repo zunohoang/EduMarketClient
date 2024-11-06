@@ -131,6 +131,9 @@ export function BarChart({width,height}) {
         { category: "Thứ 4", value: 32 },
         { category: "Thứ 5", value: 16 },
         { category: "Thứ 6", value: 5 },
+        { category: "Thứ 7", value: 12 },
+        { category: "Chủ nhật", value:14 },
+
     ] 
 
 

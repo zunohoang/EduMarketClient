@@ -49,11 +49,11 @@ export default function RightBar() {
             <div className="*:text-[#155e94] mt-5">
                 <div className="flex justify-between">
                     <h1 className="flex items-center justify-start font-medium">Tin tức</h1>
-                    <span className="cursor-pointer italic text-[#6e7583]">Xem tất cả</span>
+                    <Link to={'./news'} className="cursor-pointer italic text-[#6e7583]">Xem tất cả</Link>
                 </div>
 
                 {[1, 2, 3, 4].map((_, index) => (
-                    <Link key={index} className="flex items-center justify-start rounded-lg py-2.5 cursor-pointer" to="/">
+                    <Link to={`./news/1`} key={index} className="flex items-center justify-start rounded-lg py-2.5 cursor-pointer">
                         <img src={infor} alt="" className="rounded-xl" width="50px" height="50px" />
                         <div className="ml-4">
                             <p className="font-medium h-full">Bộ đề 20 trang về Vật lý 12 - có đáp án</p>
