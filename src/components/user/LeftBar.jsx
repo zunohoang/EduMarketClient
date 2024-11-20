@@ -104,7 +104,7 @@ export default function SideBar() {
                             hover:bg-[rgba(26,79,140,0.06)] 
                             rounded-lg px-4 py-2.5 
                             cursor-pointer 
-                            " href="./">
+                            " to={`https://www.facebook.com/`}>
                 <img src={FB} width='35px' height="35px" alt="" srcset="" />
                 <p className="ml-4 font-medium h-full text-center">Facebook</p>
             </Link>
@@ -113,7 +113,7 @@ export default function SideBar() {
                             hover:bg-[rgba(26,79,140,0.06)] 
                             rounded-lg px-4 py-2.5 
                             cursor-pointer 
-                            " href="./">
+                            " to={`https://www.messenger.com/`}>
                 <img src={MS} width='35px' height="35px" alt="" srcset="" />
                 <p className="ml-4 font-medium h-full text-center">Messenger</p>
             </Link>

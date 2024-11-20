@@ -1,5 +1,5 @@
 import React from 'react'
-import Bg from '../../assets/banner.png'
+import Bg from '../../assets/banner.webp'
 import { Link } from 'react-router-dom'
 import SearchCategories from '../../components/user/SearchCategories'
 import LeftBar from '../../components/user/LeftBar'

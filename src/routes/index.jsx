@@ -64,7 +64,8 @@ export default function AppRoutes() {
                 </Route>
                 <Route path="/admin" element={<LayoutAdmin />}>
                     <Route index element={<DashboardAdmin />} />
-
+                    
+                    <Route path="dashboard" element={<DashboardAdmin />} />
                     <Route path="courses" element={<CourseListAdmin />} />
                     <Route path="courses/:courseId/edit" element={<EditCourse />} />
                     <Route path="add-course" element={<AddCourseAdmin />} />
