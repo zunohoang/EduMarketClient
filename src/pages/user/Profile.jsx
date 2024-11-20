@@ -40,32 +40,22 @@ function ClassCard({ title, id, isActive, onClick }) {
     )
 }
 
-function MyCourses() {
+function MyCourses({ courses }) {
     return (
         <div className="mt-5">
             <h2 className="text-xl font-bold text-sky-800 mb-4">Khóa học của tôi</h2>
             <div className="grid md:grid-cols-2 gap-5">
-                <div className='flex gap-3 shadow-sm'>
-                    <img src="/subject1.jpg" className='w-16 h-16 rounded-sm' alt="" />
-                    <div>
-                        <h1 className='font-bold text-sky-800'>Công phá vật lý 12 một cách toàn diện</h1>
-                        <p className='text-sm font-medium text-sky-950'>Giáo viên: Nguyễn Văn A</p>
-                    </div>
-                </div>
-                <div className='flex gap-3'>
-                    <img src="/subject1.jpg" className='w-16 h-16 rounded-sm' alt="" />
-                    <div>
-                        <h1 className='font-bold text-sky-800'>Công phá vật lý 12 một cách toàn diện</h1>
-                        <p className='text-sm font-medium text-sky-950'>Giáo viên: Nguyễn Văn A</p>
-                    </div>
-                </div>
-                <div className='flex gap-3'>
-                    <img src="/subject1.jpg" className='w-16 h-16 rounded-sm' alt="" />
-                    <div>
-                        <h1 className='font-bold text-sky-800'>Công phá vật lý 12 một cách toàn diện</h1>
-                        <p className='text-sm font-medium text-sky-950'>Giáo viên: Nguyễn Văn A</p>
-                    </div>
-                </div>
+                {
+                    courses && [...new Map(courses.map(course => [course._id, course])).values()].map(course => (
+                        <Link to={'/courses/' + course._id} key={course._id} className='flex gap-3 shadow-sm'>
+                            <img src={`${process.env.VITE_API}/${course.image}`} className='w-16 h-16 rounded-sm' alt="" />
+                            <div>
+                                <h1 className='font-bold text-sky-800'>{course.name}</h1>
+                                <p className='text-sm font-medium text-sky-950'>Giáo viên: {course.instructor ? course.instructor.fullName : "Đang cập nhật"}</p>
+                            </div>
+                        </Link>
+                    ))
+                }
             </div>
         </div>
     );
@@ -96,13 +86,13 @@ function ChangePassword() {
 
 export default function Profile() {
     const [isEditing, setIsEditing] = useState(false);
-    
+
     const [userData, setUserData] = useState({
         name: "Nguyễn Văn Hoàng",
         email: "hoang@gmail.com",
         description: "Nguyễn Văn Hoàng là một giáo viên tận tâm với hơn 10 năm kinh nghiệm trong lĩnh vực giáo dục. Anh đã giảng dạy tại nhiều trường học danh tiếng và có nhiều đóng góp quan trọng trong việc phát triển chương trình giảng dạy. Anh luôn nỗ lực để mang đến cho học sinh những bài học thú vị và bổ ích.",
-        phone:"0984328181",
-        address:"Ba Đình, Hà Nội"
+        phone: "0984328181",
+        address: "Ba Đình, Hà Nội"
     });
 
     const [activeTab, setActiveTab] = useState('personal');
@@ -139,18 +129,44 @@ export default function Profile() {
     const [email, setEmail] = useState('')
     const [role, setRole] = useState('')
     const [isAuth, setIsAuth] = useState(false)
-    const [address,setAddress] = useState('')
+    const [address, setAddress] = useState('Chưa update')
+    const [phone, setPhone] = useState('Chưa update')
+    const [description, setDescription] = useState('Chưa update')
+    const [courses, setCourses] = useState([])
+
     React.useEffect(() => {
-        if (Cookies.get('accesstoken')) {
-            setIsAuth(true);
-            setUsername(Cookies.get('username'));
-            setFullName(Cookies.get('fullName'));
-            setEmail(Cookies.get('email'));
-            setRole(Cookies.get('role'));
-            setAddress(Cookies.get('address'));
-        } else {
-            setIsAuth(false);
-        }
+        const fetchData = async () => {
+            if (Cookies.get('accessToken')) {
+                setIsAuth(true);
+                const username = Cookies.get('username');
+                const response = await fetch(`${process.env.VITE_API}/api/v1/users/profile`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${Cookies.get('accessToken')}`
+                    }
+                });
+                let data = await response.json();
+                if (data.status) {
+                    const user = data.data.user;
+                    console.log(user);
+                    setUsername(user.username);
+                    setFullName(user.fullName);
+                    setEmail(user.email);
+                    setRole(user.role);
+                    setPhone(user.phone || "Chưa update");
+                    setDescription(user.description || "Chưa update");
+                    setAddress(user.address || "Chưa update");
+                    setCourses(user.coursesJoined);
+                } else {
+                    setIsAuth(false);
+                    console.log("BUG");
+                }
+            } else {
+                setIsAuth(false);
+            }
+        };
+        fetchData();
     }, []);
 
     return (
@@ -164,9 +180,9 @@ export default function Profile() {
                 <div className='flex gap-4'>
                     <img src="/teacher1.png" className='rounded-full w-40 h-40' alt="" />
                     <div className='w-full'>
-                        <h1 className='font-bold text-2xl text-sky-800'>{userData.name}</h1>
-                        <p className='text-lg font-medium text-sky-950'>Giáo viên</p>
-                        <p className='text-sm font-medium text-gray-600'>@hoangvannguyen</p>
+                        <h1 className='font-bold text-2xl text-sky-800'>{fullName}</h1>
+                        <p className='text-lg font-medium text-sky-950'>{role}</p>
+                        <p className='text-sm font-medium text-gray-600'>@{username}</p>
 
                     </div>
                     <div className='flex flex-col gap-1'>
@@ -285,25 +301,25 @@ export default function Profile() {
                                     </form>
                                 ) : (
                                     <div className='flex gap-4'>
-                                    <img src="/teacher1.png" className='w-52 rounded-md object-cover' alt="" />
-                                    <div className="flex flex-col gap-3">
-                                        <p className="text-2xl font-medium text-sky-950">Họ và tên: {userData.name}</p>
-                                        <p className="text-lg font-medium text-sky-950">Email: {userData.email}</p>
-                                        <p className="text-lg font-medium text-sky-950">Phone: {userData.phone}</p>
-                                        <p className="text-lg font-medium text-sky-950">Quê quán: {userData.address}</p>
-                                        <p className="text-lg font-medium text-sky-950">Mô tả: {userData.description}</p>
-                                        <button
-                                            onClick={() => setIsEditing(true)}
-                                            className="ml-auto w-[150px] mt-4 px-4 py-2 bg-sky-700 text-white rounded-md hover:bg-blue-600"
-                                        >
-                                            Chỉnh sửa
-                                        </button>
-                                    </div>
+                                        <img src="/teacher1.png" className='w-52 rounded-md object-cover' alt="" />
+                                        <div className="flex flex-col gap-3">
+                                            <p className="text-2xl font-medium text-sky-950">Họ và tên: {fullName}</p>
+                                            <p className="text-lg font-medium text-sky-950">Email: {email}</p>
+                                            <p className="text-lg font-medium text-sky-950">Phone: {phone}</p>
+                                            <p className="text-lg font-medium text-sky-950">Quê quán: {address}</p>
+                                            <p className="text-lg font-medium text-sky-950">Mô tả: {description}</p>
+                                            <button
+                                                onClick={() => setIsEditing(true)}
+                                                className="ml-auto w-[150px] mt-4 px-4 py-2 bg-sky-700 text-white rounded-md hover:bg-blue-600"
+                                            >
+                                                Chỉnh sửa
+                                            </button>
+                                        </div>
                                     </div>
                                 )}
                             </div>
                         )}
-                        {activeTab === 'courses' && <MyCourses />}
+                        {activeTab === 'courses' && <MyCourses courses={courses} />}
                         {activeTab === 'password' && <ChangePassword />}
                     </div>
                 </div>

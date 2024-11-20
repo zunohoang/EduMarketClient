@@ -87,6 +87,27 @@ export default function AppRoutes() {
 
                     <Route path="*" element={<h1>Not Found</h1>} />
                 </Route>
+
+                <Route path="/teacher" element={<LayoutAdmin />}>
+                    <Route index element={<Dashboard />} />
+                    <Route path="courses" element={<CourseListAdmin />} />
+                    <Route path="courses/:courseId/edit" element={<EditCourse />} />
+                    <Route path="add-course" element={<AddCourseAdmin />} />
+                    <Route path="courses/:courseId/students" element={<CourseStudents />} />
+                    <Route path="students" element={<StudentsListAdmin />} />
+                    <Route path="*" element={<h1>Not Found</h1>} />
+                </Route>
+
+                <Route path="/collaborator" element={<LayoutAdmin />}>
+                    <Route index element={<Dashboard />} />
+                    <Route path="courses" element={<CourseListAdmin />} />
+                    <Route path="courses/:courseId/students" element={<CourseStudents />} />
+                    <Route path="access-keys" element={<AccessKeys />} />
+                    <Route path="add-key" element={<AddAccessKey />} />
+                    <Route path="*" element={<h1>Not Found</h1>} />
+                </Route>
+
+                <Route path="*" element={<h1>Not Found</h1>} />
             </Routes>
         </BrowserRouter>
     )

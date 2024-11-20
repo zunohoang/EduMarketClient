@@ -1,6 +1,8 @@
 
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie'
+
 
 export default function AddUsers() {
     const navigate = useNavigate();
@@ -50,6 +52,7 @@ export default function AddUsers() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                "Authorization": `Bearer ${Cookies.get('accessToken')}`
             },
             body: JSON.stringify(teacher),
         });

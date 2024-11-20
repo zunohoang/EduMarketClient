@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { PencilIcon, TrashIcon, ChevronLeftIcon, ChevronRightIcon, SearchIcon, ChevronLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import OptionEditor from '../../components/admin/users/OptionEditor';
+import Cookies from 'js-cookie'
+
 
 export default function Users() {
     const [students, setStudents] = useState([]);
@@ -12,6 +14,9 @@ export default function Users() {
             try {
                 const response = await fetch(`${process.env.VITE_API}/api/v1/users`, {
                     method: 'GET',
+                    headers: {
+                        "Authorization": `Bearer ${Cookies.get('accessToken')}`
+                    }
                 });
                 const data = await response.json();
                 console.log(data)
@@ -56,7 +61,7 @@ function TableStudent({ students, setStudents }) {
             const response = await fetch(`${process.env.VITE_API}/api/v1/users/${studentId}`, {
                 method: 'DELETE',
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${Cookies.get('accessToken')}`
                 }
             });
             const data = await response.json();

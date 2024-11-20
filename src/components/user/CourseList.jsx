@@ -44,7 +44,7 @@ function CourseItem({ name, img, teacher, id }) {
     return (
         <Link className="course__item min-w-[150px] text-[#395978]" key={id} to={`/courses/${id}`}>
             <img className="rounded-xl w-[150px] h-[150px]" src={img} alt={name} />
-            <div className="uppercase mt-2 text-[15px] font-medium">
+            <div className="uppercase mt-2 text-[15px] font-medium w-[150px]">
                 <h2>{name}</h2>
             </div>
             <div className="flex items-center text-[13px] gap-2">
@@ -58,6 +58,20 @@ function CourseItem({ name, img, teacher, id }) {
 }
 
 export default function CourseList() {
+    const [courses, setCourses] = useState([]);
+
+    useEffect(() => {
+        const fetchCourses = async () => {
+            const response = await fetch(`${process.env.VITE_API}/api/v1/courses`);
+            const data = await response.json();
+            if (data.status) {
+                setCourses(data.data.courses);
+                console.log(courses);
+            }
+        }
+        fetchCourses();
+    }, []);
+
     const [translateX, setTranslateX] = useState(0);
     const courseListRef = useRef(null);
     const [currentX, setCurrentX] = useState(0);
@@ -108,13 +122,13 @@ export default function CourseList() {
                     style={{ transform: `translateX(${translateX}px)` }}
                     ref={courseListRef}
                 >
-                    {teachers.map((item, index) => (
+                    {courses.map((item, index) => (
                         <CourseItem
                             key={index}
                             name={item.name}
-                            img={item.image}
-                            teacher={item.teacher}
-                            id={index}
+                            img={process.env.VITE_API + item.image}
+                            teacher={item.instructor.fullName}
+                            id={item._id}
                         />
                     ))}
                 </div>

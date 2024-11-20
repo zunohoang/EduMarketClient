@@ -13,7 +13,7 @@ export default function SideBar() {
     const [role, setRole] = React.useState('');
 
     React.useEffect(() => {
-        if (Cookies.get('accesstoken')) {
+        if (Cookies.get('accessToken')) {
             setIsAuth(true);
             setUsername(Cookies.get('username'));
             setFullName(Cookies.get('fullName'));
@@ -100,7 +100,7 @@ export default function SideBar() {
 
             <h1 className="flex items-center justify-start font-medium ml-2 px-4">Liên kết</h1>
 
-            <Link className="flex items-center justify-start  
+            <Link to={'https://www.facebook.com/zunohoang'} className="flex items-center justify-start  
                             hover:bg-[rgba(26,79,140,0.06)] 
                             rounded-lg px-4 py-2.5 
                             cursor-pointer 
@@ -109,7 +109,7 @@ export default function SideBar() {
                 <p className="ml-4 font-medium h-full text-center">Facebook</p>
             </Link>
 
-            <Link className="flex items-center justify-start  
+            <Link to={'https://www.facebook.com/zunohoang'} className="flex items-center justify-start  
                             hover:bg-[rgba(26,79,140,0.06)] 
                             rounded-lg px-4 py-2.5 
                             cursor-pointer 
@@ -118,7 +118,7 @@ export default function SideBar() {
                 <p className="ml-4 font-medium h-full text-center">Messenger</p>
             </Link>
 
-            <Link className="flex items-center justify-start  
+            <Link to={'https://www.facebook.com/zunohoang'} className="flex items-center justify-start  
                             hover:bg-[rgba(26,79,140,0.06)] 
                             rounded-lg px-4 py-2.5 
                             cursor-pointer 

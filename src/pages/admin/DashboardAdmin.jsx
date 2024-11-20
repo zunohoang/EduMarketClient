@@ -1,33 +1,34 @@
-import React, { useEffect, useRef,useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import Cookies from 'js-cookie'
 
 
 
-export function BarChart({width,height}) {
-    const data = [
-        { category: "Thứ 2", value: 100 },
-        { category: "Thứ 3", value: 200 },
-        { category: "Thứ 4", value: 300 },
-        { category: "Thứ 5", value: 400 },
-        { category: "Thứ 6", value: 450 },
-    ]
+export function BarChart({ width, height }) {
+  const data = [
+    { category: "Thứ 2", value: 100 },
+    { category: "Thứ 3", value: 200 },
+    { category: "Thứ 4", value: 300 },
+    { category: "Thứ 5", value: 400 },
+    { category: "Thứ 6", value: 450 },
+  ]
 
 
-    const maxValue = Math.max(...data.map(item => item.value))
-    const chartHeight = width
-    const chartWidth = height
-    const barWidth = chartWidth / data.length * 0.8
-    const gap = chartWidth / data.length * 0.2
+  const maxValue = Math.max(...data.map(item => item.value))
+  const chartHeight = width
+  const chartWidth = height
+  const barWidth = chartWidth / data.length * 0.8
+  const gap = chartWidth / data.length * 0.2
 
-    return (
+  return (
     <div className="w-full max-w-3xl p-4 bg-white  rounded-lg shadow-md">
-        <div className="relative h-[350px]" aria-hidden="true">
+      <div className="relative h-[350px]" aria-hidden="true">
         <svg className="w-full h-full" viewBox={`0 0 ${chartWidth} ${chartHeight}`}>
-            {/* Bars */}
-            {data.map((item, index) => {
+          {/* Bars */}
+          {data.map((item, index) => {
             const barHeight = (item.value / maxValue) * chartHeight
             const x = index * (barWidth + gap)
             return (
-                <g key={item.category}>
+              <g key={item.category}>
                 <rect
                   x={x}
                   y={chartHeight - barHeight}
@@ -47,23 +48,23 @@ export function BarChart({width,height}) {
                 </text>
               </g>
             )
-            })}
+          })}
         </svg>
-        
+
         {/* X-axis labels */}
         <div className="absolute bottom-0 left-0 w-full flex justify-between">
-            {data.map((item, index) => {
+          {data.map((item, index) => {
             const labelWidth = chartWidth / data.length
             return (
-                <div key={item.category} className="flex justify-center" style={{ width: labelWidth }}>
+              <div key={item.category} className="flex justify-center" style={{ width: labelWidth }}>
                 <span className="text-xs text-gray-600 text-center">
-                    {item.category}
+                  {item.category}
                 </span>
-                </div>
+              </div>
             )
-            })}
+          })}
         </div>
-        </div>
+      </div>
     </div>
   )
 }
@@ -110,13 +111,13 @@ export default function DashboardAdmin() {
 
       <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
         <div className="rounded-xl bg-white p-6 shadow-sm">
-            <h3 className="mb-4 text-lg font-medium">Chart</h3>
-            <BarChart width={200} height={400}/>
+          <h3 className="mb-4 text-lg font-medium">Chart</h3>
+          <BarChart width={200} height={400} />
         </div>
 
         <div className="rounded-xl bg-white p-6 shadow-sm">
           <h3 className="mb-4 text-lg font-medium">Chart</h3>
-            <BarChart width={200} height={400}/>
+          <BarChart width={200} height={400} />
 
         </div>
       </div>
@@ -172,13 +173,12 @@ export default function DashboardAdmin() {
                     <td className="py-3">{row.name}</td>
                     <td className="py-3">
                       <span
-                        className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${
-                          row.status === 'approved'
+                        className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${row.status === 'approved'
                             ? 'bg-green-100 text-green-800'
                             : row.status === 'declined'
-                            ? 'bg-red-100 text-red-800'
-                            : 'bg-gray-100 text-gray-800'
-                        }`}
+                              ? 'bg-red-100 text-red-800'
+                              : 'bg-gray-100 text-gray-800'
+                          }`}
                       >
                         {row.status}
                       </span>

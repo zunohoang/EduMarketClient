@@ -49,18 +49,37 @@ export default function RightBar() {
             <div className="*:text-[#155e94] mt-5">
                 <div className="flex justify-between">
                     <h1 className="flex items-center justify-start font-medium">Tin tức</h1>
-                    <span className="cursor-pointer italic text-[#6e7583]">Xem tất cả</span>
+                    <Link to={'/news'} className="cursor-pointer italic text-[#6e7583]">Xem tất cả</Link>
                 </div>
 
-                {[1, 2, 3, 4].map((_, index) => (
-                    <Link key={index} className="flex items-center justify-start rounded-lg py-2.5 cursor-pointer" to="/">
-                        <img src={infor} alt="" className="rounded-xl" width="50px" height="50px" />
-                        <div className="ml-4">
-                            <p className="font-medium h-full">Bộ đề 20 trang về Vật lý 12 - có đáp án</p>
-                            <span className="text-[#6e7583] text-xs">12:48 - 1/6/2024</span>
-                        </div>
-                    </Link>
-                ))}
+                <Link className="flex items-center justify-start rounded-lg py-2.5 cursor-pointer" to="/news/1">
+                    <img src={'https://mapstudy.sgp1.digitaloceanspaces.com/blog/sn4cz9w00ew1/sse7ts8006kv-1718867802248.jpg'} alt="" className="rounded-xl" width="60px" height="60px" />
+                    <div className="ml-4">
+                        <p className="font-medium h-full">Bộ đề 20 trang về Vật lý 12 - có đáp án</p>
+                        <span className="text-[#6e7583] text-xs">12:48 - 1/6/2024</span>
+                    </div>
+                </Link>
+                <Link className="flex items-center justify-start rounded-lg py-2.5 cursor-pointer" to="/news/1">
+                    <img src={'https://mapstudy.sgp1.digitaloceanspaces.com/blog/sn4cz9w00ew1/sse7ts8006kv-1718867802248.jpg'} alt="" className="rounded-xl" width="60px" height="60px" />
+                    <div className="ml-4">
+                        <p className="font-medium h-full">Bộ đề 20 trang về Toán 12 - có đáp án</p>
+                        <span className="text-[#6e7583] text-xs">07:34 - 1/6/2024</span>
+                    </div>
+                </Link>
+                <Link className="flex items-center justify-start rounded-lg py-2.5 cursor-pointer" to="/news/1">
+                    <img src={'https://mapstudy.sgp1.digitaloceanspaces.com/blog/sn4cz9w00ew1/sse7ts8006kv-1718867802248.jpg'} alt="" className="rounded-xl" width="60px" height="60px" />
+                    <div className="ml-4">
+                        <p className="font-medium h-full">Bộ đề 20 trang về Hóa Học 12 - có đáp án</p>
+                        <span className="text-[#6e7583] text-xs">08:43 - 1/6/2024</span>
+                    </div>
+                </Link>
+                <Link className="flex items-center justify-start rounded-lg py-2.5 cursor-pointer" to="/news/1">
+                    <img src={'https://mapstudy.sgp1.digitaloceanspaces.com/blog/sn4cz9w00ew1/sse7ts8006kv-1718867802248.jpg'} alt="" className="rounded-xl" width="60px" height="60px" />
+                    <div className="ml-4">
+                        <p className="font-medium h-full">Bộ đề 20 trang về Đại số 12 - có đáp án</p>
+                        <span className="text-[#6e7583] text-xs">08:47 - 1/6/2024</span>
+                    </div>
+                </Link>
             </div>
         </div>
     );

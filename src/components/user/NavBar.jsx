@@ -32,7 +32,7 @@ export default function NavBar() {
     const [isAuth, setIsAuth] = React.useState(false);
 
     React.useEffect(() => {
-        if (Cookies.get('accesstoken')) {
+        if (Cookies.get('accessToken')) {
             setIsAuth(true);
         } else {
             setIsAuth(false);
@@ -58,7 +58,7 @@ export default function NavBar() {
     const toggleDropdown = () => setIsOpen(!isOpen)
 
     const handleLogout = () => {
-        Cookies.remove('accesstoken')
+        Cookies.remove('accessToken')
         Cookies.remove('role')
         Cookies.remove('username')
         Cookies.remove('fullName')
