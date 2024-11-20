@@ -1,20 +1,46 @@
 import iconFB from '../../../assets/facebook-circle.png'
 import iconMS from '../../../assets/messenger-circle.png'
 import iconYT from '../../../assets/youtube-circle.png'
+import { Link, useParams } from 'react-router-dom'
+import React from 'react'
+import Cookies from 'js-cookie'
 
 export default function TeacherDetail() {
+
+    const [teacher, setTeacher] = React.useState({})
+    const { teacherId } = useParams()
+
+    React.useEffect(() => {
+        async function callApiGetTeacher() {
+            console.log(process.env.VITE_API);
+            const response = await fetch(`${process.env.VITE_API}/api/v1/users/${teacherId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${Cookies.get('accessToken')}`
+                }
+            });
+            const data = await response.json();
+            if (data.status) {
+                console.log(data);
+                setTeacher(data.data);
+            }
+        }
+        callApiGetTeacher();
+    }, [teacherId])
+
     return (
         <div className="grid grid-cols-12 mx-10 my-2">
             <div className="lg:col-span-5 col-span-12 bg-white rounded-md p-5">
                 <div className="flex gap-5">
-                    <img src="/teacher1.png" alt="teacher" className="rounded-md w-36 h-36" />
+                    <img src={process.env.VITE_API + teacher.avt} alt="teacher" className="rounded-md w-36 h-36" />
                     <div>
-                        <p className="text-md font-semibold text-[#2D5D90]">Nguyễn Văn Hoàng</p>
+                        <p className="text-md font-semibold text-[#2D5D90]">{teacher.fullName}</p>
                         <p className="text-sm mt-1">Giáo viên EduMarket</p>
                     </div>
                 </div>
                 <div className="mt-5">
-                    <p className="text-gray-500"><span className="font-medium text-[#2D5D90]">Mô tả: </span>Nguyễn Văn Hoàng là một giáo viên tận tâm với hơn 10 năm kinh nghiệm trong lĩnh vực giáo dục. Anh đã giảng dạy tại nhiều trường học danh tiếng và có nhiều đóng góp quan trọng trong việc phát triển chương trình giảng dạy. Anh luôn nỗ lực để mang đến cho học sinh những bài học thú vị và bổ ích.</p>
+                    <p className="text-gray-500"><span className="font-medium text-[#2D5D90]">Mô tả: </span>{teacher.description}</p>
                 </div>
                 <div className="mt-3">
                     <p className="font-semibold text-[#2D5D90] text-md">Liên kết mạng xã hội</p>
@@ -38,20 +64,19 @@ export default function TeacherDetail() {
                 <div className='p-4 px-6 mt-5 bg-white rounded-md'>
                     <p className='text-[#2D5D90] text-md font-medium'>Tất cả khóa học</p>
                     <div className='mt-3 flex flex-col gap-5'>
-                        <div className='flex gap-3 shadow-sm hover:shadow-md p-3 rounded-md'>
-                            <img src="/subject1.jpg" className='w-16 h-16 rounded-sm' alt="" />
-                            <div>
-                                <h1 className='font-bold text-sky-800'>Công phá vật lý 12 một cách toàn diện</h1>
-                                <p className='text-sm font-medium text-sky-950'>Giáo viên: Nguyễn Văn A</p>
-                            </div>
-                        </div>
-                        <div className='flex gap-3 shadow-sm hover:shadow-md p-3 rounded-md'>
-                            <img src="/subject1.jpg" className='w-16 h-16 rounded-sm' alt="" />
-                            <div>
-                                <h1 className='font-bold text-sky-800'>Công phá vật lý 12 một cách toàn diện</h1>
-                                <p className='text-sm font-medium text-sky-950'>Giáo viên: Nguyễn Văn A</p>
-                            </div>
-                        </div>
+                        {
+                            teacher.coursesManagement && teacher.coursesManagement.map((course, index) => (
+                                <Link
+                                    to={`/courses/${course._id}`}
+                                    index={index} className='flex gap-3 shadow-sm hover:shadow-md p-3 rounded-md'>
+                                    <img src={process.env.VITE_API + course.image} className='w-16 h-16 rounded-sm' alt="" />
+                                    <div>
+                                        <h1 className='font-bold text-sky-800'>{course.name}</h1>
+                                        <p className='text-sm font-medium text-sky-950'>Giáo viên: {teacher.fullName}</p>
+                                    </div>
+                                </Link>
+                            ))
+                        }
                     </div>
                 </div>
             </div>

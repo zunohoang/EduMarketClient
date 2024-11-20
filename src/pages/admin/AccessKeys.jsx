@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import { PencilIcon, TrashIcon, ChevronLeftIcon, ChevronRightIcon, SearchIcon } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 export default function AccessKey() {
     const [accessKeys, setAccessKeys] = useState([])
 
     useEffect(() => {
         const fetchAccessKey = async () => {
-            const response = await fetch(`${process.env.VITE_API}/api/v1/access-keys`)
+            const response = await fetch(`${process.env.VITE_API}/api/v1/access-keys`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${Cookies.get('accessToken')}`
+                }
+            })
             if (response.ok) {
                 const data = await response.json()
                 if (data.status)
@@ -46,6 +53,10 @@ function TableAccessKey({ accessKeys, setAccessKeys }) {
     const deleteAccesskey = async (id) => {
         const response = await fetch(`${process.env.VITE_API}/api/v1/access-keys/${id}`, {
             method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${Cookies.get('accessToken')}`
+            }
         })
         if (response.ok) {
             const data = await response.json()

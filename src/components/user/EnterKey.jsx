@@ -8,12 +8,14 @@ export default function EnterKey({ setOpen, open }) {
     const [key, setKey] = useState('')
     const [data, setData] = useState({ key: { key: '', courses: [] } });
     const [active, setActive] = useState(false);
+    const navigate = useNavigate();
 
     const activeKey = async () => {
         const response = await fetch(`${process.env.VITE_API}/api/v1/access-keys/active`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
             },
             body: JSON.stringify({
                 key: key,
@@ -29,6 +31,8 @@ export default function EnterKey({ setOpen, open }) {
             setData({ key: data.key });
             setActive(true);
             setOpen(false);
+            // chuyen huong /profile
+            navigate('/profile');
         } else {
             setActive(false);
             alert('Kích hoạt thất bại');

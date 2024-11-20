@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { PlusCircle, Trash2, ChevronDown, ChevronUp, Book, Clock, FileText, Paperclip, ChevronLeft } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
+import Cookies from 'js-cookie'
+
 
 export default function CourseManager() {
     const { courseId } = useParams();
@@ -59,7 +61,11 @@ export default function CourseManager() {
     React.useEffect(() => {
         async function callApiGetInstructors() {
             const res = await fetch(`${process.env.VITE_API}/api/v1/users/instructor`, {
-                method: "GET"
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${Cookies.get('accessToken')}`
+                }
             });
 
             const data = await res.json();
@@ -151,6 +157,9 @@ export default function CourseManager() {
 
         const res = await fetch(`${process.env.VITE_API}/api/v1/courses/${courseId}`, {
             method: 'PUT',
+            headers: {
+                "Authorization": `Bearer ${Cookies.get('accessToken')}`
+            },
             body: data
         });
         const result = await res.json();

@@ -2,13 +2,21 @@ import React, { useState } from 'react'
 import { PencilIcon, TrashIcon, ChevronLeftIcon, ChevronRightIcon, SearchIcon } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import OptionEditor from '../../components/admin/teachers/OptionEditor'
+import Cookies from 'js-cookie'
+
 
 export default function Teachers() {
     const [teachers, setTeachers] = React.useState([]);
 
     React.useEffect(() => {
         async function callApi() {
-            const response = await fetch(`${process.env.VITE_API}/api/v1/users/teachers`);
+            const response = await fetch(`${process.env.VITE_API}/api/v1/users/teachers`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${Cookies.get('accessToken')}`
+                }
+            });
             const data = await response.json();
             console.log(data);
             if (data.data.teachers)
@@ -50,7 +58,8 @@ function TableTeacher({ teachers, setTeachers }) {
         const res = await fetch(`${process.env.VITE_API}/api/v1/users/${id}`, {
             method: "DELETE",
             headers: {
-                "Content-Type": "application/json"
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${Cookies.get('accessToken')}`
             }
         });
         if (res.ok) {

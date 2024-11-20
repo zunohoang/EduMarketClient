@@ -1,158 +1,34 @@
-import React, { useEffect, useRef,useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import Cookies from 'js-cookie'
 
 
 
-export function CustomersChart({widthChart,heightChart}) {
-  const customerData = [
-  { month: "Jan 2024", HN: 190, HCM: 110, HP: 70 },
-  { month: "Feb 2024", HN: 150, HCM: 120, HP: 60 },
-  { month: "Mar 2024", HN: 140, HCM: 90, HP: 80 },
-  { month: "Apr 2024", HN: 190, HCM: 130, HP: 70 },
-  { month: "May 2024", HN: 210, HCM: 140, HP: 85 },
-  { month: "Jun 2024", HN: 220, HCM: 150, HP: 95 },
-  { month: "Jul 2024", HN: 290, HCM: 190, HP: 120 },
-  { month: "Aug 2024", HN: 280, HCM: 180, HP: 110 },
-  { month: "Sep 2024", HN: 220, HCM: 170, HP: 90 },
-  { month: "Oct 2024", HN: 240, HCM: 160, HP: 85 },
-  { month: "Nov 2024", HN: 130, HCM: 90, HP: 50 },
-]
+export function BarChart({ width, height }) {
+  const data = [
+    { category: "Thứ 2", value: 100 },
+    { category: "Thứ 3", value: 200 },
+    { category: "Thứ 4", value: 300 },
+    { category: "Thứ 5", value: 400 },
+    { category: "Thứ 6", value: 450 },
+  ]
 
 
-
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth)
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
-  const margin = { top: 30, right: 30, bottom: 30, left: 30 }
-  const width = widthChart
-  const height = heightChart
-  const chartWidth = width - margin.left - margin.right
-  const chartHeight = height - margin.top - margin.bottom
-
-  const maxValue = Math.max(...customerData.flatMap(d => [d.HN, d.HCM, d.HP]))
-  const xScale = (index) => (index / (customerData.length - 1)) * chartWidth
-  const yScale = (value) => chartHeight - (value / maxValue) * chartHeight
-
-  const HNPath = customerData.map((d, i) => `${i === 0 ? 'M' : 'L'} ${xScale(i)} ${yScale(d.HN)}`).join(' ')
-  const HCMPath = customerData.map((d, i) => `${i === 0 ? 'M' : 'L'} ${xScale(i)} ${yScale(d.HCM)}`).join(' ')
-  const HPPath = customerData.map((d, i) => `${i === 0 ? 'M' : 'L'} ${xScale(i)} ${yScale(d.HP)}`).join(' ')
+  const maxValue = Math.max(...data.map(item => item.value))
+  const chartHeight = width
+  const chartWidth = height
+  const barWidth = chartWidth / data.length * 0.8
+  const gap = chartWidth / data.length * 0.2
 
   return (
-    <div className="bg-white w-full h-full flex flex-col overflow-scroll" >
-      <svg width={widthChart} height={heightChart} >
-        <g transform={`translate(${margin.left}, ${margin.top})`}>
-          {/* X and Y axes */}
-          <line x1="0" y1={chartHeight} x2={chartWidth} y2={chartHeight} stroke="currentColor" />
-          <line x1="0" y1="0" x2="0" y2={chartHeight} stroke="currentColor" />
-
-          {/* X-axis labels */}
-          {customerData.map((d, i) => (
-            <text
-              key={i}
-              x={xScale(i)}
-              y={chartHeight + 20}
-              textAnchor="middle"
-              className="text-xs fill-gray-500"
-            >
-              {d.month.split(' ')[0]}
-            </text>
-          ))}
-
-          {/* Y-axis labels */}
-          {[0, 100, 200, 300, 400].map((tick, i) => (
-            <text
-              key={i}
-              x="-10"
-              y={yScale(tick)}
-              textAnchor="end"
-              alignmentBaseline="middle"
-              className="text-xs fill-gray-500"
-            >
-              {tick}
-            </text>
-          ))}
-
-          {/* Grid lines */}
-          {[0, 100, 200, 300, 400].map((tick, i) => (
-            <line
-              key={i}
-              x1="0"
-              y1={yScale(tick)}
-              x2={chartWidth}
-              y2={yScale(tick)}
-              stroke="currentColor"
-              strokeOpacity="0.1"
-            />
-          ))}
-
-          {/* Data lines */}
-          <path d={HNPath} fill="none" stroke="#3b82f6" strokeWidth="2" />
-          <path d={HCMPath} fill="none" stroke="#10b981" strokeWidth="2" />
-          <path d={HPPath} fill="none" stroke="#f59e0b" strokeWidth="2" />
-
-          {/* Data points */}
-          {customerData.map((d, i) => (
-            <g key={i}>
-              <circle cx={xScale(i)} cy={yScale(d.HN)} r="4" fill="#3b82f6" />
-              <circle cx={xScale(i)} cy={yScale(d.HCM)} r="4" fill="#10b981" />
-              <circle cx={xScale(i)} cy={yScale(d.HP)} r="4" fill="#f59e0b" />
-            </g>
-          ))}
-        </g>
-      </svg>
-
-      {/* Legend */}
-      <div className="flex justify-center mt-4">
-        <div className="flex items-center mr-4">
-          <div className="w-4 h-4 bg-blue-500 mr-2"></div>
-          <span className="text-sm">Người đăng kí mới</span>
-        </div>
-        <div className="flex items-center mr-4">
-          <div className="w-4 h-4 bg-green-500 mr-2"></div>
-          <span className="text-sm">Số lượng giao dịch </span>
-        </div>
-        <div className="flex items-center">
-          <div className="w-4 h-4 bg-yellow-500 mr-2"></div>
-          <span className="text-sm">Số người dùng truy cập</span>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-
-
-export function BarChart({width,height}) {
-    const frenqData = [
-        { category: "Thứ 2", value: 10 },
-        { category: "Thứ 3", value: 20 },
-        { category: "Thứ 4", value: 32 },
-        { category: "Thứ 5", value: 16 },
-        { category: "Thứ 6", value: 5 },
-        { category: "Thứ 7", value: 12 },
-        { category: "Chủ nhật", value:14 },
-
-    ] 
-
-
-    const maxValue = Math.max(...frenqData.map(item => item.value))
-    const chartHeight = width
-    const chartWidth = height
-    const barWidth = chartWidth / frenqData.length * 0.8
-    const gap = chartWidth / frenqData.length * 0.2
-
-    return (
-    <div className="w-full max-w-3xl p-4 bg-white">
-        <div className="relative h-[350px]" aria-hidden="true">
+    <div className="w-full max-w-3xl p-4 bg-white  rounded-lg shadow-md">
+      <div className="relative h-[350px]" aria-hidden="true">
         <svg className="w-full h-full" viewBox={`0 0 ${chartWidth} ${chartHeight}`}>
-            {/* Bars */}
-            {frenqData.map((item, index) => {
+          {/* Bars */}
+          {data.map((item, index) => {
             const barHeight = (item.value / maxValue) * chartHeight
             const x = index * (barWidth + gap)
             return (
-                <g key={item.category}>
+              <g key={item.category}>
                 <rect
                   x={x}
                   y={chartHeight - barHeight}
@@ -172,28 +48,29 @@ export function BarChart({width,height}) {
                 </text>
               </g>
             )
-            })}
+          })}
         </svg>
-        
+
         {/* X-axis labels */}
         <div className="absolute bottom-0 left-0 w-full flex justify-between">
-            {frenqData.map((item, index) => {
-            const labelWidth = chartWidth / frenqData.length
+          {data.map((item, index) => {
+            const labelWidth = chartWidth / data.length
             return (
-                <div key={item.category} className="flex justify-center" style={{ width: labelWidth }}>
+              <div key={item.category} className="flex justify-center" style={{ width: labelWidth }}>
                 <span className="text-xs text-gray-600 text-center">
-                    {item.category}
+                  {item.category}
                 </span>
-                </div>
+              </div>
             )
-            })}
+          })}
         </div>
-        </div>
+      </div>
     </div>
   )
 }
 
 export default function DashboardAdmin() {
+  const [selectedDate, setSelectedDate] = useState(new Date())
   const stats = [
     { label: 'Đơn hàng mới', value: '20', icon: '📈' },
     { label: 'Tỉ lệ thanh toán', value: '70.24%', icon: '💰' },
@@ -233,14 +110,14 @@ export default function DashboardAdmin() {
       </div>
 
       <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <div className="flex flex-col rounded-xl bg-white p-6 shadow-sm">
-            <h3 className="mb-4 text-lg font-medium">Thống kê hoạt động người dùng </h3>
-              <CustomersChart widthChart={500} heightChart={300}/>
+        <div className="rounded-xl bg-white p-6 shadow-sm">
+          <h3 className="mb-4 text-lg font-medium">Chart</h3>
+          <BarChart width={200} height={400} />
         </div>
 
         <div className="rounded-xl bg-white p-6 shadow-sm">
-          <h3 className="mb-4 text-lg font-medium">Thống kê đơn hàng</h3>
-            <BarChart width={200} height={400}/>
+          <h3 className="mb-4 text-lg font-medium">Chart</h3>
+          <BarChart width={200} height={400} />
 
         </div>
       </div>
@@ -248,7 +125,7 @@ export default function DashboardAdmin() {
       <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
         <div className="rounded-xl bg-white p-6 shadow-sm">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-medium">Bảng thống kê key và sô lượng sử dụng</h3>
+            <h3 className="text-lg font-medium">Check Table</h3>
             <button className="text-gray-500 hover:text-gray-700">•••</button>
           </div>
           <div className="mt-4 overflow-x-auto">
@@ -277,7 +154,7 @@ export default function DashboardAdmin() {
 
         <div className="rounded-xl bg-white p-6 shadow-sm">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-medium">Bảng trạng thái khóa học</h3>
+            <h3 className="text-lg font-medium">Bảng khóa học</h3>
             <button className="text-gray-500 hover:text-gray-700">•••</button>
           </div>
           <div className="mt-4 overflow-x-auto">
@@ -296,13 +173,12 @@ export default function DashboardAdmin() {
                     <td className="py-3">{row.name}</td>
                     <td className="py-3">
                       <span
-                        className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${
-                          row.status === 'approved'
+                        className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${row.status === 'approved'
                             ? 'bg-green-100 text-green-800'
                             : row.status === 'declined'
-                            ? 'bg-red-100 text-red-800'
-                            : 'bg-gray-100 text-gray-800'
-                        }`}
+                              ? 'bg-red-100 text-red-800'
+                              : 'bg-gray-100 text-gray-800'
+                          }`}
                       >
                         {row.status}
                       </span>

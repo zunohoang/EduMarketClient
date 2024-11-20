@@ -1,6 +1,8 @@
 
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie'
+
 
 export default function CourseManager() {
     const navigate = useNavigate();
@@ -52,6 +54,10 @@ export default function CourseManager() {
 
         const res = await fetch(`${process.env.VITE_API}/api/v1/users/teacher`, {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${Cookies.get('accessToken')}`
+            },
             body: formData,
         });
 

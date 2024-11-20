@@ -3,6 +3,8 @@ import { PencilIcon, TrashIcon, ChevronLeftIcon, ChevronRightIcon, SearchIcon } 
 import { Link, useNavigate } from 'react-router-dom'
 import OptionEditor from '../../components/admin/courses/OptionEditor'
 import { useParams } from 'react-router-dom'
+import Cookies from 'js-cookie'
+
 
 export default function Courses() {
     const [courses, setCourses] = useState([]);
@@ -11,7 +13,13 @@ export default function Courses() {
 
     React.useEffect(() => {
         async function callApi() {
-            const response = await fetch(`${process.env.VITE_API}/api/v1/courses${teacherId ? `?teacherId=${teacherId}` : ''}`);
+            const response = await fetch(`${process.env.VITE_API}/api/v1/courses${teacherId ? `?teacherId=${teacherId}` : ''}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${Cookies.get('accessToken')}`
+                }
+            });
             const data = await response.json();
             console.log(data);
             setCourses(data.data.courses);
@@ -54,6 +62,7 @@ function TableCourse({ courses, setCourses }) {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${Cookies.get('accessToken')}`
                 }
             })
             if (response.ok) {

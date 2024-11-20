@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PencilIcon } from 'lucide-react';
+import Cookies from 'js-cookie';
 
 function CourseOptions({ student, setStudents }) {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -13,10 +14,13 @@ function CourseOptions({ student, setStudents }) {
 
     const handleChangeRole = async (ROLE) => {
         console.log(ROLE)
+        console.log(student._id)
+        console.log(localStorage.getItem('accessToken'))
         const res = await fetch(`${process.env.VITE_API}/api/v1/users/${student._id}/change-role`, {
             method: 'PUT',
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${Cookies.get('accessToken')}`
             },
             body: JSON.stringify({
                 role: ROLE

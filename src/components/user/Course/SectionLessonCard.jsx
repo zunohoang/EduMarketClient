@@ -5,6 +5,10 @@ function LessonCard({ title, videoId }) {
     const location = useLocation();
     const navigate = useNavigate();
     const updateURL = () => {
+        if (videoId == null) {
+            alert('Hãy mua khóa học để xem video');
+            return;
+        }
         navigate(`${videoId}`);
     };
     return (
@@ -24,7 +28,7 @@ function LessonCard({ title, videoId }) {
     )
 }
 
-export default function SectionLessonCard() {
+export default function SectionLessonCard({ section }) {
     const [open, setOpen] = useState(false);
     const contentRef = useRef(null);
     const [contentHeight, setContentHeight] = useState(0)
@@ -41,7 +45,7 @@ export default function SectionLessonCard() {
     return (
         <div className="w-full">
             <div className='h-[40px] bg-[#395c8c] rounded-lg flex items-center pl-4 pr-3 shadow-md' onClick={() => setOpen(!open)}>
-                <h1 className='font-normal text-white mr-auto'>CHƯƠNG I. HỆ THỨC TRUY HỒI</h1>
+                <h1 className='font-normal text-white mr-auto'>{section.title ? section.title : ""}</h1>
                 <p className='text-white font-bold ml-auto'>+</p>
             </div>
             <div
@@ -53,11 +57,20 @@ export default function SectionLessonCard() {
                 }}
             >
                 <div className="mt-[6px] space-y-2">
-                    <LessonCard title="Bài 1. Ánh sáng và hệ thức" videoId={"dQw4w9WgXcQ"} />
-                    <LessonCard title="Bài 2. Sóng ánh sáng, bước sóng" videoId={"lt3k_j9MSco"} />
-                    <LessonCard title="Bài 3. Tính chất hạt của ánh sáng" videoId={"2"} />
+                    {
+                        section.lessons && section.lessons.map((lesson, index) => (
+                            <LessonCard title={lesson.title} videoId={getYouTubeVideoId(lesson.url || "")} />
+                        ))
+                    }
                 </div>
             </div>
         </div>
     )
+}
+
+
+function getYouTubeVideoId(url) {
+    const regex = /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&]+)/;
+    const match = url.match(regex);
+    return match ? match[1] : null;
 }

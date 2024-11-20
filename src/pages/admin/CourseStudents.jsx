@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { PencilIcon, TrashIcon, ChevronLeftIcon, ChevronRightIcon, SearchIcon, ChevronLeft } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import Cookies from 'js-cookie'
+
 
 export default function Students() {
     const { courseId } = useParams();
@@ -16,6 +18,7 @@ export default function Students() {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
+                        "Authorization": `Bearer ${Cookies.get('accessToken')}`
                     }
                 });
                 const data = await response.json();
@@ -86,6 +89,7 @@ function TableStudent({ students, setStudents, courseId }) {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${Cookies.get('accessToken')}`
                 }
             });
             const data = await response.json();

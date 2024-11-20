@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { PencilIcon, TrashIcon, ChevronLeftIcon, ChevronRightIcon, SearchIcon, ChevronLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import OptionEditor from '../../components/admin/students/OptionEditor';
+import Cookies from 'js-cookie'
+
 
 export default function Students() {
     const [students, setStudents] = useState([]);
@@ -14,6 +16,7 @@ export default function Students() {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
+                        "Authorization": `Bearer ${Cookies.get('accessToken')}`
                     }
                 });
                 const data = await response.json();
@@ -60,6 +63,7 @@ function TableStudent({ students, setStudents }) {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${Cookies.get('accessToken')}`
                 }
             });
             const data = await response.json();

@@ -4,6 +4,9 @@ import { Outlet, useLocation } from 'react-router-dom';
 import SectionLessonCard from '../../components/user/Course/SectionLessonCard'
 import TeacherCourse from '../../components/user/Course/Video/TeacherCourse';
 import CommentVideo from '../../components/user/Course/Video/CommentVideo';
+import { useParams } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import { CourseProvider } from '../../contexts/CourseContext';
 
 function HomeIcon() {
     return (
@@ -27,30 +30,56 @@ function HomeIcon() {
 }
 
 export default function CourseVideoPage() {
+    const { courseId } = useParams();
+    const [course, setCourse] = useState({});
+
+    useEffect(() => {
+        const fetchCourse = async () => {
+            const response = await fetch(`${process.env.VITE_API}/api/v1/courses/${courseId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${Cookies.get('accessToken')}`
+                }
+            });
+            const data = await response.json();
+            if (data.status) {
+                console.log(data.data.course);
+                setCourse(data.data.course);
+            }
+        }
+        fetchCourse();
+    }, [courseId]);
+
     return (
-        <div className='pt-[80px] pl-7 pr-7'>
-            <div className="flex items-center text-[#2D5D90] gap-3">
-                <HomeIcon />
-                <div className="sm:text-lg text-md">&gt;</div>
-                <span className="font-medium cursor-pointer sm:text-md text-xs">LẬP TRÌNH TƯ DUY TỪ TRƯỜNG VÀ HẠT NHÂN</span>
-            </div>
-            <div className="grid grid-cols-12 gap-6 mt-4">
-                <div className='lg:col-span-7 col-span-12'>
-                    <Outlet />
-                    <TeacherCourse />
+        <CourseProvider course={course}>
+            <div className='pt-[80px] pl-7 pr-7'>
+                <div className="flex items-center text-[#2D5D90] gap-3">
+                    <HomeIcon />
+                    <div className="sm:text-lg text-md">&gt;</div>
+                    <span className="font-medium cursor-pointer sm:text-md text-xs">{course.name}</span>
                 </div>
-                <div className='lg:col-span-5 col-span-12'>
-                    <div className='p-4 px-7 rounded-md bg-[#FFFFFF]'>
-                        <h1 className='font-semibold'>Danh sách bài học</h1>
-                        <div className='mt-6 flex flex-col gap-2'>
-                            <SectionLessonCard />
-                            <SectionLessonCard />
-                        </div>
+                <div className="grid grid-cols-12 gap-6 mt-4">
+                    <div className='lg:col-span-7 col-span-12'>
+                        <Outlet title={course.name} img={course.img} />
+                        <TeacherCourse teacher={course.instructor} />
                     </div>
-                    <CommentVideo />
+                    <div className='lg:col-span-5 col-span-12'>
+                        <div className='p-4 px-7 rounded-md bg-[#FFFFFF]'>
+                            <h1 className='font-semibold'>Danh sách bài học</h1>
+                            <div className='mt-6 flex flex-col gap-2'>
+                                {
+                                    course.sections && course.sections.map((section, index) => (
+                                        <SectionLessonCard key={index} section={section} />
+                                    ))
+                                }
+                            </div>
+                        </div>
+                        <CommentVideo />
+                    </div>
                 </div>
-            </div>
-        </div >
+            </div >
+        </CourseProvider >
     )
 }
 

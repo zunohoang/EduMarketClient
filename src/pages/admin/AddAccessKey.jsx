@@ -4,6 +4,7 @@ import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
+
 export default function AddAccessKey() {
     const navigate = useNavigate();
 
@@ -22,7 +23,13 @@ export default function AddAccessKey() {
 
     React.useEffect(() => {
         async function fetchCourses() {
-            const response = await fetch(`${process.env.VITE_API}/api/v1/courses`);
+            const response = await fetch(`${process.env.VITE_API}/api/v1/courses`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${Cookies.get('accessToken')}`
+                }
+            });
             const data = await response.json();
             console.log(data);
             setCourses(data.data.courses);
@@ -59,6 +66,9 @@ export default function AddAccessKey() {
 
         const response = await fetch(`${process.env.VITE_API}/api/v1/access-keys`, {
             method: 'POST',
+            headers: {
+                "Authorization": `Bearer ${Cookies.get('accessToken')}`
+            },
             body: formData
         });
 

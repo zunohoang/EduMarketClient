@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 function ClassCard({ title, isActive, onClick }) {
     return (
@@ -72,11 +73,10 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
 export default function CourseTabs() {
     const [activeClass, setActiveClass] = useState("Tất cả");
     const [currentPage, setCurrentPage] = useState(1);
-    const totalPages = 5;
 
     const classes = ["Tất cả", "Lớp 12", "Lớp 11", "Lớp 10"];
 
-    const courses = [
+    const courses1 = [
         { name: "Toán 12", img: "/subject1_1.jpg", teacher: "Nguyễn Văn A", id: 1, class: "Lớp 12" },
         { name: "Văn 12", img: "/subject1_1.jpg", teacher: "Trần Thị B", id: 2, class: "Lớp 12" },
         { name: "Anh 11", img: "/subject1.jpg", teacher: "Lê Văn C", id: 3, class: "Lớp 11" },
@@ -87,13 +87,52 @@ export default function CourseTabs() {
         { name: "Địa 11", img: "/subject1_1.jpg", teacher: "Phạm Thị H", id: 8, class: "Lớp 11" },
         { name: "GDCD 10", img: "/subject1_1.jpg", teacher: "Nguyễn Văn I", id: 9, class: "Lớp 10" },
         { name: "Tin 12", img: "/subject1_1.jpg", teacher: "Trần Thị J", id: 10, class: "Lớp 12" },
+        { name: "Sử 12", img: "/subject1.jpg", teacher: "Lê Văn G", id: 7, class: "Lớp 12" },
+        { name: "Địa 11", img: "/subject1_1.jpg", teacher: "Phạm Thị H", id: 8, class: "Lớp 11" },
+        { name: "GDCD 10", img: "/subject1_1.jpg", teacher: "Nguyễn Văn I", id: 9, class: "Lớp 10" },
+        { name: "Tin 12", img: "/subject1_1.jpg", teacher: "Trần Thị J", id: 10, class: "Lớp 12" },
     ];
+
+    const [courses, setCourses] = useState([]);
+
+    useEffect(() => {
+        const fetchCourse = async () => {
+            const response = await fetch(`${process.env.VITE_API}/api/v1/courses`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${Cookies.get('accessToken')}`
+                }
+            });
+            const data = await response.json();
+            if (data.status) {
+                console.log(data.data.courses);
+                const keyH = ["Lớp 10", "Lớp 11", "Lớp 12"];
+                const courses_v1 = data.data.courses.map(course => {
+                    const courseClass = course.category.find(cat => keyH.includes(cat)) || "Khác";
+
+                    return {
+                        name: course.name,
+                        img: process.env.VITE_API + course.image,
+                        teacher: course.instructor.fullName,
+                        id: course._id,
+                        class: courseClass
+                    };
+                });
+                setCourses(courses_v1);
+            }
+        };
+
+        fetchCourse();
+    }, []);
+
+    const totalPages = Math.ceil(courses.length / 10);
 
     const filteredCourses = courses.filter(course =>
         activeClass === "Tất cả" || course.class === activeClass
     );
 
-    const coursesToShow = filteredCourses.slice((currentPage - 1) * 8, currentPage * 8);
+    const coursesToShow = filteredCourses.slice((currentPage - 1) * 10, currentPage * 10);
 
     return (
         <div className="mt-3 w-fit p-5">

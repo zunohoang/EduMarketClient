@@ -7,7 +7,7 @@ export default function FooterBar() {
     const [isAuth, setIsAuth] = React.useState(false);
 
     React.useEffect(() => {
-        if (Cookies.get('accesstoken')) {
+        if (Cookies.get('accessToken')) {
             setIsAuth(true);
         } else {
             setIsAuth(false);

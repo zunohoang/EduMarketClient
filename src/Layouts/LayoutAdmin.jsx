@@ -25,13 +25,13 @@ export default function LayoutAdmin() {
 
 
     useEffect(() => {
-        if (!Cookies.get("accesstoken")) {
+        if (!Cookies.get("accessToken")) {
             window.location.href = "/login";
         }
     }, []);
 
     const handleLogout = () => {
-        Cookies.remove("accesstoken");
+        Cookies.remove("accessToken");
         Cookies.remove("role");
         Cookies.remove("fullName");
         Cookies.remove("email");
@@ -41,7 +41,7 @@ export default function LayoutAdmin() {
     }
 
     return (
-        Cookies.get("accesstoken") === undefined || Cookies.get("role") === "STUDENT" ? <div>Không đủ quyền</div> :
+        Cookies.get("accessToken") === undefined || Cookies.get("role") === "STUDENT" ? <div>Không đủ quyền</div> :
             <div className="w-full">
                 <div
                     ref={sidebarRef}
