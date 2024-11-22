@@ -11,11 +11,11 @@ export default function EnterKey({ setOpen, open }) {
     const navigate = useNavigate();
 
     const activeKey = async () => {
-        const response = await fetch(`${process.env.VITE_API}/api/v1/access-keys/active`, {
+        const response = await fetch(`${process.env.VITE_API}/api/v1/access-keys/activate`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                'Authorization': `Bearer ${Cookies.get('accessToken')}`
             },
             body: JSON.stringify({
                 key: key,
@@ -28,7 +28,6 @@ export default function EnterKey({ setOpen, open }) {
         if (data.status) {
             alert('Kích hoạt thành công');
             console.log(data.key)
-            setData({ key: data.key });
             setActive(true);
             setOpen(false);
             // chuyen huong /profile
