@@ -1,76 +1,120 @@
-<div align="center">
+# EduMarket - Online Education Platform
 
-<h1>Chào mừng bạn đến với dự án Edumarket</h1>
+Experience at: [`edu-market.vercel.app`](edu-market.vercel.app)
 
-</div>
+EduMarket is a community project providing an online education platform that connects students, teachers, admins, and collaborators. The project consists of two main parts:
 
-# Dự án
+- **Frontend (EduMarketClient)**: Building the user interface,...
+- **Backend (EduMarketServer)**: Managing data and handling business logic, REST APIs, etc.
+---
 
-## Mã nguồn:
-+ **Frontend**: [FE_Source](https://github.com/zunohoang/EduMarketClient)
-+ **Backend**: [BE_Source](https://github.com/zunohoang/EduMarketServer)
+## 📂 Project Structure
 
-## Giới thiệu
+### Repository:
 
-![alt text](https://edu-market.vercel.app/assets/banner-B_g_USSP.png)
+  + Frontend: [`edu-market-client`](https://github.com/zunohoang/EduMarketClient.git)
+  + Backend: [`edu-market-server`](https://github.com/zunohoang/EduMarketServer.git)
 
+### Tech:
 
-Đây là một dự án mã nguồn mở của chúng tôi vì mục đích giáo dục...
-bạn có thể trực tiếp trải nghiệm tại 
-```edu-market.vercel.app```
+- **Frontend:** Reactjs, TailwindCSS
 
-Dự án được tổ chức theo mô hình Client Side hoàn toàn, trong bản cập nhật tương lai chúng tôi sẽ sử dụng Nextjs cho dự án để dự án vừa Client Side và Server Side.
+- **Backend:** Nodejs (Expressjs)
 
+- **Database:** MongoDB
 
-## Công nghệ sử dụng
-- **Frontend**: ReactJs, Tailwind CSS
-- **Backend**: Node.js, Expressjs
-- **Database**: MongoDB
-- **Auth**: JWT (JSON Web Tokens)
+- **Auth:** JWT
 
- ## Đóng góp
-Chúng tôi hoan nghênh mọi đóng góp từ cộng đồng. Để đóng góp, bạn có thể:
+- **Cache:** Redis
 
-1. Fork dự án này.
-2. Tạo một nhánh mới (`git checkout -b feature/ten-tinh-nang`).
-3. Commit các thay đổi của bạn (`git commit -m 'Thêm tính năng ABC'`).
-4. Push lên nhánh (`git push origin feature/ten-tinh-nang`).
-5. Tạo một Pull Request.
+- **Libs:** mongoose, dotenv, jsonwebtoken, redis... (more at package.json)
 
-Cảm ơn bạn đã quan tâm và đóng góp cho dự án!
+---
 
+## 🚀 How to Run the Project
 
+### Method 1. Using **Docker**
 
-# Cách sử dụng dự án
+| (Update later)
 
-## 1 Đối với người dùng 
+### Method 2. Clone the code
 
-### Cách chạy dự án
+#### Run **Backend**:
+1. **Clone the Backend repo**:
+    ```bash
+    git clone https://github.com/zunohoang/EduMarketServer.git
+    cd EduMarketServer
+    ```
+2. **Install dependencies**:
+    ```bash
+    npm i
+    ```
+3. **Configure environment variables**:
+    Create a `.env` file with the following template:
+    ```env
+    PORT=5000
 
-- Đầu tiên bạn hãy truy cập [https://github.com/zunohoang/EduMarketServer]. Đây là mã nguồn backend của dự án, hãy làm theo các hướng dẫn ở readme để cài đặt và chạy nó. Sau khi `npm run dev` không có lỗi xãy ra nó thì chuyển qua những bước phía dưới (hãy liên hệ với tôi nếu bạn gặp khó khăn @zunohoang)
-- Đảm bảo rằng bạn đã cài đặt Node.js và npm.
-- Clone dự án về máy `git clone [url-repo]`.
-- Di chuyển vào thư mục dự án `cd EduMarketClient`.
-- Cài đặt tất cả các gói cần thiết `npm install`.
-- Tạo file `.env` để tạo biến môi trường
-  + Trong đấy sẽ có biến VITE_API sẽ là đường dẫn tới máy chủ api ví dụ https://api.example.com
-- Chạy dự án `npm run dev`.
+    MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/db
 
+    JWT_SECRET=<your_secret_key>
 
-## 2 Đối với developer người đóng góp chính của dự án
+    REDIS_PORT=<port>
+    REDIS_PW=<password>
+    REDIS_HOST=<url_host>
+    ```
+4. **Run the server**:
+    ```bash
+    npm run dev
+    ```
+    The server will run at: `http://localhost:<PORT>`.
 
-- Đầu tiên clone dự án về máy `git clone [url-repo]`
+---
 
-### Cách chạy dự án
+#### Run **Frontend**:
+1. **Clone the Frontend repo**:
+    ```bash
+    git clone https://github.com/zunohoang/EduMarketClient.git
+    cd EduMarketClient
+    ```
+2. **Install dependencies**:
+    ```bash
+    npm i
+    ```
+3. **Configure environment variables**:
+    Create a `.env` file with the following template:
+    ```env
+    VITE_PORT=<port>
+    VITE_API=<server_url>
+    ```
+4. **Run the application**:
+    ```bash
+    npm run dev
+    ```
+    The application will run at: `http://localhost:<port>`.
 
-- Để cài đặt tất cả các gói sử dụng `npm i`
-- Để chạy dự án `npn run dev`
+## 🛠️ Contributing
 
-### Cách push code
+If you want to contribute to the project, please follow these steps:
+1. Fork the repository.
+2. Create a new branch for the feature or bug fix:
+    ```bash
+    git checkout -b feature/<feature-name>
+    ```
+3. Commit your changes:
+    ```bash
+    git commit -m "Add feature <feature-name>"
+    ```
+4. Push to your branch:
+    ```bash
+    git push origin feature/<feature-name>
+    ```
+5. Create a Pull Request on GitHub.
 
-- Khi push code lên thì phải tạo nhánh mới và push vào nhánh mới không được push vào main
-  `git checkout -b [tên nhánh mới]`
-- Sau khi push lên nhánh mới thì tạo yêu cầu hợp nhất nhánh
-- Sau khi được Leader dự án merge nhánh thì dùng lệnh sau để pull code về:
-  `git checkout main`
-  `git pull`
+---
+
+## 📞 Contact
+
+- **Lead Author**: [zunohoang](https://github.com/zunohoang)
+- **Email**: nguyenvanhoang2005nt@gmail.com
+
+Thank you for visiting the project! 🚀
