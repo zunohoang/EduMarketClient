@@ -6,9 +6,20 @@ import FooterBar from "../components/user/FooterBar";
 import TopBarMobile from "../components/user/TopBarMobile";
 import UserChatModal from "../components/user/UserChatModal";
 import { useState } from "react";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 export default function LayoutUser() {
-    const [isChatOpen, setIsChatOpen] = useState(true);
+    const [isChatOpen, setIsChatOpen] = useState(false);
+    const navigate = useNavigate();
+
+    const setIsChatOpenCus = (value) => {
+        if (Cookies.get('role') != 'STUDENT') {
+            navigate('/admin/chats');
+            return;
+        }
+        setIsChatOpen(value);
+    }
 
     return (
         <div>
@@ -23,7 +34,7 @@ export default function LayoutUser() {
             <div className="md:hidden w-full bg-white/40 fixed bottom-0 left-0 backdrop-blur-md">
                 <FooterBar />
             </div>
-            <UserChatModal isOpen={isChatOpen} onClose={() => setIsChatOpen(!isChatOpen)} />
+            <UserChatModal isOpen={isChatOpen} onClose={() => setIsChatOpenCus(!isChatOpen)} />
         </div>
     )
 }
