@@ -34,6 +34,7 @@ import AddUsers from '../pages/admin/AddUsers';
 import AccessKeys from '../pages/admin/AccessKeys';
 import Dashboard from '../pages/admin/DashboardAdmin';
 import AddAccessKey from '../pages/admin/AddAccessKey';
+import ChatPage from '../pages/admin/ChatPage';
 
 export default function AppRoutes() {
     return (
@@ -85,6 +86,8 @@ export default function AppRoutes() {
 
                     <Route path="access-keys" element={<AccessKeys />} />
                     <Route path="add-key" element={<AddAccessKey />} />
+
+                    <Route path="chats" element={<ChatPage />} />
 
                     <Route path="*" element={<h1>Not Found</h1>} />
                 </Route>

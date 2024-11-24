@@ -4,7 +4,7 @@ Experience at: [`edu-market.vercel.app`](edu-market.vercel.app)
 
 EduMarket is a community project providing an online education platform that connects students, teachers, admins, and collaborators. The project consists of two main parts:
 
-- **Frontend (EduMarketClient)**: Building the user interface,...
+- **Frontend (EduMarketClient)**: Building the user interface, etc.
 - **Backend (EduMarketServer)**: Managing data and handling business logic, REST APIs, etc.
 ---
 

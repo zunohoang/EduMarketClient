@@ -4,8 +4,12 @@ import Cache from "../components/Cache";
 import Footer from "../components/user/Footer";
 import FooterBar from "../components/user/FooterBar";
 import TopBarMobile from "../components/user/TopBarMobile";
+import UserChatModal from "../components/user/UserChatModal";
+import { useState } from "react";
 
 export default function LayoutUser() {
+    const [isChatOpen, setIsChatOpen] = useState(true);
+
     return (
         <div>
             <div className="z-10 md:hidden w-full fixed backdrop-blur-md">
@@ -19,6 +23,7 @@ export default function LayoutUser() {
             <div className="md:hidden w-full bg-white/40 fixed bottom-0 left-0 backdrop-blur-md">
                 <FooterBar />
             </div>
+            <UserChatModal isOpen={isChatOpen} onClose={() => setIsChatOpen(!isChatOpen)} />
         </div>
     )
 }

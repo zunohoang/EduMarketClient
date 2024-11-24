@@ -25,13 +25,13 @@ export default function Login() {
             const accessToken = response.accessToken;
             const user = response.user;
             // luu token vao cookie hạn 7 ngày
-            document.cookie = `accessToken=${accessToken}; max-age=900; path=/`;
+            document.cookie = `accessToken=${accessToken}; max-age=64000; path=/`;
             document.cookie = `refreshToken=${response.refreshToken}; max-age=64000; path=/`;
-            document.cookie = `role=${user.role}; max-age=900; path=/`;
-            document.cookie = `username=${user.username}; max-age=900; path=/`;
-            document.cookie = `fullName=${user.fullName}; max-age=900; path=/`;
-            document.cookie = `email=${user.email}; max-age=900; path=/`;
-            document.cookie = `id=${user._id}; max-age=900; path=/`;
+            document.cookie = `role=${user.role}; max-age=64000; path=/`;
+            document.cookie = `username=${user.username}; max-age=64000; path=/`;
+            document.cookie = `fullName=${user.fullName}; max-age=64000; path=/`;
+            document.cookie = `email=${user.email}; max-age=64000; path=/`;
+            document.cookie = `id=${user._id}; max-age=64000; path=/`;
             window.location.href = '/';
         } else {
             alert("Sai tên tài khoản hoặc mật khẩu")
